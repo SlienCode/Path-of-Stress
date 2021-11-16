@@ -12,18 +12,20 @@ boolean allow = true;
 boolean noano = true;
 boolean lastaction = true; //true for right, false for left
 boolean left = false; //face left
+boolean go_left = true; //determines whether the player can go left or not
+boolean go_right = true; //determines whether the player can go right or not
 
 void setup(){
-  homescreen = loadImage("C:/Users/nickc/Desktop/unnamed.jpg");
-  idle = loadImage("C:/Users/nickc/Desktop/male.png");
-  walk1 = loadImage("C:/Users/nickc/Desktop/walk1.png");
-  walk2 = loadImage("C:/Users/nickc/Desktop/walk2.png");
-  walk3 = loadImage("C:/Users/nickc/Desktop/walk3.png");
-  mid1 = loadImage("C:/Users/nickc/Desktop/mid1.png");
-  walk4 = loadImage("C:/Users/nickc/Desktop/walk4.png");
-  walk5 = loadImage("C:/Users/nickc/Desktop/walk5.png");
-  walk6 = loadImage("C:/Users/nickc/Desktop/walk6.png");
-  mid2 = loadImage("C:/Users/nickc/Desktop/mid2.png");
+  homescreen = loadImage("C:/Users/ATHGEO/Desktop/Path-of-Stress-main/images/unnamed.jpg");
+  idle = loadImage("C:/Users/ATHGEO/Desktop/Path-of-Stress-main/images/male.png");
+  walk1 = loadImage("C:/Users/ATHGEO/Desktop/Path-of-Stress-main/images/walk1.png");
+  walk2 = loadImage("C:/Users/ATHGEO/Desktop/Path-of-Stress-main/images/walk2.png");
+  walk3 = loadImage("C:/Users/ATHGEO/Desktop/Path-of-Stress-main/images/walk3.png");
+  mid1 = loadImage("C:/Users/ATHGEO/Desktop/Path-of-Stress-main/images/mid1.png");
+  walk4 = loadImage("C:/Users/ATHGEO/Desktop/Path-of-Stress-main/images/walk4.png");
+  walk5 = loadImage("C:/Users/ATHGEO/Desktop/Path-of-Stress-main/images/walk5.png");
+  walk6 = loadImage("C:/Users/ATHGEO/Desktop/Path-of-Stress-main/images/walk6.png");
+  mid2 = loadImage("C:/Users/ATHGEO/Desktop/Path-of-Stress-main/images/mid2.png");
   //player.resize(64, 128);
   size(1000, 1000);
   noSmooth();
@@ -33,7 +35,7 @@ void draw() {
   image(homescreen, x, 0);
   image(homescreen, x+homescreen.width, 0);
   image(homescreen, x-homescreen.width, 0);
-  background(60);
+  background(0);
   
   x += input;
   
@@ -41,9 +43,15 @@ void draw() {
   
   if (counter == -1) y +=10; //gravity. If the jumping animation is not running, apply gravity
   else y+= jump();
-  if (y >=  385) y=384;
-  if (x<=0) x=1;
-  if (x>=901) x=900;
+  if (y >=  384) y=384;
+  if ( (x<=0) || (x>=492 && x<=500 && y==384) ) {
+    go_left = false; input = 0; walk = -1;
+  } //player can't go left
+  else go_left = true; //player can go left
+  if ( (x>=936) || (x>=436 && x<=444 && y==384) ) {
+    go_right = false; input = 0; walk = -1;
+  } //player can't go right
+  else go_right = true; //player can go right
   
   if (walk == -1) player = idle; //load the default image of the player
   else player = walk();
@@ -52,20 +60,28 @@ void draw() {
   image(player, x, y, 64, 128);
   popMatrix();
   System.out.println(x);
+  
+  ellipse(500, 500, 10, 10);
+  /*
+  if (x<=0) {go_left = false; input = 0; walk = -1;} //player can't go left
+  else go_left = true; //player can go left
+  if (x>=500 && x<=510 && y==123) {go_right = false; input = 0; walk = -1;} //player can't go right
+  else go_right = true; //player can go right
+  */
 }
 
 void keyPressed() {
   if (key == CODED) {
-    if (keyCode == RIGHT) {
-      input = 8;
-      if (noano) {
-        walk = 1;
-        noano = false;
-        left = false;
-        lastaction = true;
-      }
+    if (keyCode == RIGHT && go_right) {
+       input = 8;
+       if (noano) {
+         walk = 1;
+         noano = false;
+         left = false;
+         lastaction = true;
+       }
     }
-    if (keyCode == LEFT) {
+    if (keyCode == LEFT && go_left) {
       input = -8;
       if (noano) {
         walk = 1;
