@@ -17,9 +17,9 @@ class Cone {
     hitbox = new Point[192];
     
     for (int i = 0; i < 64; i++) {
-      hitbox[i] = new Point(x,y-i+64);
+      hitbox[i] = new Point(x,y-i+63);
       hitbox[i+64] = new Point(x+i, y);
-      hitbox[i+128] = new Point(x+63, y-i + 64);
+      hitbox[i+128] = new Point(x+63, y-i + 63);
     }
   }
   

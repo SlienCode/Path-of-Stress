@@ -20,6 +20,7 @@ void draw() {
   background(60);
   level.print();
   player.x += x_motion;
+  if (player.onKiss()) player.x -= x_motion;
   level.draw();
   player.draw();
 }
