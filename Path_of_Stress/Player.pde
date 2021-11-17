@@ -1,4 +1,3 @@
-
 class Player {
   
   String gender;
@@ -22,7 +21,7 @@ class Player {
     
     gender = g;
     
-    //default coordinates untill player moves
+    //default coordinates until player moves
     x = 128;
     y = 644;
     
@@ -34,15 +33,24 @@ class Player {
     jump = new PImage[3];
     walk = new PImage[8];
     for (int i = 0; i <3; i++) {
-      idle[i] = loadImage("C:/Users/nickc/Desktop/Path_of_Stress/images/player/" + gender + "/idle" + i + ".png");
-      jump[i] = loadImage("C:/Users/nickc/Desktop/Path_of_Stress/images/player/" + gender + "/jump" + i + ".png");
+      idle[i] = loadImage("C:/Users/ATHGEO/Desktop/Path_of_Stress/images/player/" + gender + "/idle" + i + ".png");
+      jump[i] = loadImage("C:/Users/ATHGEO/Desktop/Path_of_Stress/images/player/" + gender + "/jump" + i + ".png");
     }
     for (int i = 0; i < 8; i++) {
-      walk[i] = loadImage("C:/Users/nickc/Desktop/Path_of_Stress/images/player/" + gender + "/walk" + i + ".png");
+      walk[i] = loadImage("C:/Users/ATHGEO/Desktop/Path_of_Stress/images/player/" + gender + "/walk" + i + ".png");
     }
   }
   
   void draw() {
+    //player coordinates
+    textSize(40);
+    text("x: ", 100, 100);
+    text(x, 160, 100);
+    text("y: ", 100, 160);
+    text(y, 160, 160);
+    
+    //a simple box
+    rect(500, 800, 100, 100);
     
     image = idle[0]; //default standing position image
     
@@ -52,8 +60,9 @@ class Player {
     if (jump_counter == -1 && !onGround()) { //if the player is not jumping and is not standing on ground, apply gravity
       y+=10;
       image = jump[2];
+    } else {
+      y += jump(); 
     }
-    else y += jump(); 
     
     //off screen borders
     if (x < 8) x = 8;
@@ -62,9 +71,11 @@ class Player {
     if (reverse) { //if the player is walking towards the left, flip the image if needed 
       scale(-1,1); 
       image(image, - x - 128, y, 128, 256);
+    } else { //else don't flip it
+      image(image, x, y, 128, 256); 
     }
-    else image(image, x, y, 128, 256); //else don't flip it
   }
+ 
   
   
   
