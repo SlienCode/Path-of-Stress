@@ -1,6 +1,8 @@
+
 class Player {
   
   String gender;
+  Level level;
   
   //coordinates
   int x;
@@ -21,36 +23,35 @@ class Player {
     
     gender = g;
     
-    //default coordinates until player moves
+    //default coordinates untill player moves
     x = 128;
     y = 644;
     
     reverse = false;
     
+    level = new Level();
     walk_counter = -1;
     jump_counter = -1;
     idle = new PImage[3];
     jump = new PImage[3];
     walk = new PImage[8];
     for (int i = 0; i <3; i++) {
-      idle[i] = loadImage("C:/Users/ATHGEO/Desktop/Path_of_Stress/images/player/" + gender + "/idle" + i + ".png");
-      jump[i] = loadImage("C:/Users/ATHGEO/Desktop/Path_of_Stress/images/player/" + gender + "/jump" + i + ".png");
+      idle[i] = loadImage("C:/Users/nickc/Desktop/Path_of_Stress/images/player/" + gender + "/idle" + i + ".png");
+      jump[i] = loadImage("C:/Users/nickc/Desktop/Path_of_Stress/images/player/" + gender + "/jump" + i + ".png");
     }
     for (int i = 0; i < 8; i++) {
-      walk[i] = loadImage("C:/Users/ATHGEO/Desktop/Path_of_Stress/images/player/" + gender + "/walk" + i + ".png");
+      walk[i] = loadImage("C:/Users/nickc/Desktop/Path_of_Stress/images/player/" + gender + "/walk" + i + ".png");
     }
   }
   
   void draw() {
-    //player coordinates
+    
+    rect(x + 32, y+256, 64, -8);
     textSize(40);
     text("x: ", 100, 100);
     text(x, 160, 100);
     text("y: ", 100, 160);
     text(y, 160, 160);
-    
-    //a simple box
-    rect(500, 800, 100, 100);
     
     image = idle[0]; //default standing position image
     
@@ -60,9 +61,8 @@ class Player {
     if (jump_counter == -1 && !onGround()) { //if the player is not jumping and is not standing on ground, apply gravity
       y+=10;
       image = jump[2];
-    } else {
-      y += jump(); 
     }
+    else y += jump(); 
     
     //off screen borders
     if (x < 8) x = 8;
@@ -71,18 +71,25 @@ class Player {
     if (reverse) { //if the player is walking towards the left, flip the image if needed 
       scale(-1,1); 
       image(image, - x - 128, y, 128, 256);
-    } else { //else don't flip it
-      image(image, x, y, 128, 256); 
     }
+    else image(image, x, y, 128, 256); //else don't flip it
+    
   }
- 
   
   
   
   //checks if the player is standing on solid ground
   boolean onGround() {
-    if (y == 644) return true; //literally the ground (y border)
-    return false;
+    boolean result = false;
+    if (y == 644) result = true; //literally the ground (y border)
+    else {
+      for (int i = 0; i < 192; i++) {
+        if ((x + 32 == (int)level.cone.hitbox[i].getX() || x + 96 == (int)level.cone.hitbox[i].getX()) && y+256 == (int)level.cone.hitbox[i].getY()){
+          result = true;
+        }
+      }
+    }
+    return result;
   }
   
   //checks if the player is kissing a wall
@@ -105,7 +112,7 @@ class Player {
       else if (jump_counter <= 39) image = jump[1];
       else if (jump_counter <= 50) image = jump[2];
       jump_counter++;
-      if (jump_counter == 50) jump_counter = -1;
+      if (jump_counter == 50) jump_counter = -1; //stop animation and stop the jump
     }
   }
   
