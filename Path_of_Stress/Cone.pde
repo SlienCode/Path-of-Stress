@@ -8,24 +8,36 @@ class Cone {
   
   PImage image;
   
-  Point[] hitbox;
+  Point[] hitboxleft;
+  Point[] hitboxup;
+  Point[] hitboxright;
   
   Cone(int x, int y) {
     this.x = x;
     this.y = y;
+    
     image = loadImage("C:/Users/nickc/Desktop/Path_of_Stress/images/objects/cone.png");
-    hitbox = new Point[192];
+    
+    hitboxleft = new Point[64];
+    hitboxup = new Point[64];
+    hitboxright = new Point[64];
     
     for (int i = 0; i < 64; i++) {
-      hitbox[i] = new Point(x,y-i+63);
-      hitbox[i+64] = new Point(x+i, y);
-      hitbox[i+128] = new Point(x+63, y-i + 63);
+      hitboxleft[i] = new Point(x, y-i+64);
+      hitboxup[i] = new Point(x+i, y);
+      hitboxright[i] = new Point(x+63, y-i + 64);
     }
   }
   
+  void draw() {
+    image(image, x, y, 64, 64); 
+  }
+  
   void print() {
-    for (int i = 0; i < 192; i++) {
-      rect((int) hitbox[i].getX(),(int) hitbox[i].getY(), 1, 1);
+    for (int i = 0; i < 64; i++) {
+      rect((int) hitboxleft[i].getX(),(int) hitboxleft[i].getY(), 1, 1);
+      rect((int) hitboxup[i].getX(),(int) hitboxup[i].getY(), 1, 1);
+      rect((int) hitboxright[i].getX(),(int) hitboxright[i].getY(), 1, 1);
     }
   }
   

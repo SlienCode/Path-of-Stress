@@ -4,6 +4,7 @@ Level level;
 boolean free_right; //is the user holding the right arrow? if they aren't then it's free so -> true
 boolean free_left; //is the user holding the left arrow? if they aren't then it's free so -> true
 int x_motion; //how much the player should move on the x axis
+int temp;
 
 void setup(){
   size(1440, 900);
@@ -19,8 +20,8 @@ void draw() {
   
   background(60);
   level.print();
+  temp = player.x;
   player.x += x_motion;
-  if (player.onKiss()) player.x -= x_motion;
   level.draw();
   player.draw();
 }

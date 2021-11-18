@@ -46,7 +46,9 @@ class Player {
   
   void draw() {
     
-    rect(x + 32, y+256, 64, -8);
+    //rect(x + 32, y+256, 48, -8); //hitbox
+    //rect(x + 32, y+250, 10, 10);
+    //rect(x + 80, y+250, 10, 10);
     textSize(40);
     text("x: ", 100, 100);
     text(x, 160, 100);
@@ -81,9 +83,9 @@ class Player {
   boolean onGround() {
     if (y == 644) return true; //literally the ground (y border)
     else {
-      for (int i = 0; i < 192; i++) {
-        for (int j = 0; j < 10; j++ ) {
-          if ((x + 32 == (int)level.cone.hitbox[i].getX() || x + 96 == (int)level.cone.hitbox[i].getX()) && y + 256 + j == (int)level.cone.hitbox[i].getY()) {
+      for (int i = 0; i < 64; i++) {
+        for (int j = 0; j < 10; j++ ) { //take into consideration the gravity
+          if ((x + 32 == (int)level.cone.hitboxup[i].getX() || x + 80 == (int)level.cone.hitboxup[i].getX()) && y + 256 + j == (int)level.cone.hitboxup[i].getY()) {
             y += j;
             return true;
           }
@@ -95,18 +97,24 @@ class Player {
   
   //checks if the player is kissing a wall
   boolean onKiss() {
-    if (x == 8) return true; //literally the left wall (-x border)
+    if (x <= 8) { //literally the left wall (-x border)
+      x = 8;
+      return true;
+    } 
     else {
-     for (int i = 0; i < 192; i++) {
-        for (int j = 0; j < 8; j++ ) {
-          if ((x + 32 + j == (int)level.cone.hitbox[i].getX() || x + 96 + j == (int)level.cone.hitbox[i].getX()) && y + 255 == (int)level.cone.hitbox[i].getY()) {
-            System.out.println("true");
+     for (int i = 0; i < 64; i++) {
+        for (int j = 0; j < 8; j++ ) { //take into consideration the player steps
+          if (x + 80 + j == (int)level.cone.hitboxleft[i].getX() && y + 256 == (int)level.cone.hitboxleft[i].getY()) { //check the left walls
+            x = (int)level.cone.hitboxleft[i].getX() - 80 - 16 + 1; //numbers that work for some reason
+            return true;
+          }
+          else if (x + 32 + j == (int)level.cone.hitboxright[i].getX() && y + 256 == (int)level.cone.hitboxright[i].getY()) { //check the right walls
+            x = (int)level.cone.hitboxright[i].getX() - 32 + 1; //numbers that work for some reason
             return true;
           }
         }
       }
     }
-    System.out.println("false");
     return false;
   }
     
