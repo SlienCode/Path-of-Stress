@@ -8,7 +8,8 @@ class Level {
   Level() {
     objects[0] = new Cone(648, 836);
     objects[1] = new Hydrant(500, 772);
-    objects[2] = new Bench(800, 708);
+    objects[2] = new Car(800,644);
+    //objects[3] = new Bench(800, 708);
   }
   
   void draw() {
