@@ -10,7 +10,6 @@ void setup(){
   size(1440, 900);
   noSmooth();
   level = new Level();
-  level.print();
   player = new Player("male");
   free_right = true;
   free_left = true;
@@ -19,10 +18,10 @@ void setup(){
 void draw() {
   
   background(60);
-  level.print();
   temp = player.x;
   player.x += x_motion;
   level.draw();
+  level.toggle(); //for dev mode
   player.draw();
 }
 

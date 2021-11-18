@@ -83,11 +83,13 @@ class Player {
   boolean onGround() {
     if (y == 644) return true; //literally the ground (y border)
     else {
-      for (int i = 0; i < 64; i++) {
-        for (int j = 0; j < 10; j++ ) { //take into consideration the gravity
-          if ((x + 32 == (int)level.cone.hitboxup[i].getX() || x + 80 == (int)level.cone.hitboxup[i].getX()) && y + 256 + j == (int)level.cone.hitboxup[i].getY()) {
-            y += j;
-            return true;
+      for (Object object: level.objects) { //for every object in the level
+        for (int i = 0; i < object.upsize; i++) { //check if the player collides with its top
+          for (int j = 0; j < 10; j++ ) { //take into consideration the gravity
+            if ((x + 32 == (int)object.hitboxup[i].getX() || x + 80 == (int)object.hitboxup[i].getX()) && y + 256 + j == (int)object.hitboxup[i].getY()) {
+              y += j;
+              return true;
+            }
           }
         }
       }
@@ -102,15 +104,21 @@ class Player {
       return true;
     } 
     else {
-     for (int i = 0; i < 64; i++) {
-        for (int j = 0; j < 8; j++ ) { //take into consideration the player steps
-          if (x + 80 + j == (int)level.cone.hitboxleft[i].getX() && y + 256 == (int)level.cone.hitboxleft[i].getY()) { //check the left walls
-            x = (int)level.cone.hitboxleft[i].getX() - 80 - 16 + 1; //numbers that work for some reason
-            return true;
+      for (Object object: level.objects) { //for every object in the level
+       for (int i = 0; i < object.leftsize; i++) { //check if the player collides with its left
+          for (int j = 0; j < 8; j++ ) { //take into consideration the player steps
+            if (x + 80 + j == (int)object.hitboxleft[i].getX() && y + 256 == (int)object.hitboxleft[i].getY()) { //check the left walls
+              x = (int)object.hitboxleft[i].getX() - 80 - 16 + 8; //numbers that work for some reason
+              return true;
+            }
           }
-          else if (x + 32 + j == (int)level.cone.hitboxright[i].getX() && y + 256 == (int)level.cone.hitboxright[i].getY()) { //check the right walls
-            x = (int)level.cone.hitboxright[i].getX() - 32 + 1; //numbers that work for some reason
-            return true;
+       }
+       for (int i = 0; i < object.rightsize; i++) { //check if the player collides with its right
+         for (int j = 0; j < 8; j++ ) { //take into consideration the player steps
+           if (x + 32 + j == (int)object.hitboxright[i].getX() && y + 256 == (int)object.hitboxright[i].getY()) { //check the right walls
+              x = (int)object.hitboxright[i].getX() - 32 + 1; //numbers that work for some reason
+              return true;
+            }
           }
         }
       }
