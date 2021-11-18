@@ -86,7 +86,7 @@ class Player {
       for (Object object: level.objects) { //for every object in the level
         for (int i = 0; i < object.upsize; i++) { //check if the player collides with its top
           for (int j = 0; j < 10; j++ ) { //take into consideration the gravity
-            if ((x + 32 == (int)object.hitboxup[i].getX() || x + 80 == (int)object.hitboxup[i].getX()) && y + 256 + j == (int)object.hitboxup[i].getY()) {
+            if ((x + 32 == (int)object.hitboxup[i].getX() || x + 88 == (int)object.hitboxup[i].getX()) && y + 256 + j == (int)object.hitboxup[i].getY()) {
               y += j;
               return true;
             }
@@ -107,8 +107,8 @@ class Player {
       for (Object object: level.objects) { //for every object in the level
        for (int i = 0; i < object.leftsize; i++) { //check if the player collides with its left
           for (int j = 0; j < 8; j++ ) { //take into consideration the player steps
-            if (x + 80 + j == (int)object.hitboxleft[i].getX() && y + 256 == (int)object.hitboxleft[i].getY()) { //check the left walls
-              x = (int)object.hitboxleft[i].getX() - 80 - 16 + 8; //numbers that work for some reason
+            if (x + 88 + j == (int)object.hitboxleft[i].getX() && y + 256 == (int)object.hitboxleft[i].getY()) { //check the left walls
+              x = (int)object.hitboxleft[i].getX() - 88 - 16 + 8; //numbers that work for some reason
               return true;
             }
           }
