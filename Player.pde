@@ -8,6 +8,8 @@ class Player {
   int x;
   int y;
   
+  int d; //distance from the closet hitbox, up to 15
+  
   boolean reverse; //when true, flip the image to head to the opposite direction
   
   PImage image; //player's image to be printed, it can change in each frame
@@ -46,7 +48,7 @@ class Player {
   
   void draw() {
     
-    //rect(x + 32, y+256, 48, -8); //hitbox
+    rect(x + 32, y+256, 48, -8); //hitbox
     //rect(x + 32, y+250, 10, 10);
     //rect(x + 80, y+250, 10, 10);
     textSize(40);
@@ -59,9 +61,8 @@ class Player {
     
     //check which animation shall be applied
     animation();
-    
     if (jump_counter == -1 && !onGround()) { //if the player is not jumping and is not standing on ground, apply gravity
-      y+=10;
+      y+=15;
       image = jump[2];
     }
     else y += jump(); //otherwise, start jump
@@ -85,9 +86,9 @@ class Player {
     else {
       for (Object object: level.objects) { //for every object in the level
         for (int i = 0; i < object.upsize; i++) { //check if the player collides with its top
-          for (int j = 0; j < 10; j++ ) { //take into consideration the gravity
-            if ((x + 32 == (int)object.hitboxup[i].getX() || x + 88 == (int)object.hitboxup[i].getX()) && y + 256 + j == (int)object.hitboxup[i].getY()) {
-              y += j;
+          for (d = 0; d < 15; d++ ) { //take into consideration the gravity
+            if ((x + 32 == (int)object.hitboxup[i].getX() || x + 80 == (int)object.hitboxup[i].getX()) && y + 256 + d == (int)object.hitboxup[i].getY()) {
+              y += d;
               return true;
             }
           }
@@ -107,8 +108,8 @@ class Player {
       for (Object object: level.objects) { //for every object in the level
        for (int i = 0; i < object.leftsize; i++) { //check if the player collides with its left
           for (int j = 0; j < 8; j++ ) { //take into consideration the player steps
-            if (x + 88 + j == (int)object.hitboxleft[i].getX() && y + 256 == (int)object.hitboxleft[i].getY()) { //check the left walls
-              x = (int)object.hitboxleft[i].getX() - 88 - 16 + 8; //numbers that work for some reason
+            if (x + 80 + j == (int)object.hitboxleft[i].getX() && y + 256 == (int)object.hitboxleft[i].getY()) { //check the left walls
+              x = (int)object.hitboxleft[i].getX() - 80 - 16 + 8; //numbers that work for some reason
               return true;
             }
           }
@@ -146,13 +147,25 @@ class Player {
   
   private int jump() {
     
-    if (jump_counter >= 10 && jump_counter <= 20) return -7; //go up 5 pixels
-    else if (jump_counter > 20 && jump_counter <= 30) return -5; //go up 2 pixels (slow down mode)
-    else if (jump_counter >= 30 && jump_counter <= 35) return -4; //go up just 1 pixel (almost done going up)
-    else if (jump_counter >= 35 && jump_counter <= 40) return -2; //go up just 1 pixel (almost done going up)
-    else if (jump_counter >= 40 && jump_counter <= 45) return 0; //go up just 1 pixel (almost done going up)
-    else if (jump_counter >= 45 && jump_counter <= 50) return 6; //go down 3 pixels
- 
+    if (jump_counter >= 10 && jump_counter <= 20) return -10; //go up 10 pixels
+    else if (jump_counter > 20 && jump_counter <= 30) return -7; //go up 7 pixels (slow down mode)
+    else if (jump_counter >= 30 && jump_counter <= 35) return -4; //go up just 4 pixel (almost done going up)
+    else if (jump_counter >= 35 && jump_counter <= 40) return -0; //stay still
+    else if (jump_counter >= 40 && jump_counter <= 45) { //check if the player is about to hit a hitbox before they go down 5 pixels
+      if (onGround()) {
+        jump_counter = -1;
+        return d;
+      }
+      else return 5;
+    }
+    else if (jump_counter >= 45 && jump_counter <= 50) { //check if the player is about to hit a hitbox before they go down 10 pixels
+      if (onGround()) {
+        jump_counter = -1;
+        return d;
+      }
+    else return 10;
+    }
+    
     return 0; //otherwise, don't touch the y axis
   }
   
