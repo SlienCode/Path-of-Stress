@@ -7,6 +7,9 @@ class Course {
   
   boolean visibility;
   
+  //floating animation
+  int floating_counter; //80 frames
+  
   //image of the object
   PImage image;
   
@@ -26,9 +29,12 @@ class Course {
   Course(int x,int y) {
     this.x = x;
     this.y = y;
-    image = loadImage("C:/Users/ATHGEO/Desktop/Path_of_Stress/images/objects/course.png");
-
+    
     visibility = true;
+    
+    floating_counter = 0;
+    
+    image = loadImage("C:/Users/nickc/Desktop/Path_of_Stress/images/objects/course.png");
 
     hitboxcourse = new Point[size_of_array];
     
@@ -45,7 +51,23 @@ class Course {
     }
   }
   
+  void floatingAnimation() {
+    if (floating_counter < 5) y += 2;
+    else if (floating_counter < 15) y += 1;
+    else if (floating_counter < 25) y += 0;
+    else if (floating_counter < 35) y += -1;
+    else if (floating_counter < 45) y += -2;
+    else if (floating_counter < 55) y += -1;
+    else if (floating_counter < 65) y += 0;
+    else if (floating_counter < 75) y += 1;
+    else if (floating_counter < 80) y += 2;
+    
+    floating_counter++;
+    if (floating_counter == 80) floating_counter = 0; //start the animation from scratch
+  }
+  
   void draw() {
+    floatingAnimation();
     if (visibility) image(image, x, y, 64, 64);
   }
   
