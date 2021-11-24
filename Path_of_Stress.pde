@@ -1,4 +1,3 @@
-
 Player player;
 Level level;
 boolean free_right; //is the user holding the right arrow? if they aren't then it's free so -> true
@@ -19,7 +18,6 @@ void draw() {
   
   background(60);
   temp = player.x;
-  player.x += x_motion;
   level.draw();
   level.toggle(); //for dev mode
   player.draw();

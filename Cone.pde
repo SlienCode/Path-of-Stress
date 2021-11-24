@@ -5,7 +5,7 @@ class Cone extends Object {
   Cone(int x,int y) {
     
     super(x, y);
-    image = loadImage("C:/Users/nickc/Desktop/Path_of_Stress/images/objects/cone.png");
+    image = loadImage("C:/Users/ATHGEO/Desktop/Path_of_Stress/images/objects/cone.png");
 
     leftsize = 64;
     upsize = 64;
@@ -14,6 +14,7 @@ class Cone extends Object {
     hitboxleft = new Point[64];
     hitboxup = new Point[64];
     hitboxright = new Point[64];
+    
     
     for (int i = 0; i < 64; i++) {
       hitboxleft[i] = new Point(x, y-i+64);

@@ -1,4 +1,3 @@
-
 abstract class Object {
   
   //coordinates
