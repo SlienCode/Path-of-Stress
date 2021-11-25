@@ -1,3 +1,6 @@
+import processing.sound.*;
+
+SoundFile file;
 Player player;
 Level level;
 boolean free_right; //is the user holding the right arrow? if they aren't then it's free so -> true
@@ -8,6 +11,10 @@ int temp;
 void setup(){
   size(1440, 900);
   noSmooth();
+  file = new SoundFile(this, "C:/Users/nickc/Desktop/Path_of_Stress/music/menu.wav");
+  file.amp(0.3);
+  file.play();
+  file.loop();
   level = new Level();
   player = new Player("male");
   free_right = true;
@@ -19,7 +26,7 @@ void draw() {
   background(60);
   temp = player.x;
   level.draw();
-  level.toggle(); //for dev mode
+  //level.toggle(); //for dev mode
   player.draw();
 }
 

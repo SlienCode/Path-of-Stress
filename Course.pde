@@ -66,6 +66,15 @@ class Course {
     if (floating_counter == 80) floating_counter = 0; //start the animation from scratch
   }
   
+  /*void floatingAnimation() {
+    if (floating_counter < 20) y += 1;
+    else if (floating_counter < 60) y += -1;
+    else if (floating_counter < 80) y += 1;
+    
+    floating_counter++;
+    if (floating_counter == 80) floating_counter = 0; //start the animation from scratch
+  }*/
+  
   void draw() {
     floatingAnimation();
     if (visibility) image(image, x, y, 64, 64);
