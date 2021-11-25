@@ -80,10 +80,10 @@ class Player {
     //draw player coordinates
     fill(255);
     textSize(40);
-    text("x: ", 100, 100);
-    text(x, 160, 100);
-    text("y: ", 100, 160);
-    text(y, 160, 160);
+    text("x: ", 0, 35);
+    text(x, 40, 35);
+    text("y: ", 0, 75);
+    text(y, 40, 75);
     
     image = idle[0]; //default standing position image
     player.x += x_motion;
