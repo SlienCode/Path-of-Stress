@@ -8,7 +8,7 @@ class Car extends Object {
     image = loadImage("C:/Users/ATHGEO/Desktop/Path_of_Stress/images/objects/red_car.png");
 
     leftsize = 202+3;
-    upsize = 420;
+    upsize = 420+4;
     rightsize = 202+1;
 
     hitboxleft = new Point[leftsize];
@@ -28,16 +28,16 @@ class Car extends Object {
     }
 
     for (int i = 0; i < upsize; i++) {
-      if (i<=39) {
-        hitboxup[i] = new Point(x+i+49, y+127);
-      } else if (i<=77) {
-        hitboxup[i] = new Point(x+i+49, y+104);
-      } else if (i<=115) {
-        hitboxup[i] = new Point(x+i+49, y+80);
-      } else if (i<=284) {
-        hitboxup[i] = new Point(x+i+49, y+56);
+      if (i<=40) {
+        hitboxup[i] = new Point(x+i+48, y+127);
+      } else if (i<=79) {
+        hitboxup[i] = new Point(x+i+47, y+104);
+      } else if (i<=118) {
+        hitboxup[i] = new Point(x+i+46, y+80);
+      } else if (i<=288) {
+        hitboxup[i] = new Point(x+i+45, y+56);
       } else {
-        hitboxup[i] = new Point(x+i+49, y+119);
+        hitboxup[i] = new Point(x+i+44, y+119);
       }
     }
 
