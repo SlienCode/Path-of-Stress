@@ -1,5 +1,6 @@
 import processing.sound.*;
 
+PImage image;
 SoundFile file;
 Player player;
 Level level;
@@ -11,8 +12,8 @@ int temp;
 void setup(){
   size(1440, 900);
   noSmooth();
-  file = new SoundFile(this, "C:/Users/nickc/Desktop/Path_of_Stress/music/menu.wav");
-  file.amp(0.3);
+  file = new SoundFile(this, "C:/Users/ATHGEO/Desktop/Path_of_Stress/music/menu.wav");
+  file.amp(0.02);
   file.play();
   file.loop();
   level = new Level();
@@ -22,12 +23,21 @@ void setup(){
 }
 
 void draw() {
-  
-  background(60);
+  image = loadImage("C:/Users/ATHGEO/Desktop/Path_of_Stress/images/screens/aueb_pixel14-8.png");
+  //background(image);
+  //image = loadImage("C:/Users/ATHGEO/Desktop/Path_of_Stress/images/screens/unnamed.jpg");
+  image(image, 0, 0, 1440, 900);
   temp = player.x;
+  
+  //display fps
+  fill(0, 255, 0);
+  text(frameRate, width-63, 36);
+  
   level.draw();
-  //level.toggle(); //for dev mode
+  level.toggle(); //draw object and course hitboxes
+  
   player.draw();
+  
 }
 
 //make it so that holding a button won't execute keyPressed continuously using free_right and free_left

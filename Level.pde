@@ -1,6 +1,7 @@
 class Level {
 
   PImage background;
+  PImage image_course;
 
   Object[] objects = new Object[2];
   Course[] courses = new Course[2];
@@ -8,6 +9,8 @@ class Level {
   int courses_collected = 0;
 
   Level() {
+    image_course = loadImage("C:/Users/ATHGEO/Desktop/Path_of_Stress/images/objects/course.png");
+    
     //objects[0] = new Cone(648, 836);
     //objects[2] = new Course(600, 600);
     //objects[4] = new Cone (540, 760);
@@ -22,6 +25,13 @@ class Level {
   void draw() {
     for (Object object: objects) object.draw();
     for (Course course: courses) course.draw();
+    
+    //draw courses collected
+    image(image_course, width/2-70, 20, 64, 64);
+    textSize(64);
+    fill(255, 215, 0);
+    text("x", width/2, 75);
+    text(courses_collected, width/2+50, 80);
   }
 
   //toggles the hitbox visability

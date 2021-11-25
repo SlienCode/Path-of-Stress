@@ -50,13 +50,15 @@ class Player {
       hitboxplayer[i] = new Point();
     }
     
-
     
   }
   
   void draw() {
     
-    rect(x + 32, y+256, 64, -8); //draw feet hitbox
+    //draw feet hitbox
+    fill(255);
+    rect(x + 32, y+256, 64, -8);
+    
     //rect(x + 32, y+250, 10, 10);
     //rect(x + 96, y+250, 10, 10);
     
@@ -70,21 +72,18 @@ class Player {
       hitboxplayer[i+388] = new Point((x+112-6), (y+40)+i);
     }
     
-    for (int i = 0; i < hitboxplayer.length; i++) rect((int) hitboxplayer[i].getX(),(int) hitboxplayer[i].getY(), 1, 1); //draw player hitbox
+    //draw player hitbox
+    for (int i = 0; i < hitboxplayer.length; i++) rect((int) hitboxplayer[i].getX(),(int) hitboxplayer[i].getY(), 1, 1); 
     
     collectedCourses(); //count collected courses
     
     //draw player coordinates
+    fill(255);
     textSize(40);
     text("x: ", 100, 100);
     text(x, 160, 100);
     text("y: ", 100, 160);
     text(y, 160, 160);
-    
-    //draw courses collected
-    textSize(40);
-    text("Courses: ", 600, 100);
-    text(level.courses_collected, 780, 100);
     
     image = idle[0]; //default standing position image
     player.x += x_motion;
