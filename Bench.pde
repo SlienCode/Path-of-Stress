@@ -5,7 +5,7 @@ class Bench extends Object {
   Bench(int x,int y) {
     
     super(x, y);
-    image = loadImage("C:/Users/ATHGEO/Desktop/Path_of_Stress/images/objects/bench.png");
+    image = loadImage(sketchPath() + "/images/objects/bench.png");
 
     leftsize = 42;
     upsize = 192;

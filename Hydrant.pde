@@ -5,7 +5,7 @@ class Hydrant extends Object {
   Hydrant(int x,int y) {
     
     super(x, y);
-    image = loadImage("C:/Users/ATHGEO/Desktop/Path_of_Stress/images/objects/hydrant.png");
+    image = loadImage(sketchPath() + "/images/objects/hydrant.png");
 
     leftsize = 96;
     upsize = 64;

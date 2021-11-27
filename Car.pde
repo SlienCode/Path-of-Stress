@@ -5,7 +5,7 @@ class Car extends Object {
   Car(int x,int y) {
 
     super(x, y);
-    image = loadImage("C:/Users/ATHGEO/Desktop/Path_of_Stress/images/objects/red_car.png");
+    image = loadImage(sketchPath() + "/images/objects/red_car.png");
 
     leftsize = 202+3;
     upsize = 420+4;

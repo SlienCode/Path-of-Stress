@@ -5,7 +5,7 @@ class Cone extends Object {
   Cone(int x,int y) {
     
     super(x, y);
-    image = loadImage("C:/Users/ATHGEO/Desktop/Path_of_Stress/images/objects/cone.png");
+    image = loadImage(sketchPath() + "/images/objects/cone.png");
 
     leftsize = 64;
     upsize = 64;

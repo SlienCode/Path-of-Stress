@@ -34,7 +34,7 @@ class Course {
     
     floating_counter = 0;
     
-    image = loadImage("C:/Users/ATHGEO/Desktop/Path_of_Stress/images/objects/course.png");
+    image = loadImage(sketchPath() + "/images/objects/course.png");
 
     hitboxcourse = new Point[size_of_array];
   }

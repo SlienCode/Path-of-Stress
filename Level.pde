@@ -3,20 +3,18 @@ class Level {
   PImage background;
   PImage image_course;
 
-  Object[] objects = new Object[2];
+  Object[] objects = new Object[4];
   Course[] courses = new Course[8];
   
   int courses_collected = 0;
 
   Level() {
-    image_course = loadImage("C:/Users/ATHGEO/Desktop/Path_of_Stress/images/objects/course.png");
+    image_course = loadImage(sketchPath() + "/images/objects/course.png");
     
-    //objects[0] = new Cone(648, 836);
-    //objects[2] = new Course(600, 600);
-    //objects[4] = new Cone (540, 760);
-    objects[0] = new Hydrant(500, 772);
-    objects[1] = new Car(800, 644);
-    //objects[3] = new Bench(800, 708);
+    objects[0] = new Cone(50, 836);
+    objects[1] = new Hydrant(400, 772);
+    objects[2] = new Bench(625, 708);
+    objects[3] = new Car(800, 644);
     
     courses[0] = new Course(100, 400);
     courses[1] = new Course(300, 400);

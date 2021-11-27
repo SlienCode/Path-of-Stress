@@ -12,7 +12,8 @@ int temp;
 void setup(){
   size(1440, 900);
   noSmooth();
-  file = new SoundFile(this, "C:/Users/ATHGEO/Desktop/Path_of_Stress/music/menu.wav");
+  
+  file = new SoundFile(this, sketchPath() + "/music/menu.wav");
   file.amp(0.02);
   file.play();
   file.loop();
@@ -23,9 +24,9 @@ void setup(){
 }
 
 void draw() {
-  image = loadImage("C:/Users/ATHGEO/Desktop/Path_of_Stress/images/screens/aueb_pixel14-8.png");
+  image = loadImage(sketchPath() + "/images/screens/aueb_pixel14-8.png");
   //background(image);
-  //image = loadImage("C:/Users/ATHGEO/Desktop/Path_of_Stress/images/screens/unnamed.jpg");
+  //image = loadImage(sketchPath() + "/images/screens/unnamed.jpg");
   image(image, 0, 0, 1440, 900);
   temp = player.x;
   
@@ -34,7 +35,7 @@ void draw() {
   text(frameRate, width-63, 36);
   
   level.draw();
-  level.toggle(); //draw object and course hitboxes
+  //level.toggle(); //draw object and course hitboxes
   
   player.draw();
   

@@ -37,11 +37,11 @@ class Player {
     jump = new PImage[3];
     walk = new PImage[8];
     for (int i = 0; i <3; i++) {
-      idle[i] = loadImage("C:/Users/ATHGEO/Desktop/Path_of_Stress/images/player/" + gender + "/idle" + i + ".png");
-      jump[i] = loadImage("C:/Users/ATHGEO/Desktop/Path_of_Stress/images/player/" + gender + "/jump" + i + ".png");
+      idle[i] = loadImage(sketchPath() + "/images/player/" + gender + "/idle" + i + ".png");
+      jump[i] = loadImage(sketchPath() + "/images/player/" + gender + "/jump" + i + ".png");
     }
     for (int i = 0; i < 8; i++) {
-      walk[i] = loadImage("C:/Users/ATHGEO/Desktop/Path_of_Stress/images/player/" + gender + "/walk" + i + ".png");
+      walk[i] = loadImage(sketchPath() + "/images/player/" + gender + "/walk" + i + ".png");
     }
     
     //player hitbox
@@ -56,8 +56,8 @@ class Player {
   void draw() {
     
     //draw feet hitbox
-    fill(255);
-    rect(x + 32, y+256, 64, -8);
+    //fill(255);
+    //rect(x + 32, y+256, 64, -8);
     
     //rect(x + 32, y+250, 10, 10);
     //rect(x + 96, y+250, 10, 10);
@@ -73,7 +73,7 @@ class Player {
     }
     
     //draw player hitbox
-    for (int i = 0; i < hitboxplayer.length; i++) rect((int) hitboxplayer[i].getX(),(int) hitboxplayer[i].getY(), 1, 1); 
+    //for (int i = 0; i < hitboxplayer.length; i++) rect((int) hitboxplayer[i].getX(),(int) hitboxplayer[i].getY(), 1, 1); 
     
     collectedCourses(); //count collected courses
     
