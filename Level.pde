@@ -29,13 +29,13 @@ class Level {
     
     if (year == 1) {
       
-     backgroundFront = loadImage(sketchPath() + "/images/backgrounds/1st_year_front.png");
-     backgroundBack = loadImage(sketchPath() + "/images/backgrounds/1st_year_back.png");
-     
-     x_dim = 2160;
-     y = -25;
-     
-     right_border = 7200;
+       backgroundFront = loadImage(sketchPath() + "/images/backgrounds/1st_year_front.png");
+       backgroundBack = loadImage(sketchPath() + "/images/backgrounds/1st_year_back.png");
+       
+       x_dim = 2160;
+       y = -25;
+       
+       right_border = 7200;
      
     }
     
@@ -45,14 +45,14 @@ class Level {
     
     
     //move the background (and frontground if it exists) based on player movement
-    if ((player.x >= width/2 -64) && (player.x <= right_border - width/2 -64 - 16)) { 
+    if ((player.x >= width/2 - 64 - 8) && (player.x <= right_border - width/2 - 64 - 16)) { 
       
       if (game.x_motion > 0)
         fg_x -= 4;
       if (game.x_motion > 0)
         bg_x -= 1;
     }
-    if ((player.x >= 720) && (player.x <= right_border - 720 - 8)) {
+    if ((player.x >= width/2 - 64) && (player.x <= right_border - width/2 - 64 - 8)) {
       
       if (game.x_motion < 0)
         fg_x += 4;
@@ -61,7 +61,6 @@ class Level {
     }
     
     image(backgroundBack, bg_x, y, x_dim, 900);
-    println(bg_x);
     if (year == 1 ) //only the first year has a frontground
     image(backgroundFront, fg_x, 0, 4320, 900);
     

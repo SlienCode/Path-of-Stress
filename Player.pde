@@ -71,7 +71,7 @@ class Player {
     //off screen borders
     if (y > 644) y = 644;
     
-    if (x < 720) {
+    if (x < width/2 - 64) {
       if (reverse) { //if the player is walking towards the left, flip the image if needed 
         scale(-1,1); 
         image(image, - x - 128, y, 128, 256);
@@ -79,7 +79,7 @@ class Player {
       }
       else image(image, x, y, 128, 256); //else don't flip it
     }
-    else if (x > level.right_border - 720) {
+    else if (x > level.right_border - width/2 - 64) {
       if (reverse) { //if the player is walking towards the left, flip the image if needed 
         scale(-1,1); 
         image(image, - x + level.right_border - 1440 - 128, y, 128, 256);

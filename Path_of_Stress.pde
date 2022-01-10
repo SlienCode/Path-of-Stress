@@ -15,7 +15,7 @@ void setup() {
   menu = new Menu();
   game = new Game();
   
-  sound = new SoundFile(this, sketchPath() + "/music/Menu.wav");
+  sound = new SoundFile(this, sketchPath() + "/music/menu.wav");
   sound.amp(menu.volume);
   sound.play();
   sound.loop();
