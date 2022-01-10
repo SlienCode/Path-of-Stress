@@ -15,7 +15,6 @@ class Cone extends Object {
     hitboxup = new Point[64];
     hitboxright = new Point[64];
     
-    
     for (int i = 0; i < 64; i++) {
       hitboxleft[i] = new Point(x, y-i+64);
       hitboxup[i] = new Point(x+i, y);

@@ -1,12 +1,10 @@
 class Player {
   
-  String gender;
+  String character;
   
   //coordinates
   int x;
   int y;
-  
-  int d; //distance from the closet hitbox, up to 15
   
   boolean reverse; //when true, flip the image to head to the opposite direction
   
@@ -21,9 +19,10 @@ class Player {
   
   Point[] hitboxplayer;
   
-  Player(String g) {
+  Player(String c) {
     
-    gender = g;
+    character = c;
+    //print(character);
     
     //default coordinates untill player moves
     x = 128;
@@ -37,43 +36,16 @@ class Player {
     jump = new PImage[3];
     walk = new PImage[8];
     for (int i = 0; i <3; i++) {
-      idle[i] = loadImage(sketchPath() + "/images/player/" + gender + "/idle" + i + ".png");
-      jump[i] = loadImage(sketchPath() + "/images/player/" + gender + "/jump" + i + ".png");
+      idle[i] = loadImage(sketchPath() + "/images/characters/" + character + "/idle" + i + ".png");
+      jump[i] = loadImage(sketchPath() + "/images/characters/" + character + "/jump" + i + ".png");
     }
     for (int i = 0; i < 8; i++) {
-      walk[i] = loadImage(sketchPath() + "/images/player/" + gender + "/walk" + i + ".png");
+      walk[i] = loadImage(sketchPath() + "/images/characters/" + character + "/walk" + i + ".png");
     }
-    
-    //player hitbox
-    hitboxplayer = new Point[604];
-    for (int i = 0; i < hitboxplayer.length; i++) {
-      hitboxplayer[i] = new Point();
-    }
-    
-    
+      
   }
   
   void draw() {
-    
-    //draw feet hitbox
-    //fill(255);
-    //rect(x + 32, y+256, 64, -8);
-    
-    //rect(x + 32, y+250, 10, 10);
-    //rect(x + 96, y+250, 10, 10);
-    
-    //player hitbox
-    for (int i = 0; i < 86; i++) {
-      hitboxplayer[i] = new Point((x+16+4)+i, (y+32+8));
-      hitboxplayer[i+86] = new Point((x+16+4+1)+i, (y+256));
-    }
-    for (int i = 0; i < 216; i++) {
-      hitboxplayer[i+172] = new Point((x+16+4), (y+40+1)+i);
-      hitboxplayer[i+388] = new Point((x+112-6), (y+40)+i);
-    }
-    
-    //draw player hitbox
-    //for (int i = 0; i < hitboxplayer.length; i++) rect((int) hitboxplayer[i].getX(),(int) hitboxplayer[i].getY(), 1, 1); 
     
     collectedCourses(); //count collected courses
     
@@ -86,7 +58,7 @@ class Player {
     text(y, 40, 75);
     
     image = idle[0]; //default standing position image
-    player.x += x_motion;
+    x += game.x_motion;
     
     //check which animation shall be applied
     animation();
@@ -99,12 +71,29 @@ class Player {
     //off screen borders
     if (y > 644) y = 644;
     
-    if (reverse) { //if the player is walking towards the left, flip the image if needed 
-      scale(-1,1); 
-      image(image, - x - 128, y, 128, 256);
+    if (x < 720) {
+      if (reverse) { //if the player is walking towards the left, flip the image if needed 
+        scale(-1,1); 
+        image(image, - x - 128, y, 128, 256);
+        scale(-1,1);
+      }
+      else image(image, x, y, 128, 256); //else don't flip it
     }
-    else image(image, x, y, 128, 256); //else don't flip it
-    
+    else if (x > level.right_border - 720) {
+      if (reverse) { //if the player is walking towards the left, flip the image if needed 
+        scale(-1,1); 
+        image(image, - x + level.right_border - 1440 - 128, y, 128, 256);
+        scale(-1,1);
+      }
+      else image(image, x - (level.right_border - 1440), y, 128, 256); //else don't flip it
+    }
+    else 
+        if (reverse) { //if the player is walking towards the left, flip the image if needed 
+          scale(-1,1); 
+          image(image, - (width/2 - 64) - 128, y, 128, 256);
+          scale(-1,1);
+        }
+        else image(image, width/2 - 64, y, 128, 256); //else don't flip it
   }
   
   //checks if the player is standing on solid ground
@@ -112,14 +101,7 @@ class Player {
     if (y == 644) return true; //literally the ground (y border)
     else {
       for (Object object: level.objects) { //for every object in the level
-        for (int i = 0; i < object.upsize; i++) { //check if the player collides with its top
-          for (d = 0; d < 15; d++) { //take into consideration the gravity
-            if ((x + 32 == (int)object.hitboxup[i].getX() || x + 96 == (int)object.hitboxup[i].getX()) && y + 256 + d == (int)object.hitboxup[i].getY()) {
-              y += d;
-              return true;
-            }
-          }
-        }
+       
       }
     }
     return false;
@@ -130,26 +112,15 @@ class Player {
     if (x <= 8) { //literally the left wall (-x border)
       x = 8;
       return true;
-    } 
+    }
+    else if (x >= 7072) { //literally the right wall (+x border)
+      x = 7072;
+      return true;
+    }
     else {
       for (Object object: level.objects) { //for every object in the level
-       for (int i = 0; i < object.leftsize; i++) { //check if the player collides with its left
-          for (int j = 0; j < 8; j++) { //take into consideration the player steps
-            if (x + 96 - j == (int)object.hitboxleft[i].getX() && y + 256 == (int)object.hitboxleft[i].getY()) { //check the left walls
-              x -= j + 1; //numbers that work for some reason
-              return true;
-            }
-          }
+       
        }
-       for (int i = 0; i < object.rightsize; i++) { //check if the player collides with its right
-         for (int j = 0; j < 8; j++) { //take into consideration the player steps
-           if (x + 32 + j == (int)object.hitboxright[i].getX() && y + 256 == (int)object.hitboxright[i].getY()) { //check the right walls
-              x += j + 1; //numbers that work for some reason
-              return true;
-            }
-          }
-        }
-      }
     }
     return false;
   }
@@ -205,5 +176,4 @@ class Player {
       }
     }
   }
-  
 };
