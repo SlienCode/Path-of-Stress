@@ -37,15 +37,15 @@ class Course {
   }
   
   void floatingAnimation() {
-    if (floating_counter < 5) y += 2;
-    else if (floating_counter < 15) y += 1;
-    else if (floating_counter < 25) y += 0;
-    else if (floating_counter < 35) y += -1;
-    else if (floating_counter < 45) y += -2;
-    else if (floating_counter < 55) y += -1;
-    else if (floating_counter < 65) y += 0;
-    else if (floating_counter < 75) y += 1;
-    else if (floating_counter < 80) y += 2;
+    if ((floating_counter < 5) && (floating_counter % 2 == 0))  y += 2;
+    else if ((floating_counter < 15) && (floating_counter % 2 == 0)) y += 1;
+    else if ((floating_counter < 25) && (floating_counter % 2 == 0))  y += 0;
+    else if ((floating_counter < 35) && (floating_counter % 2 == 0))  y += -1;
+    else if ((floating_counter < 45) && (floating_counter % 2 == 0))  y += -2;
+    else if ((floating_counter < 55) && (floating_counter % 2 == 0)) y += -1;
+    else if ((floating_counter < 65) && (floating_counter % 2 == 0)) y += 0;
+    else if ((floating_counter < 75) && (floating_counter % 2 == 0)) y += 1;
+    else if ((floating_counter < 80) && (floating_counter % 2 == 0)) y += 2;
     
     floating_counter++;
     if (floating_counter == 80) floating_counter = 0; //start the animation from scratch

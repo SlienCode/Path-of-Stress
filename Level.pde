@@ -17,7 +17,7 @@ class Level {
   
   int fg_x; //frontground x
   int bg_x; //background x
-  int ob_x;
+  int move_x; //objects and courses x coordinate initializer
 
   Object[] objects;
   Course[] courses;
@@ -25,8 +25,7 @@ class Level {
   int courses_collected = 0;
 
   Level(int year) {
-    
-    ob_x = 0;
+    move_x = 0;
     this.year = year;
     
     courseImage = loadImage(sketchPath() + "/images/objects/course.png");
@@ -35,7 +34,7 @@ class Level {
       
       backgroundFront = loadImage(sketchPath() + "/images/backgrounds/1st_year_front.png");
       backgroundBack = loadImage(sketchPath() + "/images/backgrounds/1st_year_back.png");
-       
+      
       x_dim = 2160;
       y = -25;
       
@@ -48,85 +47,84 @@ class Level {
       objects[1] = new Bench(800, 708);
       objects[2] = new Hydrant(6328, 772);
       
-      courses[0] = new Course(100, 450);
-       
-       
+      courses[0] = new Course(300, 800);
+      //courses[1] = new Course(500, 800);
+      //courses[2] = new Course(700, 800);
+      //courses[3] = new Course(900, 800);
+      //courses[4] = new Course(1100, 800);
+      //courses[5] = new Course(1300, 800);
+      //courses[6] = new Course(1500, 800);
+      //courses[7] = new Course(1700, 800);
+      
+      
       right_border = 7200;
-     
     }
     else if (year == 2) {
       
       backgroundBack = loadImage(sketchPath() + "/images/backgrounds/2nd_year.png");
-       
+      
       objects = new Object[0];
       courses = new Course[0];
-       
+      
       x_dim = 5040;
       y = 0;
-       
-      bg_motion = 6;
-       
-      right_border = 6255;
       
+      bg_motion = 6;
+      
+      right_border = 6255;
     }
     else if (year == 3) {
       
       backgroundBack = loadImage(sketchPath() + "/images/backgrounds/3rd_year.png");
- 
+      
       objects = new Object[0];
       courses = new Course[0];
- 
+      
       x_dim = 7200;
       y = 0;
- 
+      
       bg_motion = 6;
       
       right_border = 9115;
-      
     }
     else if (year == 4) {
       
       backgroundBack = loadImage(sketchPath() + "/images/backgrounds/4th_year.png");
- 
+      
       objects = new Object[0];
       courses = new Course[0];
- 
+      
       x_dim = 5400;
       y = 0;
- 
+      
       bg_motion = 5;
       
       right_border = 7740;
-      
     }
-      
-      
   }
 
   void draw() {
-    
-    
     //move the background (and frontground if it exists) based on player movement
-    if ((player.x >= width/2 - 64 - 8) && (player.x <= right_border - width/2 - 64 - 16 && !player.still)) { 
-      
+    if ((player.x >= width/2 - 64 - 8) && (player.x <= right_border - width/2 - 64 - 16 && !player.still)) {
       if (player.x_motion > 0) {
         
         fg_x -= 4;
         bg_x -= bg_motion;
         
         for (Object object: objects) object.x -= 8;
-        ob_x += 8; //to reset the objects when leaving/finishing the level
+        for (Course course: courses) course.x -= 8;
+        move_x += 8; //to reset the objects when leaving/finishing the level
       }
     }
     if ((player.x >= width/2 - 64) && (player.x <= right_border - width/2 - 64 - 8 && !player.still)) {
-      
       if (player.x_motion < 0) {
         
         fg_x += 4;
         bg_x += bg_motion;
         
         for (Object object: objects) object.x += 8;
-        ob_x -= 8; //to reset the objects when quiting the level
+        for (Course course: courses) course.x += 8;
+        move_x -= 8; //to reset the objects when quiting the level
       }
     }
     
@@ -154,13 +152,11 @@ class Level {
   
   //resets the coordinates when quiting or finishing a level
   void reset() {
-    
     level.bg_x = 0;
     level.fg_x = 0;
-    for (Object object: objects) object.x += ob_x;
-    ob_x = 0;
-    //for (Course course: courses) course.draw();
-    
+    for (Object object: objects) object.x += move_x;
+    for (Course course: courses) course.x += move_x;
+    move_x = 0;
   }
 
   //toggles the hitbox visability
@@ -168,5 +164,4 @@ class Level {
     for (Object object: objects) object.toggle();
     for (Course course: courses) course.toggle();
   }
-
 };

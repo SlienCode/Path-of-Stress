@@ -90,8 +90,6 @@ class Menu {
   int music_down_x;
   int music_down_y;
   boolean mouse_over_music_down;
-  
-  int year;
 
   Menu() {
     
@@ -269,13 +267,19 @@ class Menu {
         levelReset();
         menu_state = "CHARACTER MENU";
       } else if (mouse_over_play) { //click on PLAY option
-        on_menu = false;
-        player = new Player(characters[character]);
-        if (level_1) year = 1;  
-        else if (level_2) year = 2;
-        else if (level_3) year = 3;
-        else if (level_4) year = 4;
-        level = levels[year-1];
+        if (level_1) {
+          level = levels[0];
+          startGame();
+        } else if (level_2 && level.courses_collected >= 5) {
+          level = levels[1];
+          startGame();
+        } else if (level_3 && level.courses_collected >= 10) {
+          level = levels[2];
+          startGame();
+        } else if (level_4 && level.courses_collected >= 15) {
+          level = levels[3];
+          startGame();
+        }
       }
     } else if (menu_state == "SETTINGS MENU") { //SETTINGS MENU
       if (mouse_over_return) { //click on RETURN option
@@ -625,13 +629,9 @@ class Menu {
     }
   }
   
-  void displayFps() {
-    //display FPS
-    if (fps) {
-      fill(0, 255, 0); //green
-      textSize(text_size*0.8);
-      text(frameRate, width+20, 30); 
-    }
+  void startGame() {
+    on_menu = false;
+    player = new Player(characters[character]); 
   }
   
   void levelReset() {
@@ -639,5 +639,14 @@ class Menu {
     level_2 = false;
     level_3 = false;
     level_4 = false;
+  }
+  
+  void displayFps() {
+    //display FPS
+    if (fps) {
+      fill(0, 255, 0); //green
+      textSize(text_size*0.8);
+      text(frameRate, width+20, 30); 
+    }
   }
 };
