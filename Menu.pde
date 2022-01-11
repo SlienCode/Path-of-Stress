@@ -181,7 +181,7 @@ class Menu {
     
     mouse_over_display_fps = false;
     mouse_over_display_hitboxes = false;
-    music = 1; //original = 5
+    music = 5;
     volume = music*0.03;
     music_up_x = width/2;
     music_up_y = 60;
@@ -262,7 +262,6 @@ class Menu {
            level_3 = false;
            level_2 = true;
          } else if (level_4) {
-           println("YO");
            level_4 = false;
            level_3 = true;
          }
