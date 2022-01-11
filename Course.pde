@@ -13,17 +13,14 @@ class Course {
   //image of the object
   PImage image;
   
-  //hitboxes' sizes
-  int size_of_array = 256;
-  
   //hitboxes
-  Point[] hitboxcourse;
+  Rectangle hitbox;
   
   int courses_collected;
   
   Course() {
     visibility = false;
-    hitboxcourse = new Point[0];
+    hitbox = new Rectangle();
   }
   
   Course(int x,int y) {
@@ -36,7 +33,7 @@ class Course {
     
     image = loadImage(sketchPath() + "/images/objects/course.png");
 
-    hitboxcourse = new Point[size_of_array];
+    hitbox = new Rectangle(x, y, 64, 64);
   }
   
   void floatingAnimation() {
@@ -56,28 +53,12 @@ class Course {
   
   void draw() {
     floatingAnimation();
-    if (visibility) {
-      image(image, x, y, 64, 64);
-      for (int i = 0; i < size_of_array; i++) {
-        if (i < size_of_array/4) {
-          hitboxcourse[i] = new Point(x+(i), y);
-        } else if (i < 2*size_of_array/4) {
-          hitboxcourse[i] = new Point(x+(size_of_array/4), y+i-(size_of_array/4));
-        } else if (i < 3*size_of_array/4) {
-          hitboxcourse[i] = new Point(x+(size_of_array/4)-(i-(2*size_of_array/4)), y+(size_of_array/4));
-        } else {
-          hitboxcourse[i] = new Point(x, y+(i+1-3*size_of_array/4));
-        }
-      }
-    }
+    if (visibility) image(image, x, y, 64, 64);
+    hitbox.setLocation(x, y);
   }
   
   void toggle() {
-    if (visibility) {
-      for (int i = 0; i < hitboxcourse.length; i++) {
-        rect((int) hitboxcourse[i].getX(),(int) hitboxcourse[i].getY(), 1, 1);
-      }
-    }
+    if (visibility) rect(x, y, 64, 64);
   }
   
 };

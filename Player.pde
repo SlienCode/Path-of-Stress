@@ -59,8 +59,6 @@ class Player {
   
   void draw() {
     
-    collectedCourses(); //count collected courses
-    
     //draw player coordinates
     fill(255);
     textSize(40);
@@ -84,6 +82,8 @@ class Player {
     else y += jump(); //otherwise, start jump
     
     //y += y_motion; //if you are not on ground, move y
+    
+    collectedCourses(); //count collected courses
     
     //off screen borders
     if (y > 644) y = 644;
@@ -120,12 +120,6 @@ class Player {
         x += x_motion;
       return true;
     }
-    else if (x >= level.right_border - 128) { //literally the right wall (+x border)
-      x = level.right_border - 128;
-      if (x_motion < 0) //if you want to go left, you are allowed
-        x += x_motion;
-      return true;
-    }
     else {
       Rectangle temp = new Rectangle((int)hitbox.getX() + x_motion, (int)hitbox.getY(), 63, 208);
       for (Object object: level.objects) { //for every object in the level
@@ -144,8 +138,10 @@ class Player {
   private void printPlayer(int x) {
    
      hitbox.setLocation(x + 32, y + 48);
-     //rect(x + 32, y + 48, 63, 208);
-      
+     if (menu.hitboxes) {
+       fill(255, 0, 255); //pink
+       rect(x + 32, y + 48, 63, 208);
+     }
       if (reverse) { //if the player is walking towards the left, flip the image if needed 
         scale(-1,1); 
         image(image, - x - 128, y, 128, 256);
@@ -194,15 +190,13 @@ class Player {
   //count collected courses
   private void collectedCourses() {
     for (int i = 0; i < level.courses.length; i++) {
-      //for (Point hitbox: hitbox) {
-        for (Point hitboxcourse: level.courses[i].hitboxcourse) {
-          if (hitbox.equals(hitboxcourse)) {
-            level.courses_collected += 1;
-            level.courses[i] = new Course();
-            return;
-          }
+      for (Course course: level.courses) {
+        if (hitbox.intersects(course.hitbox)) {
+          level.courses_collected += 1;
+          level.courses[i] = new Course();
+          return;
         }
-      //}
+      }
     }
   }
   

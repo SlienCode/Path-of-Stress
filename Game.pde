@@ -3,7 +3,6 @@ import processing.sound.*;
 class Game {
   
   PImage image;
-  int temp;
   boolean pause;
   
   int resume_game_x;
@@ -14,9 +13,8 @@ class Game {
   boolean mouse_over_leave_game;
   
   Game() {
+    
     image = loadImage(sketchPath() + "/images/tabs/tab.png");
-    level = new Level(1);
-    pause = false;
     
     resume_game_x = width/2;
     resume_game_y = height/2-50;
@@ -25,24 +23,22 @@ class Game {
     leave_game_y = height/2+50;
     mouse_over_leave_game = false;
     
-    
+    pause = false;
   }
   
   void draw() {
-    temp = player.x;
-    player.still = player.onKiss();
-    level.draw();
-    level.toggle(); //draw object and course hitboxes
-    player.draw();
-    
-    //if (pause) gameMenu();
-    
-    //DISPLAY FPS
-    if (menu.fps) {
-      fill(0, 255, 0); //green
-      textSize(menu.text_size*0.8);
-      text(frameRate, width+20, 30); 
+    if (!pause) {
+      
+      player.still = player.onKiss();
+      
+      level.draw();
+      player.draw();
     }
+    else gameMenu();
+    
+    if (player.x >= level.right_border) { leaveGame(); sound.pause(); }
+    
+    menu.displayFps();
   }
   
   //make it so that holding a button won't execute keyPressed continuously using free_right and free_left
@@ -60,22 +56,34 @@ class Game {
   }
   
   void mousePressed() {
+    if (pause) {
+      if (mouse_over_resume_game) {
+        resumeGame();
+      } else if (mouse_over_leave_game) {
+        leaveGame();
+      }
+    }
   }
   
   void pauseGame() {
     key = 0;
     pause = true;
-    noLoop();
     sound.pause();
-    
-    gameMenu();
   }
   
   void resumeGame() {
     key = 0;
     pause = false;
-    loop();
     sound.play();
+  }
+  
+  void leaveGame() {
+    on_menu = true;
+    resumeGame();
+    player.x = 128;
+    level.reset();
+    
+    menu.draw();
   }
   
   void gameMenu() {
@@ -86,7 +94,6 @@ class Game {
       rect(resume_game_x-200, resume_game_y-60, 400, 80); //hitbox of RESUME GAME button
       rect(leave_game_x-200, leave_game_y-60, 400, 80); //hitbox of LEAVE GAME button
     }
-    
     if (mouseX > resume_game_x-200 && mouseX < resume_game_x+200 && mouseY > resume_game_y-60 && mouseY < resume_game_y+20) {
       mouse_over_resume_game = true;
       fill(255, 200, 45); //yellow
@@ -95,15 +102,13 @@ class Game {
       fill(235, 15, 15); //red
     }
     text("RESUME GAME", resume_game_x, resume_game_y);
-      
     if (mouseX > leave_game_x-200 && mouseX < leave_game_x+200 && mouseY > leave_game_y-60 && mouseY < leave_game_y+20) {
       mouse_over_leave_game = true;
       fill(255, 200, 45); //yellow
     } else {
-      mouse_over_resume_game = false;
+      mouse_over_leave_game = false;
       fill(235, 15, 15); //red
     }
     text("LEAVE GAME", leave_game_x, leave_game_y);
   }
-  
 };
