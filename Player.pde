@@ -6,7 +6,14 @@ class Player {
   int x;
   int y;
   
+  int x_motion;
+  
+  boolean free_right; //is the user holding the right arrow? if they aren't then it's free so -> true
+  boolean free_left; //is the user holding the left arrow? if they aren't then it's free so -> true
+  
   boolean reverse; //when true, flip the image to head to the opposite direction
+  
+  boolean still;
   
   PImage image; //player's image to be printed, it can change in each frame
   
@@ -17,7 +24,7 @@ class Player {
   PImage jump[]; //3 jump animations
   PImage walk[]; //8 walk animations 
   
-  Point[] hitboxplayer;
+  Rectangle hitbox;
   
   Player(String c) {
     
@@ -27,6 +34,9 @@ class Player {
     //default coordinates untill player moves
     x = 128;
     y = 644;
+    
+    free_right = true;
+    free_left = true;
     
     reverse = false;
     
@@ -42,6 +52,8 @@ class Player {
     for (int i = 0; i < 8; i++) {
       walk[i] = loadImage(sketchPath() + "/images/characters/" + character + "/walk" + i + ".png");
     }
+    
+    hitbox = new Rectangle(x + 32, y + 48, 63, 208);
       
   }
   
@@ -58,50 +70,43 @@ class Player {
     text(y, 40, 75);
     
     image = idle[0]; //default standing position image
-    x += game.x_motion;
     
-    //check which animation shall be applied
-    animation();
-    if (jump_counter == -1 && !onGround()) { //if the player is not jumping and is not standing on ground, apply gravity
-      y+=15;
+    //still = onKiss();
+    
+    if (!still) x += x_motion; //if you didn't kiss a wall, move x
+    
+    animation(); //check which animation shall be applied
+    
+    if (jump_counter == -1 && !onGround()) { //if the player is not jumping, apply gravity
+      y += 15;
       image = jump[2];
     }
     else y += jump(); //otherwise, start jump
     
+    //y += y_motion; //if you are not on ground, move y
+    
     //off screen borders
     if (y > 644) y = 644;
     
-    if (x < width/2 - 64) {
-      if (reverse) { //if the player is walking towards the left, flip the image if needed 
-        scale(-1,1); 
-        image(image, - x - 128, y, 128, 256);
-        scale(-1,1);
-      }
-      else image(image, x, y, 128, 256); //else don't flip it
-    }
-    else if (x > level.right_border - width/2 - 64) {
-      if (reverse) { //if the player is walking towards the left, flip the image if needed 
-        scale(-1,1); 
-        image(image, - x + level.right_border - 1440 - 128, y, 128, 256);
-        scale(-1,1);
-      }
-      else image(image, x - (level.right_border - 1440), y, 128, 256); //else don't flip it
-    }
-    else 
-        if (reverse) { //if the player is walking towards the left, flip the image if needed 
-          scale(-1,1); 
-          image(image, - (width/2 - 64) - 128, y, 128, 256);
-          scale(-1,1);
-        }
-        else image(image, width/2 - 64, y, 128, 256); //else don't flip it
+    if (x < width/2 - 64) printPlayer(x); //if the player is at the start of the level, print them based on variable x behind the middle of the screen
+    
+    else if (x > level.right_border - width/2 - 64) printPlayer(x - (level.right_border - 1440)); //if the player is at the end of the level, print them based on variable x after the middle of the screen
+    
+    else printPlayer(width/2 - 64); //if the player is at the middle of the level, print them exactly in the middle of the screen
   }
   
   //checks if the player is standing on solid ground
   boolean onGround() {
     if (y == 644) return true; //literally the ground (y border)
     else {
-      for (Object object: level.objects) { //for every object in the level
-       
+      Rectangle temp = new Rectangle((int)hitbox.getX(), (int)hitbox.getY() + 15, 63, 208);
+      for (Object object: level.objects) { //for every object in the level;
+        for (Rectangle hitboxiter: object.hitbox) {
+          if (temp.intersects(hitboxiter)) {
+            y -= (int)hitbox.getY() + 208 - (int)hitboxiter.getY();
+            return true;
+          }
+        }
       }
     }
     return false;
@@ -111,22 +116,46 @@ class Player {
   boolean onKiss() {
     if (x <= 8) { //literally the left wall (-x border)
       x = 8;
+      if (x_motion > 0) //if you want to go right, you are allowed
+        x += x_motion;
       return true;
     }
-    else if (x >= 7072) { //literally the right wall (+x border)
-      x = 7072;
+    else if (x >= level.right_border - 128) { //literally the right wall (+x border)
+      x = level.right_border - 128;
+      if (x_motion < 0) //if you want to go left, you are allowed
+        x += x_motion;
       return true;
     }
     else {
+      Rectangle temp = new Rectangle((int)hitbox.getX() + x_motion, (int)hitbox.getY(), 63, 208);
       for (Object object: level.objects) { //for every object in the level
-       
-       }
+        for (Rectangle hitboxiter: object.hitbox) {
+          if (temp.intersects(hitboxiter)) {
+            if (x_motion > 0) return true;
+            else return true;
+          }
+        }
+      }
     }
     return false;
   }
   
+  //prints the player in the right position
+  private void printPlayer(int x) {
+   
+     hitbox.setLocation(x + 32, y + 48);
+     //rect(x + 32, y + 48, 63, 208);
+      
+      if (reverse) { //if the player is walking towards the left, flip the image if needed 
+        scale(-1,1); 
+        image(image, - x - 128, y, 128, 256);
+        scale(-1,1);
+      }
+      else image(image, x, y, 128, 256); //else don't flip it
+  }
+  
   private void animation() {
-    if (walk_counter != -1 && !onKiss()) { //walking animtion
+    if (walk_counter != -1 && !still) { //walking animtion
       image = walk[walk_counter/5]; //each image plays for 5 frames
       walk_counter++;
       if (walk_counter == 40) walk_counter = 0; //start animation all over again if you reach the last frame
@@ -144,7 +173,7 @@ class Player {
     if (jump_counter >= 10 && jump_counter <= 20) return -10; //go up 10 pixels
     else if (jump_counter > 20 && jump_counter <= 30) return -7; //go up 7 pixels (slow down mode)
     else if (jump_counter >= 30 && jump_counter <= 35) return -4; //go up just 4 pixel (almost done going up)
-    else if (jump_counter >= 35 && jump_counter <= 40) return -0; //stay still
+    else if (jump_counter >= 35 && jump_counter <= 40) return 0; //stay still
     else if (jump_counter >= 40 && jump_counter <= 45) { //check if the player is about to hit a hitbox before they go down 5 pixels
       if (onGround()) {
         jump_counter = -1;
@@ -165,14 +194,57 @@ class Player {
   //count collected courses
   private void collectedCourses() {
     for (int i = 0; i < level.courses.length; i++) {
-      for (Point hitboxplayer: hitboxplayer) {
+      //for (Point hitbox: hitbox) {
         for (Point hitboxcourse: level.courses[i].hitboxcourse) {
-          if (hitboxplayer.equals(hitboxcourse)) {
+          if (hitbox.equals(hitboxcourse)) {
             level.courses_collected += 1;
             level.courses[i] = new Course();
             return;
           }
         }
+      //}
+    }
+  }
+  
+  //make it so that holding a button won't execute keyPressed continuously using free_right and free_left
+  void keyPressed() {
+    if (key == CODED) {
+      if (keyCode == RIGHT && free_right) {
+        x_motion = 8;
+        player.walk_counter = 0;
+        free_right = false;
+        player.reverse = false; //don't flip the image, head to the right
+      }
+      else if (keyCode == LEFT && free_left) {
+        x_motion = -8;
+        player.walk_counter = 0;
+        free_left = false;
+        player.reverse = true; //flip the image, head to the left
+      }
+      if (keyCode == UP) {
+        //if we are on the ground, jump
+        if (player.onGround()) {
+          player.jump_counter = 0;
+        }
+      }
+    }
+  }
+  
+  void keyReleased() {
+    if (key == CODED) {
+      if (keyCode == RIGHT) {
+        if (free_left) { //if the user is not holding the left arrow, you can stop the animations
+          x_motion = 0;
+          player.walk_counter = -1;
+        }
+        free_right = true; //user let go of the right arrow
+      }
+      else if (keyCode == LEFT) {
+        if (free_right) { //if the user is not holding the right arrow,you can stop the animations
+          x_motion = 0;
+          player.walk_counter = -1;
+        }
+        free_left = true; //user let go of the left arrow
       }
     }
   }

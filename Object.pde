@@ -17,6 +17,8 @@ abstract class Object {
   Point[] hitboxup;
   Point[] hitboxright;
   
+  Rectangle hitbox[];
+  
   Object(int x, int y) {
     this.x = x;
     this.y = y;

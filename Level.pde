@@ -16,7 +16,7 @@ class Level {
   int fg_x; //frontground x
   int bg_x; //background x
 
-  Object[] objects = new Object[0];
+  Object[] objects = new Object[3];
   Course[] courses = new Course[0];
   
   int courses_collected = 0;
@@ -35,6 +35,10 @@ class Level {
        x_dim = 2160;
        y = -25;
        
+       objects[0] = new Cone(1600, 836);
+       objects[1] = new Bench(800, 708);
+       objects[2] = new Hydrant(616, 772);
+       
        right_border = 7200;
      
     }
@@ -45,19 +49,21 @@ class Level {
     
     
     //move the background (and frontground if it exists) based on player movement
-    if ((player.x >= width/2 - 64 - 8) && (player.x <= right_border - width/2 - 64 - 16)) { 
+    if ((player.x >= width/2 - 64 - 8) && (player.x <= right_border - width/2 - 64 - 16 && !player.still)) { 
       
-      if (game.x_motion > 0)
+      if (player.x_motion > 0) {
         fg_x -= 4;
-      if (game.x_motion > 0)
         bg_x -= 1;
+        for (Object object: objects) object.x -= 8;
+      }
     }
-    if ((player.x >= width/2 - 64) && (player.x <= right_border - width/2 - 64 - 8)) {
+    if ((player.x >= width/2 - 64) && (player.x <= right_border - width/2 - 64 - 8 && !player.still)) {
       
-      if (game.x_motion < 0)
+      if (player.x_motion < 0) {
         fg_x += 4;
-      if (game.x_motion < 0)
         bg_x += 1;
+        for (Object object: objects) object.x += 8;
+      }
     }
     
     image(backgroundBack, bg_x, y, x_dim, 900);
@@ -79,7 +85,7 @@ class Level {
 
   //toggles the hitbox visability
   void toggle() {
-    for (Object object: objects) object.toggle();
+    //for (Object object: objects) object.toggle();
     for (Course course: courses) course.toggle();
   }
 
