@@ -2,6 +2,10 @@ class Menu {
   
   PImage image_main_menu_background;
   PImage image_secondary_menu_background;
+  PImage image_thumb1;
+  PImage image_thumb2;
+  PImage image_thumb3;
+  PImage image_thumb4;
   PImage image_return_arrow_red;
   PImage image_return_arrow_yellow;
   PImage image_right_arrow_red;
@@ -22,6 +26,7 @@ class Menu {
   PImage image_character0;
   PImage image_character1;
   PImage image_character2;
+  PImage image_character3;
   
   String menu_state;
   int text_size;
@@ -93,6 +98,10 @@ class Menu {
     //images
     image_main_menu_background = loadImage(sketchPath() + "/images/backgrounds/sky_aueb.png");
     image_secondary_menu_background = loadImage(sketchPath() + "/images/backgrounds/sky.png");
+    image_thumb1 = loadImage(sketchPath() + "/images/thumbnails/1st_thumb.png");
+    image_thumb2 = loadImage(sketchPath() + "/images/thumbnails/2nd_thumb.png");
+    image_thumb3 = loadImage(sketchPath() + "/images/thumbnails/3rd_thumb.png");
+    image_thumb4 = loadImage(sketchPath() + "/images/thumbnails/4th_thumb.png");
     image_return_arrow_red = loadImage(sketchPath() + "/images/arrows/return_arrow_red.png");
     image_return_arrow_yellow = loadImage(sketchPath() + "/images/arrows/return_arrow_yellow.png");
     image_right_arrow_red = loadImage(sketchPath() + "/images/arrows/right_arrow_red.png");
@@ -122,14 +131,15 @@ class Menu {
     menu_state = "MAIN MENU";
     
     //available characters
-    characters = new String[3];
+    characters = new String[4];
     characters[0] = "male";
     image_character0 = loadImage(sketchPath() + "/images/characters/" + characters[0] + "/idle0.png");
-    characters[1] = "thanos";
+    characters[1] = "female";
     image_character1 = loadImage(sketchPath() + "/images/characters/" + characters[1] + "/idle0.png");
-    characters[2] = "female";
+    characters[2] = "thanos";
     image_character2 = loadImage(sketchPath() + "/images/characters/" + characters[2] + "/idle0.png");
-    
+    characters[3] = "athanasia";
+    image_character3 = loadImage(sketchPath() + "/images/characters/" + characters[3] + "/idle0.png");
      
     return_x = width;
     return_y = height;
@@ -156,10 +166,7 @@ class Menu {
     mouse_over_select = false;
     mouse_over_displayed_character = false;
     
-    level_1 = false;
-    level_2 = false;
-    level_3 = false;
-    level_4 = false;
+    levelReset();
     
     play_x = width/2;
     play_y = height;
@@ -174,7 +181,7 @@ class Menu {
     
     mouse_over_display_fps = false;
     mouse_over_display_hitboxes = false;
-    music = 5;
+    music = 1; //original = 5
     volume = music*0.03;
     music_up_x = width/2;
     music_up_y = 60;
@@ -234,10 +241,7 @@ class Menu {
       }
     } else if (menu_state == "LEVEL MENU") { //LEVEL MENU
       if (mouse_over_return) { //click on RETURN option
-          level_1 = false;
-          level_2 = false;
-          level_3 = false;
-          level_4 = false;
+          levelReset();
           menu_state = "MAIN MENU";
       } else if (mouse_over_next_level) { //click on NEXT LEVEL option
          if (level_1) {
@@ -258,14 +262,12 @@ class Menu {
            level_3 = false;
            level_2 = true;
          } else if (level_4) {
+           println("YO");
            level_4 = false;
            level_3 = true;
          }
       } else if (mouse_over_displayed_character) { //click on DISPLAYED CHARACTER option
-        level_1 = false;
-        level_2 = false;
-        level_3 = false;
-        level_4 = false;
+        levelReset();
         menu_state = "CHARACTER MENU";
       } else if (mouse_over_play) { //click on PLAY option
         on_menu = false;
@@ -410,6 +412,8 @@ class Menu {
       image(image_character1, character_x-100, character_y-220, 192, 384);
     } else if (character == 2) {
       image(image_character2, character_x-100, character_y-220, 192, 384);
+    } else if (character == 3) {
+      image(image_character3, character_x-100, character_y-220, 192, 384);
     }
   }
   
@@ -450,7 +454,7 @@ class Menu {
         rect(next_level_x-156, next_level_y-130, 130, 130); //hitbox of NEXT LEVEL button
       }
       //check if the mouse if over the NEXT LEVEL option
-      if (mouseX > next_level_x-156 && mouseX < next_level_x-26 && mouseY > next_level_y-130 && mouseY < next_level_y && !level_4) {
+      if (mouseX > next_level_x-156 && mouseX < next_level_x-26 && mouseY > next_level_y-130 && mouseY < next_level_y) {
         mouse_over_next_level = true;
         image(image_right_arrow_yellow, next_level_x-155, next_level_y-130, 130, 130);
       } else {
@@ -465,7 +469,7 @@ class Menu {
         rect(previous_level_x+25, previous_level_y-130, 130, 130); //hitbox of PREVIOUS LEVEL button
       }
       //check if the mouse if over the PREVIOUS LEVEL option
-      if (mouseX > previous_level_x+25 && mouseX < previous_level_x+155 && mouseY > previous_level_y-130 && mouseY < previous_level_y && !level_1) {
+      if (mouseX > previous_level_x+25 && mouseX < previous_level_x+155 && mouseY > previous_level_y-130 && mouseY < previous_level_y) {
         mouse_over_previous_level = true;
         image(image_left_arrow_yellow, previous_level_x+25, previous_level_y-130, 130, 130);
       } else {
@@ -475,8 +479,8 @@ class Menu {
     }
     
     if (level_1) {
-      fill(0, 128, 255); //light blue
-      rect(width/2-300, height/2-350, 600, 350);
+      mouse_over_previous_level = false;
+      image(image_thumb1, width/2-300, height/2-350, 600, 350);
       fill(255, 255, 255); //white
       textSize(text_size);
       text("LEVEL 1", width/2, height/2+80);
@@ -484,8 +488,7 @@ class Menu {
       textSize(text_size*3/2);
       text("8", width/2+62, height/2+160);
     } else if (level_2) {
-      fill(0, 100, 205); //blue 2
-      rect(width/2-300, height/2-350, 600, 350);
+      image(image_thumb2, width/2-300, height/2-350, 600, 350);
       fill(255, 255, 255); //white
       textSize(text_size);
       text("LEVEL 2", width/2, height/2+80);
@@ -493,8 +496,7 @@ class Menu {
       textSize(text_size*3/2);
       text("8", width/2+62, height/2+160);
     } else if (level_3) {
-      fill(0, 70, 160); //blue 3
-      rect(width/2-300, height/2-350, 600, 350);
+      image(image_thumb3, width/2-300, height/2-350, 600, 350);
       fill(255, 255, 255); //white
       textSize(text_size);
       text("LEVEL 3", width/2, height/2+80);
@@ -502,8 +504,8 @@ class Menu {
       textSize(text_size*3/2);
       text("8", width/2+62, height/2+160);
     } else if (level_4) {
-      fill(0, 0, 128); //dark blue
-      rect(width/2-300, height/2-350, 600, 350);
+      mouse_over_next_level = false;
+      image(image_thumb4, width/2-300, height/2-350, 600, 350);
       fill(255, 255, 255); //white
       textSize(text_size);
       text("LEVEL 4", width/2, height/2+80);
@@ -618,6 +620,8 @@ class Menu {
         image(image_character1, 40+33, 40-8, 64, 128);
       } else if (character == 2) {
         image(image_character2, 40+33, 40-8, 64, 128);
+      } else if (character == 3) {
+        image(image_character3, 40+33, 40-8, 64, 128);
       }
     }
   }
@@ -629,5 +633,12 @@ class Menu {
       textSize(text_size*0.8);
       text(frameRate, width+20, 30); 
     }
+  }
+  
+  void levelReset() {
+    level_1 = false;
+    level_2 = false;
+    level_3 = false;
+    level_4 = false;
   }
 };

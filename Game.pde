@@ -45,8 +45,10 @@ class Game {
   void keyPressed() {
     player.keyPressed();
     if ((key == ESC) && !pause) { //press ESC while playing
+      key = 0;
       pauseGame();
     } else if ((key == ESC) && pause) { //press ESC while paused
+      key = 0;
       resumeGame();
     }
   }
@@ -66,23 +68,21 @@ class Game {
   }
   
   void pauseGame() {
-    key = 0;
     pause = true;
     sound.pause();
   }
   
   void resumeGame() {
-    key = 0;
     pause = false;
     sound.play();
   }
   
   void leaveGame() {
+    pause = false;
+    sound.play();
     on_menu = true;
-    resumeGame();
     player.x = 128;
     level.reset();
-    
     menu.draw();
   }
   
