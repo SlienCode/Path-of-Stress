@@ -270,11 +270,11 @@ class Menu {
       } else if (mouse_over_play) { //click on PLAY option
         on_menu = false;
         player = new Player(characters[character]);
-        //if (level_1) year = 1;  
-        //else if (level_2) year = 2;
-        //else if (level_3) year = 3;
-        //else if (level_4) year = 4;
-        //level = levels[year-1];
+        if (level_1) year = 1;  
+        else if (level_2) year = 2;
+        else if (level_3) year = 3;
+        else if (level_4) year = 4;
+        level = levels[year-1];
       }
     } else if (menu_state == "SETTINGS MENU") { //SETTINGS MENU
       if (mouse_over_return) { //click on RETURN option
