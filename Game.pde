@@ -2,6 +2,8 @@ import processing.sound.*;
 
 class Game {
   
+  int courses_collected;
+  
   PImage image;
   boolean pause;
   
@@ -13,6 +15,8 @@ class Game {
   boolean mouse_over_leave_game;
   
   Game() {
+    
+    courses_collected = 0;
     
     image = loadImage(sketchPath() + "/images/tabs/tab.png");
     

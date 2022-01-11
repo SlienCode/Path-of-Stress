@@ -60,12 +60,12 @@ class Player {
   void draw() {
     
     //draw player coordinates
-    fill(255);
-    textSize(40);
-    text("x: ", 0, 35);
-    text(x, 40, 35);
-    text("y: ", 0, 75);
-    text(y, 40, 75);
+    //fill(255);
+    //textSize(40);
+    //text("x ", 30, 40);
+    //text(x, 90, 40);
+    //text("y ", 30, 80);
+    //text(y, 90, 80);
     
     image = idle[0]; //default standing position image
     
@@ -190,12 +190,11 @@ class Player {
   //count collected courses
   private void collectedCourses() {
     for (int i = 0; i < level.courses.length; i++) {
-      for (Course course: level.courses) {
-        if (hitbox.intersects(course.hitbox)) {
-          level.courses_collected += 1;
-          level.courses[i] = new Course();
-          return;
-        }
+      if (hitbox.intersects(level.courses[i].hitbox)) {
+        level.courses_collected += 1;
+        game.courses_collected += 1;
+        level.courses[i] = new Course();
+        return;
       }
     }
   }

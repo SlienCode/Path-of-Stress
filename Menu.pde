@@ -270,13 +270,13 @@ class Menu {
         if (level_1) {
           level = levels[0];
           startGame();
-        } else if (level_2 && level.courses_collected >= 5) {
+        } else if (level_2 && game.courses_collected >= 5) {
           level = levels[1];
           startGame();
-        } else if (level_3 && level.courses_collected >= 10) {
+        } else if (level_3 && game.courses_collected >= 10) {
           level = levels[2];
           startGame();
-        } else if (level_4 && level.courses_collected >= 15) {
+        } else if (level_4 && game.courses_collected >= 15) {
           level = levels[3];
           startGame();
         }
@@ -482,6 +482,7 @@ class Menu {
     }
     
     if (level_1) {
+      level = levels[0];
       mouse_over_previous_level = false;
       image(image_thumb1, width/2-300, height/2-350, 600, 350);
       fill(255, 255, 255); //white
@@ -489,24 +490,27 @@ class Menu {
       text("LEVEL 1", width/2, height/2+80);
       fill(255, 215, 0); //gold
       textSize(text_size*3/2);
-      text("8", width/2+62, height/2+160);
+      text(8 - level.courses_collected, width/2+62, height/2+160);
     } else if (level_2) {
+       level = levels[1];
       image(image_thumb2, width/2-300, height/2-350, 600, 350);
       fill(255, 255, 255); //white
       textSize(text_size);
       text("LEVEL 2", width/2, height/2+80);
       fill(255, 215, 0); //gold
       textSize(text_size*3/2);
-      text("8", width/2+62, height/2+160);
+      text(8 - level.courses_collected, width/2+62, height/2+160);
     } else if (level_3) {
+       level = levels[2];
       image(image_thumb3, width/2-300, height/2-350, 600, 350);
       fill(255, 255, 255); //white
       textSize(text_size);
       text("LEVEL 3", width/2, height/2+80);
       fill(255, 215, 0); //gold
       textSize(text_size*3/2);
-      text("8", width/2+62, height/2+160);
+      text(8 - level.courses_collected, width/2+62, height/2+160);
     } else if (level_4) {
+       level = levels[3];
       mouse_over_next_level = false;
       image(image_thumb4, width/2-300, height/2-350, 600, 350);
       fill(255, 255, 255); //white
@@ -514,12 +518,25 @@ class Menu {
       text("LEVEL 4", width/2, height/2+80);
       fill(255, 215, 0); //gold
       textSize(text_size*3/2);
-      text("8", width/2+62, height/2+160);
+      text(8 - level.courses_collected, width/2+62, height/2+160);
     }
     image(image_course, width/2-100, height/2+100, 64, 64);
     fill(220, 220, 220); //light grey
     textSize(text_size*0.8);
     text("X", width/2, height/2+150);
+    
+
+    image(image_course, 57, 188, 32, 32);
+    fill(220, 220, 220); //light grey
+    textSize(text_size*0.4);
+    text("X", 107, 213);
+    fill(255, 215, 0); //gold
+    textSize(text_size*3/4);
+    if (game.courses_collected < 10) {
+      text(game.courses_collected, 138, 218);
+    } else {
+      text(game.courses_collected, 148, 218);
+    }
     
     displayCharacter();
   }

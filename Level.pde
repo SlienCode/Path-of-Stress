@@ -22,16 +22,17 @@ class Level {
   Object[] objects;
   Course[] courses;
   
-  int courses_collected = 0;
+  int courses_collected;
 
   Level(int year) {
     move_x = 0;
     this.year = year;
     
+    courses_collected = 0;
+    
     courseImage = loadImage(sketchPath() + "/images/objects/course.png");
     
     if (year == 1) {
-      
       backgroundFront = loadImage(sketchPath() + "/images/backgrounds/1st_year_front.png");
       backgroundBack = loadImage(sketchPath() + "/images/backgrounds/1st_year_back.png");
       
@@ -41,26 +42,25 @@ class Level {
       bg_motion = 1;
        
       objects = new Object[3];
-      courses = new Course[1];
+      courses = new Course[8];
       
       objects[0] = new Cone(1600, 836);
       objects[1] = new Bench(800, 708);
       objects[2] = new Hydrant(6328, 772);
       
       courses[0] = new Course(300, 800);
-      //courses[1] = new Course(500, 800);
-      //courses[2] = new Course(700, 800);
-      //courses[3] = new Course(900, 800);
-      //courses[4] = new Course(1100, 800);
-      //courses[5] = new Course(1300, 800);
-      //courses[6] = new Course(1500, 800);
-      //courses[7] = new Course(1700, 800);
+      courses[1] = new Course(500, 800);
+      courses[2] = new Course(700, 800);
+      courses[3] = new Course(900, 800);
+      courses[4] = new Course(1100, 800);
+      courses[5] = new Course(1300, 800);
+      courses[6] = new Course(1500, 800);
+      courses[7] = new Course(1700, 800);
       
       
       right_border = 7200;
     }
     else if (year == 2) {
-      
       backgroundBack = loadImage(sketchPath() + "/images/backgrounds/2nd_year.png");
       
       objects = new Object[0];
@@ -71,14 +71,34 @@ class Level {
       
       bg_motion = 6;
       
+      objects = new Object[0];
+      courses = new Course[8];
+            
+      courses[0] = new Course(300, 800);
+      courses[1] = new Course(500, 800);
+      courses[2] = new Course(700, 800);
+      courses[3] = new Course(900, 800);
+      courses[4] = new Course(1100, 800);
+      courses[5] = new Course(1300, 800);
+      courses[6] = new Course(1500, 800);
+      courses[7] = new Course(1700, 800);
+      
       right_border = 6255;
     }
     else if (year == 3) {
-      
       backgroundBack = loadImage(sketchPath() + "/images/backgrounds/3rd_year.png");
       
       objects = new Object[0];
-      courses = new Course[0];
+      courses = new Course[8];
+            
+      courses[0] = new Course(300, 800);
+      courses[1] = new Course(500, 800);
+      courses[2] = new Course(700, 800);
+      courses[3] = new Course(900, 800);
+      courses[4] = new Course(1100, 800);
+      courses[5] = new Course(1300, 800);
+      courses[6] = new Course(1500, 800);
+      courses[7] = new Course(1700, 800);
       
       x_dim = 7200;
       y = 0;
@@ -88,11 +108,19 @@ class Level {
       right_border = 9115;
     }
     else if (year == 4) {
-      
       backgroundBack = loadImage(sketchPath() + "/images/backgrounds/4th_year.png");
       
       objects = new Object[0];
-      courses = new Course[0];
+      courses = new Course[8];
+            
+      courses[0] = new Course(300, 800);
+      courses[1] = new Course(500, 800);
+      courses[2] = new Course(700, 800);
+      courses[3] = new Course(900, 800);
+      courses[4] = new Course(1100, 800);
+      courses[5] = new Course(1300, 800);
+      courses[6] = new Course(1500, 800);
+      courses[7] = new Course(1700, 800);
       
       x_dim = 5400;
       y = 0;
