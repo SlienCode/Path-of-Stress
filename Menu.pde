@@ -124,7 +124,7 @@ class Menu {
     y_size = text_size;
     
     fps = false;
-    hitboxes = true;
+    hitboxes = false;
     
     menu_state = "MAIN MENU";
     
