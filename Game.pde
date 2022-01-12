@@ -38,7 +38,7 @@ class Game {
     }
     else gameMenu();
     
-    if (player.x >= level.right_border) { leaveGame(); level.music.pause(); }
+    if (player.x >= level.right_border) leaveGame();
     
     menu.displayFps();
   }

@@ -3,8 +3,9 @@ import processing.sound.*; //<>//
 //variable used for the intro and main of the 1st and 4th year songs
 boolean intro;
 
-AudioSample music;
-AudioSample tracks[];
+SoundFile music;
+SoundFile tracks[];
+SoundFile sounds[];
 Level[] levels;
 Game game;
 Menu menu;
@@ -27,6 +28,19 @@ void setup() {
   tracks[4] = new SoundFile(this, sketchPath() + "/music/4th_year_intro.wav");
   tracks[5] = new SoundFile(this, sketchPath() + "/music/1st_year_main.wav");
   tracks[6] = new SoundFile(this, sketchPath() + "/music/4th_year_main.wav");
+  
+  sounds = new SoundFile[11];
+  sounds[0] = new SoundFile(this, sketchPath() + "/sounds/back.wav");
+  sounds[1] = new SoundFile(this, sketchPath() + "/sounds/collect.wav");
+  sounds[2] = new SoundFile(this, sketchPath() + "/sounds/front.wav");
+  sounds[3] = new SoundFile(this, sketchPath() + "/sounds/in.wav");
+  sounds[4] = new SoundFile(this, sketchPath() + "/sounds/jump.wav");
+  sounds[5] = new SoundFile(this, sketchPath() + "/sounds/left.wav");
+  sounds[6] = new SoundFile(this, sketchPath() + "/sounds/lose.wav");
+  sounds[7] = new SoundFile(this, sketchPath() + "/sounds/out.wav");
+  sounds[8] = new SoundFile(this, sketchPath() + "/sounds/right.wav");
+  sounds[9] = new SoundFile(this, sketchPath() + "/sounds/step1.wav");
+  sounds[10] = new SoundFile(this, sketchPath() + "/sounds/win.wav");
   
   music = tracks[0];
   
@@ -56,6 +70,9 @@ void draw() {
   else game.draw();
  
   if (intro && !game.pause) manageIntros();
+  
+  //if the game gets paused, we have to execute music.loop again, otherwise the music will stop playing after it finishes
+  if (!intro && !music.isPlaying() && !game.pause) music.loop();
   
 }
 

@@ -6,6 +6,8 @@ class Player {
   int x;
   int y;
   
+  int troll;
+  
   int x_motion;
   
   boolean free_right; //is the user holding the right arrow? if they aren't then it's free so -> true
@@ -29,8 +31,9 @@ class Player {
   
   Player(String c) {
     
+    troll = 0;
+    
     character = c;
-    //print(character);
     
     //default coordinates untill player moves
     x = 128;
@@ -73,7 +76,17 @@ class Player {
     
     //still = onKiss();
     
-    if (!still) x += x_motion; //if you didn't kiss a wall, move x
+    if (!still) { //if you are not kissing a wall
+      x += x_motion; //if you didn't kiss a wall, move x
+      if (walk_counter == 0 && jump_counter == -1 && onGround()) { //if you are walking and if you are not trying to jump and if you are not in the air
+        sounds[9].amp(menu.volume);
+        sounds[9].play();
+      }
+      if (walk_counter == 20 && jump_counter == -1 && onGround()) { //if you are walking and if you are not trying to jump and if you are not in the air
+        sounds[9].amp(menu.volume);
+        sounds[9].play();
+      }
+    }
     
     animation(); //check which animation shall be applied
     
@@ -171,6 +184,10 @@ class Player {
   }
   
   private int jump() {
+    if (jump_counter == 9) {
+      sounds[4].amp(menu.volume);
+      sounds[4].play();
+    }
     if (jump_counter >= 10 && jump_counter <= 20) return -10; //go up 10 pixels
     else if (jump_counter > 20 && jump_counter <= 30) return -7; //go up 7 pixels (slow down mode)
     else if (jump_counter >= 30 && jump_counter <= 35) return -4; //go up just 4 pixel (almost done going up)
@@ -198,6 +215,8 @@ class Player {
       if (hitbox_player.intersects(level.courses[i].hitbox)) {
         level.courses_collected += 1;
         game.courses_collected += 1;
+        sounds[1].amp(menu.volume);
+        sounds[1].play();
         level.courses[i] = new Course();
         return;
       }

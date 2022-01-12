@@ -92,6 +92,7 @@ class Menu {
   boolean mouse_over_music_volume_down;
 
   Menu() {
+    
     //images
     image_main_menu_background = loadImage(sketchPath() + "/images/backgrounds/sky_aueb.png");
     image_secondary_menu_background = loadImage(sketchPath() + "/images/backgrounds/sky.png");
@@ -117,12 +118,13 @@ class Menu {
     image_tabS_yellow = loadImage(sketchPath() + "/images/tabs/tabS_yellow.png");
     image_course = loadImage(sketchPath() + "/images/objects/course.png");
 
+    
     text_size = 60;
     x_size = text_size*9;
     y_size = text_size;
     
     fps = false;
-    hitboxes = true;
+    hitboxes = false;
     
     menu_state = "MAIN MENU";
     
@@ -203,6 +205,8 @@ class Menu {
   void mousePressed() {
     if (menu_state == "MAIN MENU") { //MAIN MENU
       if (mouse_over_start_game) { //click on START GAME option
+        sounds[2].amp(volume);
+        sounds[2].play();
         if (!character_selected){
           menu_state = "CHARACTER MENU";
         } else {
@@ -210,6 +214,8 @@ class Menu {
           menu_state = "LEVEL MENU";
         }
       } else if (mouse_over_settings) { //click on SETTINGS option
+        sounds[2].amp(volume);
+        sounds[2].play();
         menu_state = "SETTINGS MENU";
       } else if (mouse_over_exit_game) { //click on EXIT GAME option
         exit();
@@ -217,20 +223,28 @@ class Menu {
       
     } else if (menu_state == "CHARACTER MENU") { //CHARACTER MENU
       if (mouse_over_return) { //click on RETURN option
+          sounds[0].amp(volume);
+          sounds[0].play();
           menu_state = "MAIN MENU";
       } else if (mouse_over_next_character) { //click on NEXT CHARACTER option
+          sounds[8].amp(volume);
+          sounds[8].play();
         if (character+1 == characters.length) {
           character = 0;
         } else {
           character++;
         }
       } else if (mouse_over_previous_character) { //click on PREVIOUS CHARACTER option
+          sounds[5].amp(volume);
+          sounds[5].play();
         if (character-1 == -1) {
           character = characters.length-1;
         } else {
           character--;
         }
       } else if (mouse_over_select) { //click on SELECT option
+        sounds[2].amp(volume);
+        sounds[2].play();
         character_selected = true;
         level_1 = true;
         menu_state = "LEVEL MENU";
@@ -238,8 +252,12 @@ class Menu {
     } else if (menu_state == "LEVEL MENU") { //LEVEL MENU
       if (mouse_over_return) { //click on RETURN option
           levelReset();
+          sounds[0].amp(volume);
+          sounds[0].play();
           menu_state = "MAIN MENU";
       } else if (mouse_over_next_level) { //click on NEXT LEVEL option
+          sounds[8].amp(volume);
+          sounds[8].play();
          if (level_1) {
            level_1 = false;
            level_2 = true;
@@ -251,6 +269,8 @@ class Menu {
            level_4 = true;
          }
       } else if (mouse_over_previous_level) { //click on PREVIOUS LEVEL option
+          sounds[5].amp(volume);
+          sounds[5].play();
          if (level_2) {
            level_2 = false;
            level_1 = true;
@@ -281,6 +301,8 @@ class Menu {
       }
     } else if (menu_state == "SETTINGS MENU") { //SETTINGS MENU
       if (mouse_over_return) { //click on RETURN option
+          sounds[0].amp(volume);
+          sounds[0].play();
           menu_state = "MAIN MENU";
       } else if (mouse_over_display_fps) { //click on DISPLAY FPS option
         if (!fps) {
