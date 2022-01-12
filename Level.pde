@@ -45,25 +45,30 @@ class Level {
       
       bg_motion = 1;
        
-      objects = new Object[6];
-      courses = new Course[8];
+      objects = new Object[10];
+      objects[0] = new Cone(648, 0);
+      objects[1] = new Bin(1112, 0);
+      //npcs[0] = new Npc(1800, 0);
+      objects[2] = new Light(1536, 0);
+      objects[3] = new Bench(2136, 0);
+      objects[4] = new Bus_Stop(2500, 0);
+      objects[5] = new Sign(3400, 0);
+      objects[6] = new Car(3710, 0);
+      objects[7] = new Bin(4744, 0);
+      objects[8] = new Hydrant(5436, 0);
+      objects[9] = new Tree(5800, 0);
       
-      objects[0] = new Cone(1800, 0);
-      objects[1] = new Bench(3500, 0);
-      objects[2] = new Hydrant(3000, 0);
-      objects[3] = new Car(850, 0);
-      objects[4] = new Light(1400, 0);
-      objects[5] = new Sign(800, 0);
-      
-      courses[0] = new Course(300, 800);
-      courses[1] = new Course(500, 800);
-      courses[2] = new Course(700, 800);
-      courses[3] = new Course(900, 800);
-      courses[4] = new Course(1100, 800);
-      courses[5] = new Course(1300, 800);
-      courses[6] = new Course(1500, 800);
-      courses[7] = new Course(1700, 800);
-      
+      courses = new Course[10];
+      courses[0] = new Course(900, 420); //difficulty: 1
+      courses[1] = new Course(1526, 114); //difficulty: 2
+      courses[2] = new Course(2050, 130); //difficulty: 3
+      courses[3] = new Course(2400, 740); //difficulty: 0
+      courses[4] = new Course(3000, 250); //difficulty: 2
+      courses[5] = new Course(3830, 160); //difficulty: 3
+      courses[6] = new Course(4430, 740); //difficulty: 0
+      courses[7] = new Course(5100, 310); //difficulty: 1
+      courses[8] = new Course(5720, 300); //difficulty: 2
+      courses[9] = new Course(6550, 340); //difficulty: 2
       
       right_border = 7200;
     }
@@ -79,16 +84,28 @@ class Level {
       bg_motion = 6;
       
       objects = new Object[0];
-      courses = new Course[8];
-            
-      courses[0] = new Course(300, 800);
-      courses[1] = new Course(500, 800);
-      courses[2] = new Course(700, 800);
-      courses[3] = new Course(900, 800);
-      courses[4] = new Course(1100, 800);
-      courses[5] = new Course(1300, 800);
-      courses[6] = new Course(1500, 800);
-      courses[7] = new Course(1700, 800);
+      //objects[] = new ();
+      //objects[] = new ();
+      //objects[] = new ();
+      //objects[] = new ();
+      //objects[] = new ();
+      //objects[] = new ();
+      //objects[] = new ();
+      //objects[] = new ();
+      //objects[] = new ();
+      //objects[] = new ();
+      
+      courses = new Course[10];
+      courses[0] = new Course(0, 0);
+      courses[1] = new Course(0, 0);
+      courses[2] = new Course(0, 0);
+      courses[3] = new Course(0, 0);
+      courses[4] = new Course(0, 0);
+      courses[5] = new Course(0, 0);
+      courses[6] = new Course(0, 0);
+      courses[7] = new Course(0, 0);
+      courses[8] = new Course(0, 0);
+      courses[9] = new Course(0, 0);
       
       right_border = 6255;
     }
@@ -96,16 +113,26 @@ class Level {
       backgroundBack = loadImage(sketchPath() + "/images/backgrounds/3rd_year.png");
       
       objects = new Object[0];
+      //objects[] = new ();
+      //objects[] = new ();
+      //objects[] = new ();
+      //objects[] = new ();
+      //objects[] = new ();
+      //objects[] = new ();
+      //objects[] = new ();
+      //objects[] = new ();
+      //objects[] = new ();
+      //objects[] = new ();
+      
       courses = new Course[8];
-            
-      courses[0] = new Course(300, 800);
-      courses[1] = new Course(500, 800);
-      courses[2] = new Course(700, 800);
-      courses[3] = new Course(900, 800);
-      courses[4] = new Course(1100, 800);
-      courses[5] = new Course(1300, 800);
-      courses[6] = new Course(1500, 800);
-      courses[7] = new Course(1700, 800);
+      courses[0] = new Course(0, 0);
+      courses[1] = new Course(0, 0);
+      courses[2] = new Course(0, 0);
+      courses[3] = new Course(0, 0);
+      courses[4] = new Course(0, 0);
+      courses[5] = new Course(0, 0);
+      courses[6] = new Course(0, 0);
+      courses[7] = new Course(0, 0);
       
       x_dim = 7200;
       y = 0;
@@ -118,16 +145,26 @@ class Level {
       backgroundBack = loadImage(sketchPath() + "/images/backgrounds/4th_year.png");
       
       objects = new Object[0];
+      //objects[] = new ();
+      //objects[] = new ();
+      //objects[] = new ();
+      //objects[] = new ();
+      //objects[] = new ();
+      //objects[] = new ();
+      //objects[] = new ();
+      //objects[] = new ();
+      //objects[] = new ();
+      //objects[] = new ();
+      
       courses = new Course[8];
-            
-      courses[0] = new Course(300, 800);
-      courses[1] = new Course(500, 800);
-      courses[2] = new Course(700, 800);
-      courses[3] = new Course(900, 800);
-      courses[4] = new Course(1100, 800);
-      courses[5] = new Course(1300, 800);
-      courses[6] = new Course(1500, 800);
-      courses[7] = new Course(1700, 800);
+      courses[0] = new Course(0, 0);
+      courses[1] = new Course(0, 0);
+      courses[2] = new Course(0, 0);
+      courses[3] = new Course(0, 0);
+      courses[4] = new Course(0, 0);
+      courses[5] = new Course(0, 0);
+      courses[6] = new Course(0, 0);
+      courses[7] = new Course(0, 0);
       
       x_dim = 5400;
       y = 0;
