@@ -41,12 +41,13 @@ class Level {
       
       bg_motion = 1;
        
-      objects = new Object[3];
+      objects = new Object[4];
       courses = new Course[8];
       
-      objects[0] = new Cone(1600, 836);
-      objects[1] = new Bench(800, 708);
-      objects[2] = new Hydrant(6328, 772);
+      objects[0] = new Cone(1600, 0);
+      objects[1] = new Bench(1800, 0);
+      objects[2] = new Hydrant(6328, 0);
+      objects[3] = new Car(800, 0);
       
       courses[0] = new Course(300, 800);
       courses[1] = new Course(500, 800);

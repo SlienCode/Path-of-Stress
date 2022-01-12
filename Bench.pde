@@ -8,17 +8,16 @@ class Bench extends Object {
     image = loadImage(sketchPath() + "/images/objects/bench.png");
 
     hitbox = new Rectangle[1];
-    hitbox[0] = new Rectangle(x, y+150, 192, 32);
-     
+    hitbox[0] = new Rectangle(x, y+858, 192, 42);
   }
   
   void draw() {
-    image(image, x, y, 192, 192);
-    hitbox[0].setLocation(x, y+150);
+    image(image, x, y+708, 192, 192);
+    hitbox[0].setLocation(x, y+858);
   }
   
   void toggle() {
-    rect(x, y+150, 192, 32);
+    rect(x, y+858, 192, 42);
   }
   
 };

@@ -5,16 +5,15 @@ class Car extends Object {
   Car(int x,int y) {
 
     super(x, y);
-    image = loadImage(sketchPath() + "/images/objects/red_car.png");
+    image = loadImage(sketchPath() + "/images/objects/car_red.png");
 
-    leftsize = 202+3;
-    upsize = 420+4;
-    rightsize = 202+1;
-
-    hitboxleft = new Point[leftsize];
-    hitboxup = new Point[upsize];
-    hitboxright = new Point[rightsize];
-
+    hitbox = new Rectangle[4];
+    hitbox[0] = new Rectangle(x, y+698, 64, 64);
+    hitbox[1] = new Rectangle(x+64, y+698, 64+64, 64);
+    hitbox[2] = new Rectangle(x+64+64, y+698, 64+64+64, 64);
+    hitbox[3] = new Rectangle(x+64+64+64, y+698, 64+64+64+64, 64);
+    
+    /*
     for (int i = 0; i < leftsize; i++) {
       if (i<=130) {
         hitboxleft[i] = new Point(x+48, y+257-i);
@@ -48,13 +47,24 @@ class Car extends Object {
         hitboxright[i] = new Point(x+333, y-i+258);
       }
     }
+    */
   }
 
   void draw() {
-    image(image, x, y, 512, 256); 
+    image(image, x, y+644, 512, 256);
+    hitbox[0].setLocation(x, y+698);
+    hitbox[1].setLocation(x+64, y+698);
+    hitbox[2].setLocation(x+64+64, y+698);
+    hitbox[3].setLocation(x+64+64+64, y+698);
   }
 
   void toggle() {
+    rect(x+50, y+771, 50, 211);
+    rect(x+100, y+750, 50, 211);
+    rect(x+153, y+723, 38, 211);
+    rect(x+191, y+699, 200, 211);
+    //rect(x, y+698, 512, 212);
+    /*
     for (int i = 0; i < leftsize; i++) {
       rect((int) hitboxleft[i].getX(),(int) hitboxleft[i].getY(), 1, 1);
     }
@@ -66,6 +76,7 @@ class Car extends Object {
     for (int i = 0; i < rightsize; i++) {
       rect((int) hitboxright[i].getX(),(int) hitboxright[i].getY(), 1, 1);
     }
+    */
   }
 
 };
