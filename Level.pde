@@ -1,5 +1,7 @@
 class Level {
 
+  AudioSample music;
+  
   int year;
   
   PImage backgroundFront; // only the 1st Year has a frontground
@@ -27,6 +29,8 @@ class Level {
   Level(int year) {
     move_x = 0;
     this.year = year;
+    
+    music = tracks[year];
     
     courses_collected = 0;
     

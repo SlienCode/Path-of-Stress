@@ -1,5 +1,5 @@
 class Menu {
-  
+    
   PImage image_main_menu_background;
   PImage image_secondary_menu_background;
   PImage image_thumb1;
@@ -82,14 +82,14 @@ class Menu {
   boolean hitboxes;
   boolean mouse_over_display_fps;
   boolean mouse_over_display_hitboxes;
-  int music;
+  int music_volume;
   float volume;
-  int music_up_x;
-  int music_up_y;
-  boolean mouse_over_music_up;
-  int music_down_x;
-  int music_down_y;
-  boolean mouse_over_music_down;
+  int music_volume_up_x;
+  int music_volume_up_y;
+  boolean mouse_over_music_volume_up;
+  int music_volume_down_x;
+  int music_volume_down_y;
+  boolean mouse_over_music_volume_down;
 
   Menu() {
     
@@ -179,14 +179,14 @@ class Menu {
     
     mouse_over_display_fps = false;
     mouse_over_display_hitboxes = false;
-    music = 5;
-    volume = music*0.03;
-    music_up_x = width/2;
-    music_up_y = 60;
-    mouse_over_music_up = false;
-    music_down_x = width/2;
-    music_down_y = 180;
-    mouse_over_music_down = false;
+    music_volume = 5;
+    volume = music_volume*0.03;
+    music_volume_up_x = width/2;
+    music_volume_up_y = 60;
+    mouse_over_music_volume_up = false;
+    music_volume_down_x = width/2;
+    music_volume_down_y = 180;
+    mouse_over_music_volume_down = false;
   }
   
   void draw() {
@@ -296,17 +296,17 @@ class Menu {
         } else {
           hitboxes = false;
         }
-      } else if (mouse_over_music_up) {
-        if (music < 9) {
-          music++;
-          volume = music*0.03;
-          sound.amp(volume);
+      } else if (mouse_over_music_volume_up) {
+        if (music_volume < 9) {
+          music_volume++;
+          volume = music_volume*0.03;
+          music.amp(volume);
         }
-      } else if (mouse_over_music_down) {
-        if (music > 0) {
-          music--;
-          volume = music*0.03;
-          sound.amp(volume);
+      } else if (mouse_over_music_volume_down) {
+        if (music_volume > 0) {
+          music_volume--;
+          volume = music_volume*0.03;
+          music.amp(volume);
         }
       }
     }
@@ -551,8 +551,8 @@ class Menu {
       rect(return_x - 131, return_y - 130, 130, 130); //hitbox of RETURN to menu button
       rect(20, 20, 50, 50); //hitbox of DISPLAY FPS button
       rect(20, 80, 50, 50); //hitbox of DISPLAY HITBOXES button
-      rect(music_up_x+240, music_up_y-23, 65, 33); //hitbox of music UP button
-      rect(music_down_x+240, music_down_y-40, 65, 33); //hitbox of music DOWN button
+      rect(music_volume_up_x+240, music_volume_up_y-23, 65, 33); //hitbox of music_volume UP button
+      rect(music_volume_down_x+240, music_volume_down_y-40, 65, 33); //hitbox of music_volume DOWN button
     }
     
     //check if the mouse is over the RETURN option
@@ -578,18 +578,18 @@ class Menu {
       mouse_over_display_hitboxes = false;
     }
     
-    //check if mouse is over music UP option
-    if (mouseX > music_up_x+240 && mouseX < music_up_x+305 && mouseY > music_up_y-23 && mouseY < music_up_y+10) {
-      mouse_over_music_up = true;
+    //check if mouse is over music_volume UP option
+    if (mouseX > music_volume_up_x+240 && mouseX < music_volume_up_x+305 && mouseY > music_volume_up_y-23 && mouseY < music_volume_up_y+10) {
+      mouse_over_music_volume_up = true;
     } else {
-      mouse_over_music_up = false;
+      mouse_over_music_volume_up = false;
     }
     
-    //check if mouse is over music DOWN option
-    if (mouseX > music_down_x+240 && mouseX < music_down_x+305 && mouseY > music_down_y-40 && mouseY < music_down_y-7) {
-      mouse_over_music_down = true;
+    //check if mouse is over music_volume DOWN option
+    if (mouseX > music_volume_down_x+240 && mouseX < music_volume_down_x+305 && mouseY > music_volume_down_y-40 && mouseY < music_volume_down_y-7) {
+      mouse_over_music_volume_down = true;
     } else {
-      mouse_over_music_down = false;
+      mouse_over_music_volume_down = false;
     }
     
     fill(255, 255, 255); //white
@@ -609,11 +609,11 @@ class Menu {
     }
     text("display  hitboxes", 80, 120);
     
-    image(image_up_arrowC, music_up_x+240, music_up_y-23, 65, 33);
-    image(image_down_arrowC, music_down_x+240, music_down_y-40, 65, 33);
+    image(image_up_arrowC, music_volume_up_x+240, music_volume_up_y-23, 65, 33);
+    image(image_down_arrowC, music_volume_down_x+240, music_volume_down_y-40, 65, 33);
     text("music", width/2+80, 120);
     fill(0);
-    text(music, width/2+257, 120);
+    text(music_volume, width/2+257, 120);
     
     textAlign(CENTER);
   }
@@ -648,6 +648,7 @@ class Menu {
   
   void startGame() {
     on_menu = false;
+    playMusic();
     player = new Player(characters[character]); 
   }
   

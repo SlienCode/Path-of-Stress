@@ -1,5 +1,3 @@
-import processing.sound.*;
-
 class Game {
   
   int courses_collected;
@@ -40,7 +38,7 @@ class Game {
     }
     else gameMenu();
     
-    if (player.x >= level.right_border) { leaveGame(); sound.pause(); }
+    if (player.x >= level.right_border) { leaveGame(); level.music.pause(); }
     
     menu.displayFps();
   }
@@ -73,20 +71,20 @@ class Game {
   
   void pauseGame() {
     pause = true;
-    sound.pause();
+    music.pause();
   }
   
   void resumeGame() {
     pause = false;
-    sound.play();
+    music.play();
   }
   
   void leaveGame() {
     pause = false;
-    sound.play();
     on_menu = true;
     player.x = 128;
     level.reset();
+    playMusic();
     menu.draw();
   }
   
