@@ -1,4 +1,4 @@
-import processing.sound.*; //<>//
+import processing.sound.*; //<>// //<>//
 
 //variable used for the intro and main of the 1st and 4th year songs
 boolean intro;
@@ -50,12 +50,12 @@ void setup() {
 
 void draw() { 
   
+  if (intro && !game.pause) manageIntros();
+  
   if (on_menu) {
     menu.draw(); 
   }
   else game.draw();
- 
-  if (intro && !game.pause) manageIntros();
   
 }
 
@@ -88,8 +88,7 @@ void playMusic() {
 void manageIntros() {
   
   if (!music.isPlaying()) {
-    music.jump(0);
-    music.stop();
+    
     intro = false; //don't come in this funciton again
     if (music == tracks[1]) music = tracks[5];
     else music = tracks[6];

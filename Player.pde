@@ -24,7 +24,8 @@ class Player {
   PImage jump[]; //3 jump animations
   PImage walk[]; //8 walk animations 
   
-  Rectangle hitbox;
+  Rectangle hitbox_player;
+  Rectangle hitbox_feet;
   
   Player(String c) {
     
@@ -53,19 +54,20 @@ class Player {
       walk[i] = loadImage(sketchPath() + "/images/characters/" + character + "/walk" + i + ".png");
     }
     
-    hitbox = new Rectangle(x + 32, y + 48, 63, 208);
+    hitbox_player = new Rectangle(x + 32, y + 48, 63, 208);
+    hitbox_feet = new Rectangle(x + 24, y + 248, 79, 8);
       
   }
   
   void draw() {
     
     //draw player coordinates
-    //fill(255);
-    //textSize(40);
-    //text("x ", 30, 40);
-    //text(x, 90, 40);
-    //text("y ", 30, 80);
-    //text(y, 90, 80);
+    fill(255);
+    textSize(40);
+    text("x ", 30, 40);
+    text(x, 90, 40);
+    text("y ", 30, 80);
+    text(y, 90, 80);
     
     image = idle[0]; //default standing position image
     
@@ -99,11 +101,11 @@ class Player {
   boolean onGround() {
     if (y == 644) return true; //literally the ground (y border)
     else {
-      Rectangle temp = new Rectangle((int)hitbox.getX(), (int)hitbox.getY() + 15, 63, 208);
+      Rectangle temp = new Rectangle((int)hitbox_feet.getX(), (int)hitbox_feet.getY() + 15, 63, 8);
       for (Object object: level.objects) { //for every object in the level;
         for (Rectangle hitboxiter: object.hitbox) {
           if (temp.intersects(hitboxiter)) {
-            y -= (int)hitbox.getY() + 208 - (int)hitboxiter.getY();
+            y -= (int)hitbox_feet.getY() + 8 - (int)hitboxiter.getY();
             return true;
           }
         }
@@ -121,7 +123,7 @@ class Player {
       return true;
     }
     else {
-      Rectangle temp = new Rectangle((int)hitbox.getX() + x_motion, (int)hitbox.getY(), 63, 208);
+      Rectangle temp = new Rectangle((int)hitbox_feet.getX() + x_motion, (int)hitbox_feet.getY(), 63, 8);
       for (Object object: level.objects) { //for every object in the level
         for (Rectangle hitboxiter: object.hitbox) {
           if (temp.intersects(hitboxiter)) {
@@ -137,17 +139,20 @@ class Player {
   //prints the player in the right position
   private void printPlayer(int x) {
    
-     hitbox.setLocation(x + 32, y + 48);
+     hitbox_player.setLocation(x + 24, y + 48);
+     hitbox_feet.setLocation(x + 32, y + 248);
      if (menu.hitboxes) {
        fill(255, 0, 255); //pink
-       rect(x + 32, y + 48, 63, 208);
+       rect(x + 24, y + 48, 79, 208);
+       fill(255); //white
+       rect(x + 32, y + 248, 63, 8);
      }
-      if (reverse) { //if the player is walking towards the left, flip the image if needed 
-        scale(-1,1); 
-        image(image, - x - 128, y, 128, 256);
-        scale(-1,1);
-      }
-      else image(image, x, y, 128, 256); //else don't flip it
+     if (reverse) { //if the player is walking towards the left, flip the image if needed 
+       scale(-1,1); 
+       image(image, - x - 128, y, 128, 256);
+       scale(-1,1);
+     }
+     else image(image, x, y, 128, 256); //else don't flip it
   }
   
   private void animation() {
@@ -190,7 +195,7 @@ class Player {
   //count collected courses
   private void collectedCourses() {
     for (int i = 0; i < level.courses.length; i++) {
-      if (hitbox.intersects(level.courses[i].hitbox)) {
+      if (hitbox_player.intersects(level.courses[i].hitbox)) {
         level.courses_collected += 1;
         game.courses_collected += 1;
         level.courses[i] = new Course();

@@ -92,7 +92,6 @@ class Menu {
   boolean mouse_over_music_volume_down;
 
   Menu() {
-    
     //images
     image_main_menu_background = loadImage(sketchPath() + "/images/backgrounds/sky_aueb.png");
     image_secondary_menu_background = loadImage(sketchPath() + "/images/backgrounds/sky.png");
@@ -118,13 +117,12 @@ class Menu {
     image_tabS_yellow = loadImage(sketchPath() + "/images/tabs/tabS_yellow.png");
     image_course = loadImage(sketchPath() + "/images/objects/course.png");
 
-    
     text_size = 60;
     x_size = text_size*9;
     y_size = text_size;
     
     fps = false;
-    hitboxes = false;
+    hitboxes = true;
     
     menu_state = "MAIN MENU";
     
