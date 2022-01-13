@@ -463,7 +463,7 @@ class Menu {
       rect(return_x - 131, return_y - 130, 130, 130); //hitbox of RETURN to menu button
       rect(character_x+249, character_y-65, 130, 130); //hitbox of NEXT CHARACTER button
       rect(character_x-380, character_y-65, 130, 130); //hitbox of PREVIOUS CHARACTER button
-      rect(select_x-185, select_y-205, 370, 130); //hitbox of SELECT button
+      rect(select_x-185, select_y-205, 369, 130); //hitbox of SELECT button
     }
     
     //check if the mouse is over the RETURN option
@@ -494,7 +494,7 @@ class Menu {
     }
     
     //check if the mouse if over the SELECT option
-    if (mouseX > select_x-185 && mouseX < select_x-180+365 && mouseY > select_y-205 && mouseY < select_y-200+125) {
+    if (mouseX > select_x-185 && mouseX < select_x-180+364 && mouseY > select_y-205 && mouseY < select_y-200+125) {
       mouse_over_select = true;
       image(image_tabS_yellow, select_x-180, select_y-200, 360, 120);
       fill(235, 15, 15); //red
@@ -527,7 +527,7 @@ class Menu {
     if (hitboxes) {
       fill(255, 0, 255); //pink
       rect(return_x - 131, return_y - 130, 130, 130); //hitbox of RETURN to menu button
-      rect(play_x-205, play_y-245, 410, 170); //hitbox of PLAY button
+      rect(play_x-205, play_y-245, 409, 170); //hitbox of PLAY button
     }
     
     //check if the mouse is over the RETURN option
@@ -540,7 +540,7 @@ class Menu {
     }
     
     //check if the mouse if over the PLAY option
-    if (mouseX > play_x-205 && mouseX < play_x+205 && mouseY > play_y-245 && mouseY < play_y-75) {
+    if (mouseX > play_x-205 && mouseX < play_x+204 && mouseY > play_y-245 && mouseY < play_y-75) {
       mouse_over_play = true;
       image(image_tabS_yellow, play_x-200, play_y-240, 400, 160);
       fill(235, 15, 15); //red
@@ -582,63 +582,43 @@ class Menu {
       }
     }
     
+    fill(255, 255, 255); //white
+    textSize(text_size);
     if (level_1) {
       level = levels[0];
       mouse_over_previous_level = false;
       image(image_thumb1, width/2-300, height/2-350, 600, 350);
-      fill(255, 255, 255); //white
-      textSize(text_size);
-      text("LEVEL 1", width/2, height/2+80);
-      fill(255, 215, 0); //gold
-      textSize(text_size*3/2);
-      textAlign(LEFT);
-      text(10 - level.courses_collected, width/2+62, height/2+160);
+      text("1st year", width/2, height/2+65);
     } else if (level_2) {
-       level = levels[1];
+      level = levels[1];
       image(image_thumb2, width/2-300, height/2-350, 600, 350);
-      fill(255, 255, 255); //white
-      textSize(text_size);
-      text("LEVEL 2", width/2, height/2+80);
-      fill(255, 215, 0); //gold
-      textSize(text_size*3/2);
-      textAlign(LEFT);
-      text(8 - level.courses_collected, width/2+62, height/2+160);
+      text("2nd year", width/2, height/2+65);
     } else if (level_3) {
-       level = levels[2];
+      level = levels[2];
       image(image_thumb3, width/2-300, height/2-350, 600, 350);
-      fill(255, 255, 255); //white
-      textSize(text_size);
-      text("LEVEL 3", width/2, height/2+80);
-      fill(255, 215, 0); //gold
-      textSize(text_size*3/2);
-      textAlign(LEFT);
-      text(10 - level.courses_collected, width/2+62, height/2+160);
+      text("3rd year", width/2, height/2+65);
     } else if (level_4) {
-       level = levels[3];
+      level = levels[3];
       mouse_over_next_level = false;
       image(image_thumb4, width/2-300, height/2-350, 600, 350);
-      fill(255, 255, 255); //white
-      textSize(text_size);
-      text("LEVEL 4", width/2, height/2+80);
-      fill(255, 215, 0); //gold
-      textSize(text_size*3/2);
-      textAlign(LEFT);
-      text(8 - level.courses_collected, width/2+62, height/2+160);
+      text("4th year", width/2, height/2+65);;
     }
-    image(image_course, width/2-100, height/2+100, 64, 64);
-    fill(220, 220, 220); //light grey
-    textSize(text_size*0.8);
-    text("X", width/2, height/2+150);
+    if (level.courses_collected < level.courses.length) {
+      textSize(text_size*3/4);
+      text(level.courses.length - level.courses_collected + "  courses  left  to  pass !", width/2, height/2+150);
+    } else {
+      textSize(text_size*3/5);
+      text("You  have  passed  all  the  courses  in  this  year !", width/2, height/2+145);
+    }
     
-
-    image(image_course, 57, 188, 32, 32);
+    image(image_course, 58, 188, 32, 32);
     fill(220, 220, 220); //light grey
     textSize(text_size*0.4);
-    text("X", 107, 213);
+    text("X", 106, 213);
     fill(255, 215, 0); //gold
     textSize(text_size*3/4);
     textAlign(LEFT);
-    text(game.courses_collected, 138, 218);
+    text(game.courses_collected, 122, 218);
     
     displayCharacter();
     
