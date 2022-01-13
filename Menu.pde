@@ -51,6 +51,7 @@ class Menu {
   //character menu
   String[] characters;
   int character;
+  int character_temp;
   int character_x;
   int character_y;
   int select_x;
@@ -172,6 +173,7 @@ class Menu {
     mouse_over_exit_game = false;
     
     character = 0;
+    character_temp = 0;
     character_x = width/2;
     character_y = height/2;
     select_x = width/2;
@@ -269,26 +271,34 @@ class Menu {
       if (mouse_over_return) { //click on RETURN option
           sounds[0].amp(volume * sfx_volume * (master_volume/10.0));
           sounds[0].play();
+        if (!character_selected){
+          character_temp = 0;
           menu_state = "MAIN MENU";
+        } else {
+          character_temp = character;
+          level_1 = true;
+          menu_state = "LEVEL MENU";
+        }
       } else if (mouse_over_next_character) { //click on NEXT CHARACTER option
           sounds[8].amp(volume * sfx_volume * (master_volume/10.0));
           sounds[8].play();
-        if (character+1 == characters.length) {
-          character = 0;
+        if (character_temp+1 == characters.length) {
+          character_temp = 0;
         } else {
-          character++;
+          character_temp++;
         }
       } else if (mouse_over_previous_character) { //click on PREVIOUS CHARACTER option
           sounds[5].amp(volume * sfx_volume * (master_volume/10.0));
           sounds[5].play();
-        if (character-1 == -1) {
-          character = characters.length-1;
+        if (character_temp-1 == -1) {
+          character_temp = characters.length-1;
         } else {
-          character--;
+          character_temp--;
         }
       } else if (mouse_over_select) { //click on SELECT option
         sounds[2].amp(volume * sfx_volume * (master_volume/10.0));
         sounds[2].play();
+        character = character_temp;
         character_selected = true;
         //level_1 = true; HELP
         level_2 = true;
@@ -499,14 +509,14 @@ class Menu {
     //display tab
     image(image_tab_blue1, character_x-200, character_y-200, 400, 400);
     
-    //display character on tab
-    if (character == 0) {
+    //display character
+    if (character_temp == 0) {
       image(image_character0, character_x-100, character_y-220, 192, 384);
-    } else if (character == 1) {
+    } else if (character_temp == 1) {
       image(image_character1, character_x-100, character_y-220, 192, 384);
-    } else if (character == 2) {
+    } else if (character_temp == 2) {
       image(image_character2, character_x-100, character_y-220, 192, 384);
-    } else if (character == 3) {
+    } else if (character_temp == 3) {
       image(image_character3, character_x-100, character_y-220, 192, 384);
     }
   }
