@@ -95,7 +95,7 @@ class Level {
       //objects[] = new ();
       //objects[] = new ();
       
-      courses = new Course[10];
+      courses = new Course[8];
       courses[0] = new Course(0, 0);
       courses[1] = new Course(0, 0);
       courses[2] = new Course(0, 0);
@@ -104,8 +104,6 @@ class Level {
       courses[5] = new Course(0, 0);
       courses[6] = new Course(0, 0);
       courses[7] = new Course(0, 0);
-      courses[8] = new Course(0, 0);
-      courses[9] = new Course(0, 0);
       
       right_border = 6255;
     }
@@ -124,7 +122,7 @@ class Level {
       //objects[] = new ();
       //objects[] = new ();
       
-      courses = new Course[8];
+      courses = new Course[10];
       courses[0] = new Course(0, 0);
       courses[1] = new Course(0, 0);
       courses[2] = new Course(0, 0);
@@ -133,6 +131,8 @@ class Level {
       courses[5] = new Course(0, 0);
       courses[6] = new Course(0, 0);
       courses[7] = new Course(0, 0);
+      courses[8] = new Course(0, 0);
+      courses[9] = new Course(0, 0);
       
       x_dim = 7200;
       y = 0;
@@ -144,27 +144,27 @@ class Level {
     else if (year == 4) {
       backgroundBack = loadImage(sketchPath() + "/images/backgrounds/4th_year.png");
       
-      objects = new Object[0];
-      //objects[] = new ();
-      //objects[] = new ();
-      //objects[] = new ();
-      //objects[] = new ();
-      //objects[] = new ();
-      //objects[] = new ();
-      //objects[] = new ();
-      //objects[] = new ();
-      //objects[] = new ();
-      //objects[] = new ();
+      objects = new Object[10];
+      objects[0] = new Car(900, 0);
+      objects[1] = new Light(1500, 0);
+      objects[2] = new Hydrant(2000, 0);
+      objects[3] = new Bin(2400, 0);
+      objects[4] = new Sign(2920, 0);
+      objects[5] = new Truck(3370, 0);
+      objects[6] = new Bin(4360, 0);
+      objects[7] = new Tree(5000, 0);
+      objects[8] = new Car(5960, 0);
+      objects[9] = new Sign(6750, 0);
       
       courses = new Course[8];
-      courses[0] = new Course(0, 0);
-      courses[1] = new Course(0, 0);
-      courses[2] = new Course(0, 0);
-      courses[3] = new Course(0, 0);
-      courses[4] = new Course(0, 0);
-      courses[5] = new Course(0, 0);
-      courses[6] = new Course(0, 0);
-      courses[7] = new Course(0, 0);
+      courses[0] = new Course(800, 280); //1
+      courses[1] = new Course(1900, 170); //2
+      courses[2] = new Course(2520, 130); //2
+      courses[3] = new Course(3200, 740); //0
+      courses[4] = new Course(4560, 95); //3
+      courses[5] = new Course(5550, 290); //2
+      courses[6] = new Course(6200, 260); //1
+      courses[7] = new Course(7350, 410); //4
       
       x_dim = 5400;
       y = 0;
