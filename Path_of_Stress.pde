@@ -91,18 +91,18 @@ void transitionAnimation() {
     sounds[3].amp(menu.volume * menu.sfx_volume * (menu.master_volume/10.0));
     sounds[3].play();
   }
-  else if (transition_counter < 26) tint(255,transition_counter*10);
-  else if (transition_counter == 26) on_menu = false;
-  else if (transition_counter < 52) tint(255,260-((transition_counter-26)*10));
+  else if (transition_counter < 50) tint(255,transition_counter*10);
+  else if (transition_counter == 50) on_menu = false;
+  else if (transition_counter < 100) tint(255,260-((transition_counter-50)*10));
   
   transition_counter++;
   
-  if (transition_counter == 90) { 
+  if (transition_counter == 100) { 
     playMusic();
     transition_counter = -1; 
   }
   
-  if (transition_counter > 1 && transition_counter < 52) image(transition_screen, 0, 0, 1440, 900);
+  if (transition_counter > 1 && transition_counter < 100) image(transition_screen, 0, 0, 1440, 900);
   tint (255, 255); 
     
 }
@@ -155,12 +155,10 @@ void mousePressed() {
 }
 
 void keyPressed() {
-  if (transition_counter == -1 ) {
-    if (!on_menu) game.keyPressed();
-    else {
-      if (key == ESC) key = 0;
-    }
-  }
+
+  if (!on_menu && transition_counter == -1) game.keyPressed();
+  else
+    if (key == ESC) key = 0;
 }
 
 void keyReleased() {
