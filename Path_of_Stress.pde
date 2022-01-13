@@ -12,8 +12,11 @@ Menu menu;
 Player player;
 Level level;
 
+int transition_counter;
+
 boolean on_menu;
 PFont myFont;
+PImage transition_screen;
 
 void setup() {
   
@@ -58,12 +61,15 @@ void setup() {
   textAlign(CENTER);
   on_menu = true;
   
+  transition_screen = loadImage(sketchPath() + "/images/backgrounds/transition.png");
+  transition_counter = -1;
+  
   playMusic();
   
 }
 
 void draw() { 
-  
+  println(transition_counter);
   if (on_menu) {
     menu.draw(); 
   }
@@ -72,8 +78,33 @@ void draw() {
   if (intro && !game.pause) manageIntros();
   
   //if the game gets paused, we have to execute music.loop again, otherwise the music will stop playing after it finishes
-  if (!intro && !music.isPlaying() && !game.pause) music.loop();
+  if (!intro && !music.isPlaying() && !game.pause && transition_counter == -1) music.loop();
   
+  if (transition_counter != -1) transitionAnimation();
+  
+}
+
+void transitionAnimation() {
+  
+  if (transition_counter == 0) {
+    music.stop();
+    sounds[3].amp(menu.volume * menu.sfx_volume * (menu.master_volume/10.0));
+    sounds[3].play();
+  }
+  else if (transition_counter < 26) tint(255,transition_counter*10);
+  else if (transition_counter == 26) on_menu = false;
+  else if (transition_counter < 52) tint(255,260-((transition_counter-26)*10));
+  
+  transition_counter++;
+  
+  if (transition_counter == 90) { 
+    playMusic();
+    transition_counter = -1; 
+  }
+  
+  if (transition_counter > 1 && transition_counter < 52) image(transition_screen, 0, 0, 1440, 900);
+  tint (255, 255); 
+    
 }
 
 void playMusic() {
@@ -117,17 +148,23 @@ void manageIntros() {
 }
 
 void mousePressed() {
-  if (on_menu) menu.mousePressed();
-  else game.mousePressed();
+  if (transition_counter == -1 ) {
+    if (on_menu) menu.mousePressed();
+    else game.mousePressed();
+  }
 }
 
 void keyPressed() {
-  if (!on_menu) game.keyPressed();
-  else {
-    if (key == ESC) key = 0;
+  if (transition_counter == -1 ) {
+    if (!on_menu) game.keyPressed();
+    else {
+      if (key == ESC) key = 0;
+    }
   }
 }
 
 void keyReleased() {
-  if (!on_menu) game.keyReleased();
+  if (transition_counter == -1 ) {
+    if (!on_menu) game.keyReleased();
+  }
 }

@@ -803,8 +803,7 @@ class Menu {
   }
   
   void startGame() {
-    on_menu = false;
-    playMusic();
+    transition_counter = 0;
     player = new Player(characters[character]); 
   }
   
