@@ -1,4 +1,4 @@
-import processing.sound.*; //<>// //<>//
+import processing.sound.*;
 
 //variable used for the intro and main of the 1st and 4th year songs
 boolean intro;
