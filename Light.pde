@@ -2,11 +2,11 @@ import java.awt.*;
 
 class Light extends Object {
   
-  Light(int x,int y) {
+  Light(int x) {
     
-    super(x, y);
+    super(x);
     image = loadImage(sketchPath() + "/images/objects/light.png");
-    
+    platform = true;
     hitbox = new Rectangle[1];
     hitbox[0] = new Rectangle(x+20, y+584, 27, 16);
         

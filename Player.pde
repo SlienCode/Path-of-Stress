@@ -138,10 +138,12 @@ class Player {
     else {
       Rectangle temp = new Rectangle((int)hitbox_feet.getX() + x_motion, (int)hitbox_feet.getY(), 63, 8);
       for (Object object: level.objects) { //for every object in the level
-        for (Rectangle hitboxiter: object.hitbox) {
-          if (temp.intersects(hitboxiter)) {
-            if (x_motion > 0) return true;
-            else return true;
+        if (!object.platform) {
+          for (Rectangle hitboxiter: object.hitbox) {
+            if (temp.intersects(hitboxiter)) {
+              if (x_motion > 0) return true;
+              else return true;
+            }
           }
         }
       }

@@ -2,11 +2,11 @@ import java.awt.*;
 
 class Desk extends Object {
   
-  Desk(int x,int y) {
+  Desk(int x) {
     
-    super(x, y);
+    super(x);
     image = loadImage(sketchPath() + "/images/objects/desk.png");
-    
+    platform = false;
     hitbox = new Rectangle[1];
     hitbox[0] = new Rectangle(x+29, y+798, 229, 104);
         

@@ -46,17 +46,17 @@ class Level {
       bg_motion = 1;
        
       objects = new Object[10];
-      objects[0] = new Cone(648, 0);
-      objects[1] = new Bin(1112, 0);
-      //npcs[0] = new Npc(1800, 0);
-      objects[2] = new Light(1536, 0);
-      objects[3] = new Bench(2136, 0);
-      objects[4] = new Bus_Stop(2500, 0);
-      objects[5] = new Sign(3400, 0);
-      objects[6] = new Car(3710, 0);
-      objects[7] = new Bin(4744, 0);
-      objects[8] = new Hydrant(5436, 0);
-      objects[9] = new Tree(5800, 0);
+      objects[0] = new Cone(648);
+      objects[1] = new Bin(1112);
+      //npcs[0] = new Npc(1800);
+      objects[2] = new Light(1536);
+      objects[3] = new Bench(2136);
+      objects[4] = new Bus_Stop(2500);
+      objects[5] = new Sign(3400);
+      objects[6] = new Car(3710);
+      objects[7] = new Bin(4744);
+      objects[8] = new Hydrant(5436);
+      objects[9] = new Tree(5800);
       
       courses = new Course[10];
       courses[0] = new Course(900, 420); //difficulty: 1
@@ -84,11 +84,11 @@ class Level {
       bg_motion = 6;
       
       objects = new Object[5];
-      objects[0] = new Chair(600, 0);
-      objects[1] = new Desk(900, 0);
-      objects[2] = new Bookshelf_Short(1300, 0);
-      objects[3] = new Bookshelf_Big(1700, 0);
-      objects[4] = new Closet(2100, 0);
+      objects[0] = new Ladder(2600);
+      objects[1] = new Desk(900);
+      objects[2] = new Bookshelf_Short(1300);
+      objects[3] = new Bookshelf_Big(1700);
+      objects[4] = new Closet(2100);
       //objects[] = new ();
       //objects[] = new ();
       //objects[] = new ();
@@ -145,16 +145,16 @@ class Level {
       backgroundBack = loadImage(sketchPath() + "/images/backgrounds/4th_year.png");
       
       objects = new Object[10];
-      objects[0] = new Car(900, 0);
-      objects[1] = new Light(1500, 0);
-      objects[2] = new Hydrant(2000, 0);
-      objects[3] = new Bin(2400, 0);
-      objects[4] = new Sign(2920, 0);
-      objects[5] = new Truck(3370, 0);
-      objects[6] = new Bin(4360, 0);
-      objects[7] = new Tree(5000, 0);
-      objects[8] = new Car(5960, 0);
-      objects[9] = new Sign(6750, 0);
+      objects[0] = new Car(900);
+      objects[1] = new Light(1500);
+      objects[2] = new Hydrant(2000);
+      objects[3] = new Bin(2400);
+      objects[4] = new Sign(2920);
+      objects[5] = new Truck(3370);
+      objects[6] = new Bin(4360);
+      objects[7] = new Tree(5000);
+      objects[8] = new Car(5960);
+      objects[9] = new Sign(6750);
       
       courses = new Course[8];
       courses[0] = new Course(800, 280); //1

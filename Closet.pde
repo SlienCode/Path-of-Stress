@@ -2,11 +2,11 @@ import java.awt.*;
 
 class Closet extends Object {
   
-  Closet(int x,int y) {
+  Closet(int x) {
     
-    super(x, y);
+    super(x);
     image = loadImage(sketchPath() + "/images/objects/closet.png");
-    
+    platform = false;
     hitbox = new Rectangle[1];
     hitbox[0] = new Rectangle(x+11, y+584, 232, 318);
         

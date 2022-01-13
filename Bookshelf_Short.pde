@@ -2,11 +2,11 @@ import java.awt.*;
 
 class Bookshelf_Short extends Object {
   
-  Bookshelf_Short(int x,int y) {
+  Bookshelf_Short(int x) {
     
-    super(x, y);
+    super(x);
     image = loadImage(sketchPath() + "/images/objects/bookshelf_short.png");
-    
+    platform = false;
     hitbox = new Rectangle[1];
     hitbox[0] = new Rectangle(x+11, y+696, 175, 206);
         

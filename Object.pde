@@ -4,6 +4,9 @@ abstract class Object {
   int x;
   int y;
   
+  //is platform or not
+  boolean platform;
+  
   //image of the object
   PImage image;
 
@@ -19,9 +22,8 @@ abstract class Object {
   
   Rectangle hitbox[];
   
-  Object(int x, int y) {
+  Object(int x) {
     this.x = x;
-    this.y = y;
   }
   
   abstract void draw();

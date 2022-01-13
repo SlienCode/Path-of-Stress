@@ -2,11 +2,11 @@ import java.awt.*;
 
 class Truck extends Object {
 
-  Truck(int x,int y) {
+  Truck(int x) {
 
-    super(x, y);
+    super(x);
     image = loadImage(sketchPath() + "/images/objects/truck0.png");
-
+    platform = false;
     hitbox = new Rectangle[2];
     hitbox[0] = new Rectangle(x+20, y+805, 43, 102);
     hitbox[1] = new Rectangle(x+43, y+544, 792, 358);

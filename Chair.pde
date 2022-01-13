@@ -2,11 +2,11 @@ import java.awt.*;
 
 class Chair extends Object {
   
-  Chair(int x,int y) {
+  Chair(int x) {
     
-    super(x, y);
+    super(x);
     image = loadImage(sketchPath() + "/images/objects/chair.png");
-    
+    platform = false;
     hitbox = new Rectangle[1];
     hitbox[0] = new Rectangle(x+25, y+846, 83, 54);
         

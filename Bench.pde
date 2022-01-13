@@ -2,11 +2,11 @@ import java.awt.*;
 
 class Bench extends Object {
   
-  Bench(int x,int y) {
+  Bench(int x) {
     
-    super(x, y);
+    super(x);
     image = loadImage(sketchPath() + "/images/objects/bench.png");
-
+    platform = false;
     hitbox = new Rectangle[1];
     hitbox[0] = new Rectangle(x, y+858, 192, 42);
   }

@@ -2,11 +2,11 @@ import java.awt.*;
 
 class Tree extends Object {
   
-  Tree(int x,int y) {
+  Tree(int x) {
     
-    super(x, y);
+    super(x);
     image = loadImage(sketchPath() + "/images/objects/tree_platform.png");
-    
+    platform = true;
     hitbox = new Rectangle[2];
     hitbox[0] = new Rectangle(x+108, y+814, 95, 16);
     hitbox[1] = new Rectangle(x+288, y+764, 103, 16);
