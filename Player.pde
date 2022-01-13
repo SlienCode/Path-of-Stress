@@ -79,11 +79,11 @@ class Player {
     if (!still) { //if you are not kissing a wall
       x += x_motion; //if you didn't kiss a wall, move x
       if (walk_counter == 0 && jump_counter == -1 && onGround()) { //if you are walking and if you are not trying to jump and if you are not in the air
-        sounds[9].amp(menu.volume);
+        sounds[9].amp(menu.volume * menu.sfx_volume * (menu.master_volume/10.0));
         sounds[9].play();
       }
       if (walk_counter == 20 && jump_counter == -1 && onGround()) { //if you are walking and if you are not trying to jump and if you are not in the air
-        sounds[9].amp(menu.volume);
+        sounds[9].amp(menu.volume * menu.sfx_volume * (menu.master_volume/10.0));
         sounds[9].play();
       }
     }
@@ -185,7 +185,7 @@ class Player {
   
   private int jump() {
     if (jump_counter == 9) {
-      sounds[4].amp(menu.volume);
+      sounds[4].amp(menu.volume * menu.sfx_volume * (menu.master_volume/10.0));
       sounds[4].play();
     }
     if (jump_counter >= 10 && jump_counter <= 20) return -10; //go up 10 pixels
@@ -215,7 +215,7 @@ class Player {
       if (hitbox_player.intersects(level.courses[i].hitbox)) {
         level.courses_collected += 1;
         game.courses_collected += 1;
-        sounds[1].amp(menu.volume);
+        sounds[1].amp(menu.volume * menu.sfx_volume * (menu.master_volume/10.0));
         sounds[1].play();
         level.courses[i] = new Course();
         return;

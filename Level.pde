@@ -83,12 +83,12 @@ class Level {
       
       bg_motion = 6;
       
-      objects = new Object[0];
-      //objects[] = new ();
-      //objects[] = new ();
-      //objects[] = new ();
-      //objects[] = new ();
-      //objects[] = new ();
+      objects = new Object[5];
+      objects[0] = new Chair(600, 0);
+      objects[1] = new Desk(900, 0);
+      objects[2] = new Bookshelf_Short(1300, 0);
+      objects[3] = new Bookshelf_Big(1700, 0);
+      objects[4] = new Closet(2100, 0);
       //objects[] = new ();
       //objects[] = new ();
       //objects[] = new ();

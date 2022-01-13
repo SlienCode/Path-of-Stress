@@ -41,6 +41,7 @@ class Game {
     if (player.x >= level.right_border) leaveGame();
     
     menu.displayFps();
+    menu.displayCoordinates();
   }
   
   //make it so that holding a button won't execute keyPressed continuously using free_right and free_left

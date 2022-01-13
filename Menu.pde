@@ -80,16 +80,38 @@ class Menu {
   //settings menu
   boolean fps;
   boolean hitboxes;
+  boolean coordinates;
   boolean mouse_over_display_fps;
   boolean mouse_over_display_hitboxes;
-  int music_volume;
+  boolean mouse_over_display_coordinates;
   float volume;
-  int music_volume_up_x;
+  
+  int master_volume;
+  int master_x;
+  int master_y;
+  int master_volume_x;
+  int master_volume_up_y;
+  int master_volume_down_y;
+  boolean mouse_over_master_volume_up;
+  boolean mouse_over_master_volume_down;
+  
+  int music_volume;
+  int music_x;
+  int music_y;
+  int music_volume_x;
   int music_volume_up_y;
-  boolean mouse_over_music_volume_up;
-  int music_volume_down_x;
   int music_volume_down_y;
+  boolean mouse_over_music_volume_up;
   boolean mouse_over_music_volume_down;
+  
+  int sfx_volume;
+  int sfx_x;
+  int sfx_y;
+  int sfx_volume_x;
+  int sfx_volume_up_y;
+  int sfx_volume_down_y;
+  boolean mouse_over_sfx_volume_up;
+  boolean mouse_over_sfx_volume_down;
 
   Menu() {
     
@@ -118,13 +140,9 @@ class Menu {
     image_tabS_yellow = loadImage(sketchPath() + "/images/tabs/tabS_yellow.png");
     image_course = loadImage(sketchPath() + "/images/objects/course.png");
 
-    
     text_size = 60;
     x_size = text_size*9;
     y_size = text_size;
-    
-    fps = false;
-    hitboxes = false;
     
     menu_state = "MAIN MENU";
     
@@ -177,16 +195,41 @@ class Menu {
     mouse_over_next_level = false;
     mouse_over_previous_level = false;
     
+    fps = true;
+    hitboxes = true;
+    coordinates = false;
     mouse_over_display_fps = false;
     mouse_over_display_hitboxes = false;
+    mouse_over_display_coordinates = false;
+    
+    master_volume = 5;
+    master_x = 100;
+    master_y = height/2-28;
+    master_volume_x = master_x+180;
+    master_volume_up_y = master_y+37;
+    master_volume_down_y = master_volume_up_y+100;
+    mouse_over_master_volume_up = false;
+    mouse_over_master_volume_down = false;
+    
     music_volume = 5;
-    volume = music_volume*0.03;
-    music_volume_up_x = width/2;
-    music_volume_up_y = 60;
+    music_x = width/2-150;
+    music_y = height/2-28;
+    music_volume_x = music_x+150;
+    music_volume_up_y = music_y+37;
+    music_volume_down_y = music_volume_up_y+100;
     mouse_over_music_volume_up = false;
-    music_volume_down_x = width/2;
-    music_volume_down_y = 180;
     mouse_over_music_volume_down = false;
+    
+    sfx_volume = 5;
+    sfx_x = width-380;
+    sfx_y = height/2-28;
+    sfx_volume_x = sfx_x+100;
+    sfx_volume_up_y = sfx_y+37;
+    sfx_volume_down_y = sfx_volume_up_y+100;
+    mouse_over_sfx_volume_up = false;
+    mouse_over_sfx_volume_down = false;
+    
+    volume = 0.03;
   }
   
   void draw() {
@@ -200,12 +243,13 @@ class Menu {
       settingsMenu();
     }
     displayFps();
+    displayCoordinates();
   }
   
   void mousePressed() {
     if (menu_state == "MAIN MENU") { //MAIN MENU
       if (mouse_over_start_game) { //click on START GAME option
-        sounds[2].amp(volume);
+        sounds[2].amp(volume * sfx_volume * (master_volume/10.0));
         sounds[2].play();
         if (!character_selected){
           menu_state = "CHARACTER MENU";
@@ -214,7 +258,7 @@ class Menu {
           menu_state = "LEVEL MENU";
         }
       } else if (mouse_over_settings) { //click on SETTINGS option
-        sounds[2].amp(volume);
+        sounds[2].amp(volume * sfx_volume * (master_volume/10.0));
         sounds[2].play();
         menu_state = "SETTINGS MENU";
       } else if (mouse_over_exit_game) { //click on EXIT GAME option
@@ -223,11 +267,11 @@ class Menu {
       
     } else if (menu_state == "CHARACTER MENU") { //CHARACTER MENU
       if (mouse_over_return) { //click on RETURN option
-          sounds[0].amp(volume);
+          sounds[0].amp(volume * sfx_volume * (master_volume/10.0));
           sounds[0].play();
           menu_state = "MAIN MENU";
       } else if (mouse_over_next_character) { //click on NEXT CHARACTER option
-          sounds[8].amp(volume);
+          sounds[8].amp(volume * sfx_volume * (master_volume/10.0));
           sounds[8].play();
         if (character+1 == characters.length) {
           character = 0;
@@ -235,7 +279,7 @@ class Menu {
           character++;
         }
       } else if (mouse_over_previous_character) { //click on PREVIOUS CHARACTER option
-          sounds[5].amp(volume);
+          sounds[5].amp(volume * sfx_volume * (master_volume/10.0));
           sounds[5].play();
         if (character-1 == -1) {
           character = characters.length-1;
@@ -243,21 +287,21 @@ class Menu {
           character--;
         }
       } else if (mouse_over_select) { //click on SELECT option
-        sounds[2].amp(volume);
+        sounds[2].amp(volume * sfx_volume * (master_volume/10.0));
         sounds[2].play();
         character_selected = true;
-        level_1 = true;
-        //level_4 = true; HELP
+        //level_1 = true; HELP
+        level_2 = true;
         menu_state = "LEVEL MENU";
       }
     } else if (menu_state == "LEVEL MENU") { //LEVEL MENU
       if (mouse_over_return) { //click on RETURN option
           levelReset();
-          sounds[0].amp(volume);
+          sounds[0].amp(volume * sfx_volume * (master_volume/10.0));
           sounds[0].play();
           menu_state = "MAIN MENU";
       } else if (mouse_over_next_level) { //click on NEXT LEVEL option
-          sounds[8].amp(volume);
+          sounds[8].amp(volume * sfx_volume * (master_volume/10.0));
           sounds[8].play();
          if (level_1) {
            level_1 = false;
@@ -270,7 +314,7 @@ class Menu {
            level_4 = true;
          }
       } else if (mouse_over_previous_level) { //click on PREVIOUS LEVEL option
-          sounds[5].amp(volume);
+          sounds[5].amp(volume * sfx_volume * (master_volume/10.0));
           sounds[5].play();
          if (level_2) {
            level_2 = false;
@@ -302,7 +346,7 @@ class Menu {
       }
     } else if (menu_state == "SETTINGS MENU") { //SETTINGS MENU
       if (mouse_over_return) { //click on RETURN option
-          sounds[0].amp(volume);
+          sounds[0].amp(volume * sfx_volume * (master_volume/10.0));
           sounds[0].play();
           menu_state = "MAIN MENU";
       } else if (mouse_over_display_fps) { //click on DISPLAY FPS option
@@ -317,17 +361,43 @@ class Menu {
         } else {
           hitboxes = false;
         }
+      } else if (mouse_over_display_coordinates) { //click on DISPLAY COORDINATES option
+        if (!coordinates) {
+          coordinates = true;
+        } else {
+          coordinates = false;
+        }
+      } else if (mouse_over_master_volume_up) {
+        if (master_volume < 9) {
+          master_volume++;
+          for (SoundFile iter : sounds) iter.amp(volume * sfx_volume * (master_volume/10.0));
+          music.amp(volume * music_volume * (master_volume/10.0));
+        }
+      } else if (mouse_over_master_volume_down) {
+        if (master_volume > 0) {
+          master_volume--;
+          for (SoundFile iter : sounds) iter.amp(volume * sfx_volume * (master_volume/10.0));
+          music.amp(volume * music_volume * (master_volume/10.0));
+        }
       } else if (mouse_over_music_volume_up) {
         if (music_volume < 9) {
           music_volume++;
-          volume = music_volume*0.03;
-          music.amp(volume);
+          music.amp(volume * music_volume * (master_volume/10.0));
         }
       } else if (mouse_over_music_volume_down) {
         if (music_volume > 0) {
           music_volume--;
-          volume = music_volume*0.03;
-          music.amp(volume);
+          music.amp(volume * music_volume * (master_volume/10.0));
+        }
+      } else if (mouse_over_sfx_volume_up) {
+        if (sfx_volume < 9) {
+          sfx_volume++;
+          for (SoundFile iter : sounds) iter.amp(volume * sfx_volume * (master_volume/10.0));
+        }
+      } else if (mouse_over_sfx_volume_down) {
+        if (sfx_volume > 0) {
+          sfx_volume--;
+          for (SoundFile iter : sounds) iter.amp(volume * sfx_volume * (master_volume/10.0));
         }
       }
     }
@@ -511,6 +581,7 @@ class Menu {
       text("LEVEL 1", width/2, height/2+80);
       fill(255, 215, 0); //gold
       textSize(text_size*3/2);
+      textAlign(LEFT);
       text(10 - level.courses_collected, width/2+62, height/2+160);
     } else if (level_2) {
        level = levels[1];
@@ -520,6 +591,7 @@ class Menu {
       text("LEVEL 2", width/2, height/2+80);
       fill(255, 215, 0); //gold
       textSize(text_size*3/2);
+      textAlign(LEFT);
       text(8 - level.courses_collected, width/2+62, height/2+160);
     } else if (level_3) {
        level = levels[2];
@@ -529,6 +601,7 @@ class Menu {
       text("LEVEL 3", width/2, height/2+80);
       fill(255, 215, 0); //gold
       textSize(text_size*3/2);
+      textAlign(LEFT);
       text(10 - level.courses_collected, width/2+62, height/2+160);
     } else if (level_4) {
        level = levels[3];
@@ -539,6 +612,7 @@ class Menu {
       text("LEVEL 4", width/2, height/2+80);
       fill(255, 215, 0); //gold
       textSize(text_size*3/2);
+      textAlign(LEFT);
       text(8 - level.courses_collected, width/2+62, height/2+160);
     }
     image(image_course, width/2-100, height/2+100, 64, 64);
@@ -553,13 +627,12 @@ class Menu {
     text("X", 107, 213);
     fill(255, 215, 0); //gold
     textSize(text_size*3/4);
-    if (game.courses_collected < 10) {
-      text(game.courses_collected, 138, 218);
-    } else {
-      text(game.courses_collected, 148, 218);
-    }
+    textAlign(LEFT);
+    text(game.courses_collected, 138, 218);
     
     displayCharacter();
+    
+    textAlign(CENTER);
   }
   
   void settingsMenu() {
@@ -572,8 +645,13 @@ class Menu {
       rect(return_x - 131, return_y - 130, 130, 130); //hitbox of RETURN to menu button
       rect(20, 20, 50, 50); //hitbox of DISPLAY FPS button
       rect(20, 80, 50, 50); //hitbox of DISPLAY HITBOXES button
-      rect(music_volume_up_x+240, music_volume_up_y-23, 65, 33); //hitbox of music_volume UP button
-      rect(music_volume_down_x+240, music_volume_down_y-40, 65, 33); //hitbox of music_volume DOWN button
+      rect(20, 140, 50, 50); //hitbox of DISPLAY COORDINATES button
+      rect(master_volume_x, master_volume_up_y, 65, 33); //hitbox of MASTER VOLUME UP button
+      rect(master_volume_x, master_volume_down_y, 65, 33); //hitbox of MASTER VOLUME DOWN button
+      rect(music_volume_x, music_volume_up_y, 65, 33); //hitbox of MUSIC VOLUME UP button
+      rect(music_volume_x, music_volume_down_y, 65, 33); //hitbox of MUSIC VOLUME DOWN button
+      rect(sfx_volume_x, sfx_volume_up_y, 65, 33); //hitbox of SFX VOLUME UP button
+      rect(sfx_volume_x, sfx_volume_down_y, 65, 33); //hitbox of SFX VOLUME DOWN button
     }
     
     //check if the mouse is over the RETURN option
@@ -599,18 +677,53 @@ class Menu {
       mouse_over_display_hitboxes = false;
     }
     
-    //check if mouse is over music_volume UP option
-    if (mouseX > music_volume_up_x+240 && mouseX < music_volume_up_x+305 && mouseY > music_volume_up_y-23 && mouseY < music_volume_up_y+10) {
+    //check if mouse is over DISPLAY COORDINATES option
+    if (mouseX > 20 && mouseX < 70 && mouseY > 140 && mouseY < 190) {
+      mouse_over_display_coordinates = true;
+    } else {
+      mouse_over_display_coordinates = false;
+    }
+    
+    //check if mouse is over MASTER VOLUME UP option
+    if (mouseX > master_volume_x && mouseX < master_volume_x+65 && mouseY > master_volume_up_y && mouseY < master_volume_up_y+33) {
+      mouse_over_master_volume_up = true;
+    } else {
+      mouse_over_master_volume_up = false;
+    }
+    
+    //check if mouse is over MASTER VOLUME DOWN option
+    if (mouseX > master_volume_x && mouseX < master_volume_x+65 && mouseY > master_volume_down_y && mouseY < master_volume_down_y+33) {
+      mouse_over_master_volume_down = true;
+    } else {
+      mouse_over_master_volume_down = false;
+    }
+    
+    //check if mouse is over MUSIC VOLUME UP option
+    if (mouseX > music_volume_x && mouseX < music_volume_x+65 && mouseY > music_volume_up_y && mouseY < music_volume_up_y+33) {
       mouse_over_music_volume_up = true;
     } else {
       mouse_over_music_volume_up = false;
     }
     
-    //check if mouse is over music_volume DOWN option
-    if (mouseX > music_volume_down_x+240 && mouseX < music_volume_down_x+305 && mouseY > music_volume_down_y-40 && mouseY < music_volume_down_y-7) {
+    //check if mouse is over MUSIC VOLUME DOWN option
+    if (mouseX > music_volume_x && mouseX < music_volume_x+65 && mouseY > music_volume_down_y && mouseY < music_volume_down_y+33) {
       mouse_over_music_volume_down = true;
     } else {
       mouse_over_music_volume_down = false;
+    }
+    
+    //check if mouse is over SFX VOLUME UP option
+    if (mouseX > sfx_volume_x && mouseX < sfx_volume_x+65 && mouseY > sfx_volume_up_y && mouseY < sfx_volume_up_y+33) {
+      mouse_over_sfx_volume_up = true;
+    } else {
+      mouse_over_sfx_volume_up = false;
+    }
+    
+    //check if mouse is over SFX VOLUME DOWN option
+    if (mouseX > sfx_volume_x && mouseX < sfx_volume_x+65 && mouseY > sfx_volume_down_y && mouseY < sfx_volume_down_y+33) {
+      mouse_over_sfx_volume_down = true;
+    } else {
+      mouse_over_sfx_volume_down = false;
     }
     
     fill(255, 255, 255); //white
@@ -630,11 +743,33 @@ class Menu {
     }
     text("display  hitboxes", 80, 120);
     
-    image(image_up_arrowC, music_volume_up_x+240, music_volume_up_y-23, 65, 33);
-    image(image_down_arrowC, music_volume_down_x+240, music_volume_down_y-40, 65, 33);
-    text("music", width/2+80, 120);
+    if (!coordinates) {
+      image(image_tab_black, 25, 145, 40, 40);
+    } else {
+      image(image_tab_white, 25, 145, 40, 40);
+    }
+    text("display  coordinates", 80, 180);
+    
+    image(image_up_arrowC, master_volume_x, master_volume_up_y, 65, 33);
+    image(image_down_arrowC, master_volume_x, master_volume_down_y, 65, 33);
+    fill(255);
+    text("master", master_x, master_y+120);
     fill(0);
-    text(music_volume, width/2+257, 120);
+    text(master_volume, master_volume_x+17, master_y+120);
+    
+    image(image_up_arrowC, music_volume_x, music_volume_up_y, 65, 33);
+    image(image_down_arrowC, music_volume_x, music_volume_down_y, 65, 33);
+    fill(255);
+    text("music", music_x, music_y+120);
+    fill(0);
+    text(music_volume, music_volume_x+17, music_y+120);
+    
+    image(image_up_arrowC, sfx_volume_x, sfx_volume_up_y, 65, 33);
+    image(image_down_arrowC, sfx_volume_x, sfx_volume_down_y, 65, 33);
+    fill(255);
+    text("sfx", sfx_x, sfx_y+120);
+    fill(0);
+    text(sfx_volume, sfx_volume_x+17, sfx_y+120);
     
     textAlign(CENTER);
   }
@@ -686,6 +821,20 @@ class Menu {
       fill(0, 255, 0); //green
       textSize(text_size*0.8);
       text(frameRate, width+20, 30); 
+    }
+  }
+
+  void displayCoordinates() {
+    //display COORDINATES
+    if (coordinates && !on_menu) {
+      textAlign(LEFT);
+      fill(0); //black
+      textSize(text_size*0.8);
+      text("x ", 30, 40);
+      text(player.x-128, 90, 40);
+      text("y ", 30, 80);
+      text(-player.y+644, 90, 80);
+      textAlign(CENTER);
     }
   }
 };

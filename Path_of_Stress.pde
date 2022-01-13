@@ -1,4 +1,4 @@
-import processing.sound.*; //<>// //<>//
+import processing.sound.*; //<>//
 
 //variable used for the intro and main of the 1st and 4th year songs
 boolean intro;
@@ -84,18 +84,18 @@ void playMusic() {
   else music = level.music;
   
   if (music == tracks[1]) {
-    music.amp(menu.volume);
+    music.amp(menu.volume * menu.music_volume * (menu.master_volume/10.0));
     music.play();
     intro = true;
   }
   else if (music == tracks[4]) {
-    music.amp(menu.volume);
+    music.amp(menu.volume * menu.music_volume * (menu.master_volume/10.0));
     music.play();
     intro = true;
   }
   else {
     intro = false;
-    music.amp(menu.volume);
+    music.amp(menu.volume * menu.music_volume * (menu.master_volume/10.0));
     music.loop();
     
   }
@@ -110,7 +110,7 @@ void manageIntros() {
     intro = false; //don't come in this funciton again
     if (music == tracks[1]) music = tracks[5];
     else music = tracks[6];
-    music.amp(menu.volume);
+    music.amp(menu.volume * menu.music_volume * (menu.master_volume/10.0));
     music.loop();
   }
   
