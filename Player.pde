@@ -67,6 +67,7 @@ class Player {
     //draw player coordinates
     fill(255);
     textSize(40);
+    textAlign(LEFT);
     text("x ", 30, 40);
     text(x, 90, 40);
     text("y ", 30, 80);

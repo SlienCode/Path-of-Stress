@@ -62,10 +62,10 @@ class Level {
       courses[0] = new Course(900, 420); //difficulty: 1
       courses[1] = new Course(1526, 114); //difficulty: 2
       courses[2] = new Course(2050, 130); //difficulty: 3
-      courses[3] = new Course(2400, 740); //difficulty: 0
+      courses[3] = new Course(2400, 750); //difficulty: 0
       courses[4] = new Course(3000, 250); //difficulty: 2
       courses[5] = new Course(3830, 160); //difficulty: 3
-      courses[6] = new Course(4430, 740); //difficulty: 0
+      courses[6] = new Course(4430, 750); //difficulty: 0
       courses[7] = new Course(5100, 310); //difficulty: 1
       courses[8] = new Course(5720, 300); //difficulty: 2
       courses[9] = new Course(6550, 340); //difficulty: 2
@@ -83,27 +83,35 @@ class Level {
       
       bg_motion = 6;
       
-      objects = new Object[5];
-      objects[0] = new Ladder(2600);
+      objects = new Object[18];
+      objects[0] = new Chair(800);
       objects[1] = new Desk(900);
-      objects[2] = new Bookshelf_Short(1300);
-      objects[3] = new Bookshelf_Big(1700);
-      objects[4] = new Closet(2100);
-      //objects[] = new ();
-      //objects[] = new ();
-      //objects[] = new ();
-      //objects[] = new ();
-      //objects[] = new ();
+      objects[2] = new Chair(1150);
+      objects[3] = new Chair(1480);
+      objects[4] = new Desk(1400);
+      objects[5] = new Bookshelf_Short(1880);
+      objects[6] = new Chair(2130);
+      objects[7] = new Pillar(2350);
+      objects[8] = new Pillar(2910);
+      objects[9] = new Bookshelf_Tall(3490);
+      objects[10] = new Chair(3830);
+      objects[11] = new Desk(3750);
+      objects[12] = new Bookshelf_Short(4110);
+      objects[13] = new Chair(4430);
+      objects[14] = new Pillar(4745);
+      objects[15] = new Chair(5100);
+      objects[16] = new Chair(5200);
+      objects[17] = new Desk(5300);
       
       courses = new Course[8];
-      courses[0] = new Course(0, 0);
-      courses[1] = new Course(0, 0);
-      courses[2] = new Course(0, 0);
-      courses[3] = new Course(0, 0);
-      courses[4] = new Course(0, 0);
-      courses[5] = new Course(0, 0);
-      courses[6] = new Course(0, 0);
-      courses[7] = new Course(0, 0);
+      courses[0] = new Course(990, 370); //1
+      courses[1] = new Course(1580, 260); //2
+      courses[2] = new Course(2150, 400); //1
+      courses[3] = new Course(2700, 750); //0
+      courses[4] = new Course(3110, 122); //3
+      courses[5] = new Course(4000, 200); //2
+      courses[6] = new Course(4810, 250); //4
+      courses[7] = new Course(5600, 400); //1
       
       right_border = 6255;
     }
@@ -160,7 +168,7 @@ class Level {
       courses[0] = new Course(800, 280); //1
       courses[1] = new Course(1900, 170); //2
       courses[2] = new Course(2520, 130); //2
-      courses[3] = new Course(3200, 740); //0
+      courses[3] = new Course(3200, 750); //0
       courses[4] = new Course(4560, 95); //3
       courses[5] = new Course(5550, 290); //2
       courses[6] = new Course(6200, 260); //1
@@ -212,14 +220,7 @@ class Level {
     for (Object object: objects) object.draw();
     for (Course course: courses) course.draw();
     
-    //display courses collected
-    image(courseImage, width/2-100, 30, 64, 64);
-    fill(220, 220, 220); //light grey
-    textSize(menu.text_size*0.8);
-    text("X", width/2, 80);
-    fill(255, 215, 0); //gold
-    textSize(menu.text_size*3/2);
-    text(courses_collected, width/2+62, 90);
+    displayCoursesCollected();
   }
   
   //resets the coordinates when quiting or finishing a level
@@ -235,5 +236,17 @@ class Level {
   void toggle() {
     for (Object object: objects) object.toggle();
     for (Course course: courses) course.toggle();
+  }
+  
+  void displayCoursesCollected() {
+    //display courses collected
+    image(courseImage, width/2-116, 30, 64, 64);
+    textAlign(LEFT);
+    fill(220, 220, 220); //light grey
+    textSize(menu.text_size*0.8);
+    text("x  ", width/2-16, 80);
+    fill(255, 215, 0); //gold
+    textSize(menu.text_size*3/2);
+    text(courses_collected, width/2+42, 92);
   }
 };

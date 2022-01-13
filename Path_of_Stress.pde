@@ -68,8 +68,7 @@ void setup() {
   
 }
 
-void draw() { 
-  println(transition_counter);
+void draw() {
   if (on_menu) {
     menu.draw(); 
   }

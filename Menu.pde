@@ -197,8 +197,8 @@ class Menu {
     mouse_over_next_level = false;
     mouse_over_previous_level = false;
     
-    fps = true;
-    hitboxes = true;
+    fps = false;
+    hitboxes = false;
     coordinates = false;
     mouse_over_display_fps = false;
     mouse_over_display_hitboxes = false;

@@ -91,6 +91,7 @@ class Game {
   
   void gameMenu() {
     image(image, width/2-250, height/2-170, 500, 300);
+    textAlign(CENTER);
     textSize(menu.text_size);
     if (menu.hitboxes) {
       fill(255, 0, 255); //pink
