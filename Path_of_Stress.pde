@@ -1,4 +1,4 @@
-import processing.sound.*; //<>//
+import processing.sound.*; //<>// //<>//
 
 //variable used for the intro and main of the 1st and 4th year songs
 boolean intro;
@@ -69,9 +69,8 @@ void setup() {
 }
 
 void draw() {
-  if (on_menu) {
-    menu.draw(); 
-  }
+  
+  if (on_menu) menu.draw();
   else game.draw();
  
   if (intro && !game.pause) manageIntros();
@@ -87,11 +86,23 @@ void transitionAnimation() {
   
   if (transition_counter == 0) {
     music.stop();
+    if (on_menu) {
     sounds[3].amp(menu.volume * menu.sfx_volume * (menu.master_volume/10.0));
     sounds[3].play();
+    }
+    else {
+      sounds[7].amp(menu.volume * menu.sfx_volume * (menu.master_volume/10.0));
+      sounds[7].play();
+    }
   }
   else if (transition_counter < 50) tint(255,transition_counter*10);
-  else if (transition_counter == 50) on_menu = false;
+  else if (transition_counter == 50) 
+    if (on_menu) on_menu = false;
+    else {
+      on_menu = true;
+      player.x = 128;
+      level.reset();
+    }
   else if (transition_counter < 100) tint(255,260-((transition_counter-50)*10));
   
   transition_counter++;

@@ -40,12 +40,10 @@ class Game {
     }
     else gameMenu();
     
-    if (player.x >= level.right_border) {
-      if (courses_collected < 36) {
-        leaveGame();
-      } else {
-        creditsMenu();
-        
+    if (transition_counter == -1) {
+      if (player.x >= level.right_border) {
+        if (courses_collected < 36 && transition_counter == -1) leaveGame();
+        else creditsMenu(); 
       }
     }
     
@@ -90,11 +88,9 @@ class Game {
   }
   
   void leaveGame() {
-    pause = false;
-    on_menu = true;
-    player.x = 128;
-    level.reset();
-    playMusic();
+    
+    game.pause = false;
+    transition_counter = 0;
     menu.draw();
   }
   
