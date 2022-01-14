@@ -1,4 +1,4 @@
-import processing.sound.*; //<>// //<>//
+import processing.sound.*; //<>//
 
 //variable used for the intro and main of the 1st and 4th year songs
 boolean intro;
@@ -91,8 +91,13 @@ void transitionAnimation() {
     sounds[3].play();
     }
     else {
-      sounds[7].amp(menu.volume * menu.sfx_volume * (menu.master_volume/10.0));
-      sounds[7].play();
+      if (game.courses_collected == 36 && !menu.credits_shown) {
+        sounds[10].amp(menu.volume * menu.sfx_volume * (menu.master_volume/10.0));
+        sounds[10].play();
+      } else {
+        sounds[7].amp(menu.volume * menu.sfx_volume * (menu.master_volume/10.0));
+        sounds[7].play();
+      }
     }
   }
   else if (transition_counter < 50) tint(255,transition_counter*10);
@@ -106,10 +111,17 @@ void transitionAnimation() {
   else if (transition_counter < 100) tint(255,260-((transition_counter-50)*10));
   
   transition_counter++;
-  
-  if (transition_counter == 100) { 
-    playMusic();
-    transition_counter = -1; 
+
+  if (game.courses_collected == 36 && !menu.credits_shown) {
+    if (transition_counter == 200) {
+      playMusic();
+      transition_counter = -1; 
+    }
+  } else {
+    if (transition_counter == 100) {
+      playMusic();
+      transition_counter = -1; 
+    }
   }
   
   if (transition_counter > 1 && transition_counter < 100) image(transition_screen, 0, 0, 1440, 900);
@@ -138,7 +150,6 @@ void playMusic() {
     intro = false;
     music.amp(menu.volume * menu.music_volume * (menu.master_volume/10.0));
     music.loop();
-    
   }
   
 }

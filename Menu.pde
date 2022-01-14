@@ -1,5 +1,5 @@
 class Menu {
-    
+  
   PImage image_main_menu_background;
   PImage image_secondary_menu_background;
   PImage image_thumb1;
@@ -117,6 +117,9 @@ class Menu {
   int sfx_volume_down_y;
   boolean mouse_over_sfx_volume_up;
   boolean mouse_over_sfx_volume_down;
+  
+  boolean credits_shown;
+  Degree degree;
 
   Menu() {
     
@@ -238,6 +241,9 @@ class Menu {
     mouse_over_sfx_volume_up = false;
     mouse_over_sfx_volume_down = false;
     
+    credits_shown = false;
+    degree = new Degree();
+    
     volume = 0.03;
   }
   
@@ -250,6 +256,8 @@ class Menu {
       levelMenu();
     } else if (menu_state == "SETTINGS MENU") {
       settingsMenu();
+    } else if (menu_state == "CREDITS MENU") {
+      creditsMenu();
     }
     displayFps();
     displayCoordinates();
@@ -415,6 +423,13 @@ class Menu {
           sfx_volume--;
           for (SoundFile iter : sounds) iter.amp(volume * sfx_volume * (master_volume/10.0));
         }
+      }
+    } else if (menu_state == "CREDITS MENU") { //CREDITS MENU
+      if (mouse_over_return) { //click on RETURN option
+          sounds[0].amp(volume * sfx_volume * (master_volume/10.0));
+          sounds[0].play();
+          credits_shown = true;
+          menu_state = "MAIN MENU";
       }
     }
   }
@@ -638,7 +653,7 @@ class Menu {
         text(level.courses.length - level.courses_collected + "  courses  left  to  pass !", width/2, height/2+150);  
       } else {
         textSize(text_size*3/5);
-        text("You  have  passed  all  the  courses  in  this  year !", width/2, height/2+145);
+        text("You  have  passed  all  the  courses  from  this  year !", width/2, height/2+145);
       }
     }
     
@@ -835,9 +850,40 @@ class Menu {
     level_4 = false;
   }
   
+  void creditsMenu() {
+    image(image_secondary_menu_background, 0, 0, 1440, 900);
+    degree.draw();
+    
+    //check if the mouse is over the RETURN option
+    if (mouseX > (return_x-131) && mouseX < return_x && mouseY > (return_y-130) && mouseY < return_y) {
+      mouse_over_return = true;
+      image(image_return_arrow_yellow, return_x-130, return_y-130, 130, 130);
+    } else {
+      mouse_over_return = false;
+      image(image_return_arrow_red, return_x-130, return_y-130, 130, 130);
+    }
+    
+    fill(255, 215, 0); //gold
+    textAlign(CENTER);
+    
+    textSize(text_size);
+    text("CONGRATULATIONS    FOR    GRADUATING", width/2, 120);
+    
+    textSize(text_size*2/3);
+    text("GRADUATION    CERTIFICATE", width/2, height/2-80);
+    
+    fill(0);
+    textSize(text_size);
+    text("THANKS   FOR   PLAYING   OUR   GAME", width/2, height/2+120);
+    textSize(text_size*3/4);
+    text("THANOS    GEORGAKAKIS", width/2, height/2+200);
+    text("NICK    CHRISTODOULOU", width/2, height/2+250);
+  }
+  
   void displayFps() {
     //display FPS
     if (fps) {
+      textAlign(CENTER);
       fill(0, 255, 0); //green
       textSize(text_size*0.8);
       text(frameRate, width+20, 30); 

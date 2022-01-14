@@ -112,7 +112,7 @@ class Level {
       courses[6] = new Course(4810, 250); //4
       courses[7] = new Course(5600, 400); //1
       
-      right_border = 6255;
+      right_border = 6240;
     }
     else if (year == 3) {
       backgroundBack = loadImage(sketchPath() + "/images/backgrounds/3rd_year.png");

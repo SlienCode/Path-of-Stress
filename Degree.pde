@@ -39,7 +39,7 @@ class Degree {
   
   void draw() {
     animation();
-    image(image, width/2-64, height/2, 128, 128);
+    image(image, width/2-64, height/2-240, 128, 128);
   }
   
   void animation() {
