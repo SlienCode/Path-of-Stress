@@ -5,7 +5,7 @@ class Truck extends Object {
   Truck(int x) {
 
     super(x);
-    image = loadImage(sketchPath() + "/images/objects/truck0.png");
+    image = loadImage(sketchPath() + "/images/objects/truck.png");
     platform = false;
     hitbox = new Rectangle[2];
     hitbox[0] = new Rectangle(x+20, y+805, 43, 102);
