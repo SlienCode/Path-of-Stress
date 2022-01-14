@@ -5,6 +5,8 @@ class Game {
   PImage image;
   boolean pause;
   
+  Degree degree;
+  
   int resume_game_x;
   int resume_game_y;
   boolean mouse_over_resume_game;
@@ -15,7 +17,7 @@ class Game {
   Game() {
     
     courses_collected = 0;
-    
+    degree = new Degree();
     image = loadImage(sketchPath() + "/images/tabs/tab.png");
     
     resume_game_x = width/2;
@@ -38,7 +40,14 @@ class Game {
     }
     else gameMenu();
     
-    if (player.x >= level.right_border) leaveGame();
+    if (player.x >= level.right_border) {
+      if (courses_collected < 36) {
+        leaveGame();
+      } else {
+        creditsMenu();
+        
+      }
+    }
     
     menu.displayFps();
     menu.displayCoordinates();
@@ -114,5 +123,15 @@ class Game {
       fill(235, 15, 15); //red
     }
     text("LEAVE GAME", leave_game_x, leave_game_y);
+  }
+  
+  void creditsMenu() {
+    image(menu.image_secondary_menu_background, 0, 0, 1440, 900);
+    
+    degree.draw();
+    textSize(64);
+    textAlign(CENTER);
+    text("CONGRATSULATIONS  YOU  GRADUATED", width/2, 100);
+    text("GRADUATION  CERTIFICATE", width/2, 300);
   }
 };

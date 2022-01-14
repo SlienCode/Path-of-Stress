@@ -6,6 +6,9 @@ class Menu {
   PImage image_thumb2;
   PImage image_thumb3;
   PImage image_thumb4;
+  PImage image_thumb2_locked;
+  PImage image_thumb3_locked;
+  PImage image_thumb4_locked;
   PImage image_return_arrow_red;
   PImage image_return_arrow_yellow;
   PImage image_right_arrow_red;
@@ -68,7 +71,7 @@ class Menu {
   boolean level_2;
   boolean level_3;
   boolean level_4;
-  boolean text_displayed;
+  boolean year_locked;
   int play_x;
   int play_y;
   boolean mouse_over_play;
@@ -124,6 +127,9 @@ class Menu {
     image_thumb2 = loadImage(sketchPath() + "/images/thumbnails/2nd_thumb.png");
     image_thumb3 = loadImage(sketchPath() + "/images/thumbnails/3rd_thumb.png");
     image_thumb4 = loadImage(sketchPath() + "/images/thumbnails/4th_thumb.png");
+    image_thumb2_locked = loadImage(sketchPath() + "/images/thumbnails/2nd_thumb_locked.png");
+    image_thumb3_locked = loadImage(sketchPath() + "/images/thumbnails/3rd_thumb_locked.png");
+    image_thumb4_locked = loadImage(sketchPath() + "/images/thumbnails/4th_thumb_locked.png");
     image_return_arrow_red = loadImage(sketchPath() + "/images/arrows/return_arrow_red.png");
     image_return_arrow_yellow = loadImage(sketchPath() + "/images/arrows/return_arrow_yellow.png");
     image_right_arrow_red = loadImage(sketchPath() + "/images/arrows/right_arrow_red.png");
@@ -186,7 +192,7 @@ class Menu {
     mouse_over_displayed_character = false;
     
     levelReset();
-    text_displayed = false;
+    year_locked = false;
     play_x = width/2;
     play_y = height;
     mouse_over_play = false;
@@ -524,7 +530,7 @@ class Menu {
   void levelMenu() {
     image(image_secondary_menu_background, 0, 0, 1440, 900);
     
-    text_displayed = false;
+    year_locked = false;
     
     if (hitboxes) {
       fill(255, 0, 255); //pink
@@ -593,34 +599,40 @@ class Menu {
       text("1st year", width/2, height/2+65);
     } else if (level_2) {
       level = levels[1];
-      image(image_thumb2, width/2-300, height/2-350, 600, 350);
-      text("2nd year", width/2, height/2+65);
+      text("2nd year", width/2, height/2+65); 
       if (game.courses_collected < 6) {
+        image(image_thumb2_locked, width/2-300, height/2-350, 600, 350);
         textSize(text_size*3/5);
         text("You  need  to  pass  " + (6 - game.courses_collected) + "  more  courses  to  unlock  this  year !", width/2, height/2+150);
-        text_displayed = true;
+        year_locked = true;
+      } else {
+        image(image_thumb2, width/2-300, height/2-350, 600, 350);
       }
     } else if (level_3) {
       level = levels[2];
-      image(image_thumb3, width/2-300, height/2-350, 600, 350);
       text("3rd year", width/2, height/2+65);
       if (game.courses_collected < 12) {
+        image(image_thumb3_locked, width/2-300, height/2-350, 600, 350);
         textSize(text_size*3/5);
         text("You  need  to  pass  " + (12 - game.courses_collected) + "  more  courses  to  unlock  this  year !", width/2, height/2+150);
-        text_displayed = true;
+        year_locked = true;
+      } else {
+        image(image_thumb3, width/2-300, height/2-350, 600, 350);
       }
     } else if (level_4) {
       level = levels[3];
       mouse_over_next_level = false;
-      image(image_thumb4, width/2-300, height/2-350, 600, 350);
       text("4th year", width/2, height/2+65);;
       if (game.courses_collected < 18) {
+        image(image_thumb4_locked, width/2-300, height/2-350, 600, 350);
         textSize(text_size*3/5);
         text("You  need  to  pass  " + (18 - game.courses_collected) + "  more  courses  to  unlock  this  year !", width/2, height/2+150);
-        text_displayed = true;
+        year_locked = true;
+      } else {
+        image(image_thumb4, width/2-300, height/2-350, 600, 350);
       }
     }
-    if (!text_displayed) {
+    if (!year_locked) {
       if (level.courses_collected < level.courses.length) {
         textSize(text_size*3/4);
         text(level.courses.length - level.courses_collected + "  courses  left  to  pass !", width/2, height/2+150);  
