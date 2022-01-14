@@ -2,10 +2,10 @@ import java.awt.*;
 
 class Sign extends Object {
   
-  Sign(int x) {
+  Sign(int x, int g) {
     
     super(x);
-    image = loadImage(sketchPath() + "/images/objects/sign2.png");
+    image = loadImage(sketchPath() + "/images/objects/sign" + g + ".png");
     platform = true;
     hitbox = new Rectangle[1];
     hitbox[0] = new Rectangle(x+20, y+584, 27, 20);

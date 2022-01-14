@@ -2,10 +2,10 @@ import java.awt.*;
 
 class Car extends Object {
 
-  Car(int x) {
+  Car(int x, int g) {
 
     super(x);
-    image = loadImage(sketchPath() + "/images/objects/car_red.png");
+    image = loadImage(sketchPath() + "/images/objects/car" + g + ".png");
     platform = false;
     hitbox = new Rectangle[5];
     hitbox[0] = new Rectangle(x+50, y+772, 64, 211);

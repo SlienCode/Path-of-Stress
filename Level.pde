@@ -47,14 +47,13 @@ class Level {
        
       objects = new Object[10];
       objects[0] = new Cone(648);
-      objects[1] = new Bin(1112);
-      //npcs[0] = new Npc(1800);
-      objects[2] = new Light(1536);
+      objects[1] = new Bin(1112, 1);
+      objects[2] = new Sign(1536, 1);
       objects[3] = new Bench(2136);
       objects[4] = new Bus_Stop(2500);
-      objects[5] = new Sign(3400);
-      objects[6] = new Car(3710);
-      objects[7] = new Bin(4744);
+      objects[5] = new Light(3400);
+      objects[6] = new Car(3710, 2);
+      objects[7] = new Bin(4744, 2);
       objects[8] = new Hydrant(5436);
       objects[9] = new Tree(5800);
       
@@ -173,16 +172,16 @@ class Level {
       backgroundBack = loadImage(sketchPath() + "/images/backgrounds/4th_year.png");
       
       objects = new Object[10];
-      objects[0] = new Car(900);
-      objects[1] = new Light(1500);
+      objects[0] = new Car(900, 1);
+      objects[1] = new Sign(1500, 3);
       objects[2] = new Hydrant(2000);
-      objects[3] = new Bin(2400);
-      objects[4] = new Sign(2920);
+      objects[3] = new Bin(2400, 2);
+      objects[4] = new Sign(2920, 2);
       objects[5] = new Truck(3370);
-      objects[6] = new Bin(4360);
+      objects[6] = new Bin(4360, 1);
       objects[7] = new Tree(5000);
-      objects[8] = new Car(5960);
-      objects[9] = new Sign(6750);
+      objects[8] = new Car(5960, 3);
+      objects[9] = new Light(6750);
       
       courses = new Course[8];
       courses[0] = new Course(800, 280); //1
