@@ -38,7 +38,6 @@ class Degree {
   }
   
   void draw() {
-    println(counter);
     animation();
     image(image, width/2-64, height/2, 128, 128);
   }
