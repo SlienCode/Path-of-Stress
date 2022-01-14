@@ -65,13 +65,13 @@ class Player {
   void draw() {
     
     //draw player coordinates
-    fill(255);
-    textSize(40);
-    textAlign(LEFT);
-    text("x ", 30, 40);
-    text(x, 90, 40);
-    text("y ", 30, 80);
-    text(y, 90, 80);
+    //fill(255);
+    //textSize(40);
+    //textAlign(LEFT);
+    //text("x ", 30, 40);
+    //text(x, 90, 40);
+    //text("y ", 30, 80);
+    //text(y, 90, 80);
     
     image = idle[0]; //default standing position image
     

@@ -8,7 +8,7 @@ class Bus_Stop extends Object {
     image = loadImage(sketchPath() + "/images/objects/bus_stop.png");
     platform = true;
     hitbox = new Rectangle[1];
-    hitbox[0] = new Rectangle(x+59, y+438, 625, 16);
+    hitbox[0] = new Rectangle(x+59, y+438, 625, 20);
         
   }
   
@@ -18,7 +18,7 @@ class Bus_Stop extends Object {
   }
   
   void toggle() {
-    rect(x+59, y+438, 625, 16);
+    rect(x+59, y+438, 625, 20);
   }
   
 };

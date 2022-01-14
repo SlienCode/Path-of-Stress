@@ -8,7 +8,7 @@ class Pillar extends Object {
     image = loadImage(sketchPath() + "/images/objects/pillar.png");
     platform = true;
     hitbox = new Rectangle[1];
-    hitbox[0] = new Rectangle(x+27, y+604, 137, 16);
+    hitbox[0] = new Rectangle(x+27, y+604, 137, 20);
         
   }
   
@@ -18,7 +18,7 @@ class Pillar extends Object {
   }
   
   void toggle() {
-    rect(x+27, y+604, 137, 16);
+    rect(x+27, y+604, 137, 20);
   }
   
 };

@@ -68,6 +68,7 @@ class Menu {
   boolean level_2;
   boolean level_3;
   boolean level_4;
+  boolean text_displayed;
   int play_x;
   int play_y;
   boolean mouse_over_play;
@@ -185,7 +186,7 @@ class Menu {
     mouse_over_displayed_character = false;
     
     levelReset();
-    
+    text_displayed = false;
     play_x = width/2;
     play_y = height;
     mouse_over_play = false;
@@ -300,8 +301,7 @@ class Menu {
         sounds[2].play();
         character = character_temp;
         character_selected = true;
-        //level_1 = true; HELP
-        level_2 = true;
+        level_1 = true;
         menu_state = "LEVEL MENU";
       }
     } else if (menu_state == "LEVEL MENU") { //LEVEL MENU
@@ -343,13 +343,13 @@ class Menu {
         if (level_1) {
           level = levels[0];
           startGame();
-        } else if (level_2 /*&& game.courses_collected >= 5*/) { //HELP
+        } else if (level_2 && game.courses_collected >= 6) {
           level = levels[1];
           startGame();
-        } else if (level_3 /*&& game.courses_collected >= 10*/) {
+        } else if (level_3 && game.courses_collected >= 12) {
           level = levels[2];
           startGame();
-        } else if (level_4 /*&& game.courses_collected >= 15*/) {
+        } else if (level_4 && game.courses_collected >= 18) {
           level = levels[3];
           startGame();
         }
@@ -524,6 +524,8 @@ class Menu {
   void levelMenu() {
     image(image_secondary_menu_background, 0, 0, 1440, 900);
     
+    text_displayed = false;
+    
     if (hitboxes) {
       fill(255, 0, 255); //pink
       rect(return_x - 131, return_y - 130, 130, 130); //hitbox of RETURN to menu button
@@ -593,22 +595,39 @@ class Menu {
       level = levels[1];
       image(image_thumb2, width/2-300, height/2-350, 600, 350);
       text("2nd year", width/2, height/2+65);
+      if (game.courses_collected < 6) {
+        textSize(text_size*3/5);
+        text("You  need  to  pass  " + (6 - game.courses_collected) + "  more  courses  to  unlock  this  year !", width/2, height/2+150);
+        text_displayed = true;
+      }
     } else if (level_3) {
       level = levels[2];
       image(image_thumb3, width/2-300, height/2-350, 600, 350);
       text("3rd year", width/2, height/2+65);
+      if (game.courses_collected < 12) {
+        textSize(text_size*3/5);
+        text("You  need  to  pass  " + (12 - game.courses_collected) + "  more  courses  to  unlock  this  year !", width/2, height/2+150);
+        text_displayed = true;
+      }
     } else if (level_4) {
       level = levels[3];
       mouse_over_next_level = false;
       image(image_thumb4, width/2-300, height/2-350, 600, 350);
       text("4th year", width/2, height/2+65);;
+      if (game.courses_collected < 18) {
+        textSize(text_size*3/5);
+        text("You  need  to  pass  " + (18 - game.courses_collected) + "  more  courses  to  unlock  this  year !", width/2, height/2+150);
+        text_displayed = true;
+      }
     }
-    if (level.courses_collected < level.courses.length) {
-      textSize(text_size*3/4);
-      text(level.courses.length - level.courses_collected + "  courses  left  to  pass !", width/2, height/2+150);
-    } else {
-      textSize(text_size*3/5);
-      text("You  have  passed  all  the  courses  in  this  year !", width/2, height/2+145);
+    if (!text_displayed) {
+      if (level.courses_collected < level.courses.length) {
+        textSize(text_size*3/4);
+        text(level.courses.length - level.courses_collected + "  courses  left  to  pass !", width/2, height/2+150);  
+      } else {
+        textSize(text_size*3/5);
+        text("You  have  passed  all  the  courses  in  this  year !", width/2, height/2+145);
+      }
     }
     
     image(image_course, 58, 188, 32, 32);

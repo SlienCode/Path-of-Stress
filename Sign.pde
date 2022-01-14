@@ -8,7 +8,7 @@ class Sign extends Object {
     image = loadImage(sketchPath() + "/images/objects/sign2.png");
     platform = true;
     hitbox = new Rectangle[1];
-    hitbox[0] = new Rectangle(x+20, y+584, 27, 16);
+    hitbox[0] = new Rectangle(x+20, y+584, 27, 20);
         
   }
   
@@ -18,7 +18,7 @@ class Sign extends Object {
   }
   
   void toggle() {
-    rect(x+20, y+584, 27, 16);
+    rect(x+20, y+584, 27, 20);
   }
   
 };

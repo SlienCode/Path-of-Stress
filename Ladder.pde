@@ -8,8 +8,8 @@ class Ladder extends Object {
     image = loadImage(sketchPath() + "/images/objects/ladder.png");
     platform = true;
     hitbox = new Rectangle[2];
-    hitbox[0] = new Rectangle(x+18, y+544, 83, 16);
-    hitbox[1] = new Rectangle(x+18, y+722, 83, 16);
+    hitbox[0] = new Rectangle(x+18, y+544, 83, 20);
+    hitbox[1] = new Rectangle(x+18, y+722, 83, 20);
         
   }
   
@@ -20,8 +20,8 @@ class Ladder extends Object {
   }
   
   void toggle() {
-    rect(x+18, y+544, 83, 16);
-    rect(x+18, y+722, 83, 16);
+    rect(x+18, y+544, 83, 20);
+    rect(x+18, y+722, 83, 20);
   }
   
 };
