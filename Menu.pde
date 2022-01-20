@@ -433,6 +433,7 @@ class Menu {
           sounds[0].amp(volume * sfx_volume * (master_volume/10.0));
           sounds[0].play();
           credits_shown = true;
+          levelReset();
           menu_state = "MAIN MENU";
       }
     }
@@ -623,7 +624,11 @@ class Menu {
       if (game.courses_collected < 6) {
         image(image_thumb2_locked, width/2-300, height/2-350, 600, 350);
         textSize(text_size*3/5);
-        text("You  need  to  pass  " + (6 - game.courses_collected) + "  more  courses  to  unlock  this  year !", width/2, height/2+150);
+        if (6 - game.courses_collected > 1) {
+          text("You  need  to  pass  " + (6 - game.courses_collected) + "  more  courses  to  unlock  this  year !", width/2, height/2+150);
+        } else {
+          text("You  need  to  pass  1  more  course  to  unlock  this  year !", width/2, height/2+150);
+        }
         year_locked = true;
       } else {
         image(image_thumb2, width/2-300, height/2-350, 600, 350);
@@ -634,7 +639,11 @@ class Menu {
       if (game.courses_collected < 12) {
         image(image_thumb3_locked, width/2-300, height/2-350, 600, 350);
         textSize(text_size*3/5);
-        text("You  need  to  pass  " + (12 - game.courses_collected) + "  more  courses  to  unlock  this  year !", width/2, height/2+150);
+        if (12 - game.courses_collected > 1) {
+          text("You  need  to  pass  " + (12 - game.courses_collected) + "  more  courses  to  unlock  this  year !", width/2, height/2+150);
+        } else {
+          text("You  need  to  pass  1  more  course  to  unlock  this  year !", width/2, height/2+150);
+        }
         year_locked = true;
       } else {
         image(image_thumb3, width/2-300, height/2-350, 600, 350);
@@ -646,6 +655,11 @@ class Menu {
       if (game.courses_collected < 18) {
         image(image_thumb4_locked, width/2-300, height/2-350, 600, 350);
         textSize(text_size*3/5);
+        if (18 - game.courses_collected > 1) {
+          text("You  need  to  pass  " + (18 - game.courses_collected) + "  more  courses  to  unlock  this  year !", width/2, height/2+150);
+        } else {
+          text("You  need  to  pass  1  more  course  to  unlock  this  year !", width/2, height/2+150);
+        }
         text("You  need  to  pass  " + (18 - game.courses_collected) + "  more  courses  to  unlock  this  year !", width/2, height/2+150);
         year_locked = true;
       } else {

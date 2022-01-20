@@ -247,8 +247,10 @@ class Level {
     if (year == 1) flag.draw();
     
     if (menu.hitboxes) {
-      fill(255, 0, 255); //pink
-      toggle();
+      fill(235, 15, 15); //red
+      toggleObjects();
+      fill(255, 215, 0); //gold
+      toggleCourses();
     }
     
     for (Object object: objects) object.draw();
@@ -269,9 +271,13 @@ class Level {
     
   }
 
-  //toggles the hitbox visability
-  void toggle() {
+  //toggles objects hitbox visibility
+  void toggleObjects() {
     for (Object object: objects) object.toggle();
+  }
+  
+  //toggles courses hitbox visibility
+  void toggleCourses() {
     for (Course course: courses) course.toggle();
   }
   

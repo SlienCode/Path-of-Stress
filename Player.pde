@@ -150,9 +150,9 @@ class Player {
      hitbox_player.setLocation(x + 24, y + 48);
      hitbox_feet.setLocation(x + 32, y + 248);
      if (menu.hitboxes) {
-       fill(255, 0, 255); //pink
+       fill(255, 215, 0); //gold
        rect(x + 24, y + 48, 79, 208);
-       fill(255); //white
+       fill(235, 15, 15); //red
        rect(x + 32, y + 248, 63, 8);
      }
      if (reverse) { //if the player is walking towards the left, flip the image if needed 
@@ -220,32 +220,29 @@ class Player {
   
   //make it so that holding a button won't execute keyPressed continuously using free_right and free_left
   void keyPressed() {
-    if (key == CODED) {
-      if (keyCode == RIGHT && free_right) {
+      if ((keyCode == RIGHT || key == 'd') && free_right) {
         x_motion = 8;
         player.walk_counter = 0;
         free_right = false;
         player.reverse = false; //don't flip the image, head to the right
       }
-      else if (keyCode == LEFT && free_left) {
+      else if ((keyCode == LEFT || key == 'a') && free_left) {
         x_motion = -8;
         player.walk_counter = 0;
         free_left = false;
         player.reverse = true; //flip the image, head to the left
       }
-      if (keyCode == UP) {
+      if (keyCode == UP || key == 'w') {
         //if we are on the ground, jump
         if (player.onGround() && free_up && jump_counter == -1) {
           player.jump_counter = 0;
         }
         free_up = false;
       }
-    }
   }
   
   void keyReleased() {
-    if (key == CODED) {
-      if (keyCode == RIGHT) {
+      if (keyCode == RIGHT || key == 'd') {
         if (free_left) { //if the user is not holding the left arrow, you can stop the animations
           x_motion = 0;
           player.walk_counter = -1;
@@ -256,7 +253,7 @@ class Player {
         }
         free_right = true; //user let go of the right arrow
       }
-      else if (keyCode == LEFT) {
+      else if (keyCode == LEFT || key == 'a') {
         if (free_right) { //if the user is not holding the right arrow, you can stop the animations
           x_motion = 0;
           player.walk_counter = -1;
@@ -267,8 +264,7 @@ class Player {
         }
         free_left = true; //user let go of the left arrow
       }
-      if (keyCode == UP)
+      if (keyCode == UP || key == 'w')
          free_up = true;
     }
-  }
 };

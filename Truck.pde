@@ -8,19 +8,19 @@ class Truck extends Object {
     image = loadImage(sketchPath() + "/images/objects/truck.png");
     platform = false;
     hitbox = new Rectangle[2];
-    hitbox[0] = new Rectangle(x+20, y+805, 43, 102);
-    hitbox[1] = new Rectangle(x+43, y+544, 792, 358);
+    hitbox[0] = new Rectangle(x+2, y+808, 41, 99);
+    hitbox[1] = new Rectangle(x+43, y+544, 796, 358);
   }
 
   void draw() {
-    image(image, x, y+388, 448*2, 256*2);
-    hitbox[0].setLocation(x, y+805);
+    image(image, x, y+388, 896, 512);
+    hitbox[0].setLocation(x+2, y+808);
     hitbox[1].setLocation(x+43, y+544);
   }
 
   void toggle() {
-    rect(x, y+805, 43, 102);
-    rect(x+43, y+544, 792, 358);
+    rect(x+2, y+808, 41, 99);
+    rect(x+43, y+544, 796, 358);
   }
 
 };
