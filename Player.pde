@@ -12,6 +12,7 @@ class Player {
   
   boolean free_right; //is the user holding the right arrow? if they aren't then it's free so -> true
   boolean free_left; //is the user holding the left arrow? if they aren't then it's free so -> true
+  boolean free_up; //is the user holding the up arrow? if they aren't then it's free so -> true
   
   boolean reverse; //when true, flip the image to head to the opposite direction
   
@@ -41,6 +42,7 @@ class Player {
     
     free_right = true;
     free_left = true;
+    free_up = true;
     
     reverse = false;
     
@@ -64,18 +66,7 @@ class Player {
   
   void draw() {
     
-    //draw player coordinates
-    //fill(255);
-    //textSize(40);
-    //textAlign(LEFT);
-    //text("x ", 30, 40);
-    //text(x, 90, 40);
-    //text("y ", 30, 80);
-    //text(y, 90, 80);
-    
     image = idle[0]; //default standing position image
-    
-    //still = onKiss();
     
     if (!still) { //if you are not kissing a wall
       x += x_motion; //if you didn't kiss a wall, move x
@@ -97,8 +88,6 @@ class Player {
     }
     else y += jump(); //otherwise, start jump
     
-    //y += y_motion; //if you are not on ground, move y
-    
     collectedCourses(); //count collected courses
     
     //off screen borders
@@ -119,7 +108,10 @@ class Player {
       for (Object object: level.objects) { //for every object in the level;
         for (Rectangle hitboxiter: object.hitbox) {
           if (temp.intersects(hitboxiter)) {
-            y -= (int)hitbox_feet.getY() + 8 - (int)hitboxiter.getY();
+            if (jump_counter == -1 || jump_counter >= 40) {
+              y = (int)hitboxiter.getY() - 256;
+              jump_counter = -1;
+            }
             return true;
           }
         }
@@ -215,12 +207,12 @@ class Player {
   //count collected courses
   private void collectedCourses() {
     for (int i = 0; i < level.courses.length; i++) {
-      if (hitbox_player.intersects(level.courses[i].hitbox)) {
+      if (hitbox_player.intersects(level.courses[i].hitbox) && (!level.courses[i].passed)) {
+        level.courses[i].passed = true;
         level.courses_collected += 1;
-        game.courses_collected += 1;
+        level.passed[i] = true;
         sounds[1].amp(menu.volume * menu.sfx_volume * (menu.master_volume/10.0));
         sounds[1].play();
-        level.courses[i] = new Course();
         return;
       }
     }
@@ -243,9 +235,10 @@ class Player {
       }
       if (keyCode == UP) {
         //if we are on the ground, jump
-        if (player.onGround()) {
+        if (player.onGround() && free_up && jump_counter == -1) {
           player.jump_counter = 0;
         }
+        free_up = false;
       }
     }
   }
@@ -257,15 +250,25 @@ class Player {
           x_motion = 0;
           player.walk_counter = -1;
         }
+        else {
+          player.x_motion = -8;
+          player.reverse = true; //flip the image, head to the left
+        }
         free_right = true; //user let go of the right arrow
       }
       else if (keyCode == LEFT) {
-        if (free_right) { //if the user is not holding the right arrow,you can stop the animations
+        if (free_right) { //if the user is not holding the right arrow, you can stop the animations
           x_motion = 0;
           player.walk_counter = -1;
         }
+        else {
+          player.x_motion = 8;
+          player.reverse = false; //don't flip the image, head to the right
+        }
         free_left = true; //user let go of the left arrow
       }
+      if (keyCode == UP)
+         free_up = true;
     }
   }
 };

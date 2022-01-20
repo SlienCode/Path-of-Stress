@@ -4,6 +4,8 @@ class Game {
   
   PImage image;
   boolean pause;
+  boolean quit;
+  boolean free_esc; //is the user holding the esc button? if they aren't then it's free so -> true
   
   int resume_game_x;
   int resume_game_y;
@@ -15,8 +17,9 @@ class Game {
   Game() {
     
     courses_collected = 0;
+    free_esc = true;
     
-    image = loadImage(sketchPath() + "/images/tabs/tab.png");
+    image = loadImage(sketchPath() + "/images/miscellaneous/tabs/tab.png");
     
     resume_game_x = width/2;
     resume_game_y = height/2-50;
@@ -40,6 +43,7 @@ class Game {
     
     if (transition_counter == -1) {
       if (player.x >= level.right_border) {
+        quit = false;
         leaveGame();
         if (courses_collected == 36 && !menu.credits_shown) {
           menu.menu_state = "CREDITS MENU";
@@ -53,18 +57,23 @@ class Game {
   
   //make it so that holding a button won't execute keyPressed continuously using free_right and free_left
   void keyPressed() {
-    player.keyPressed();
-    if ((key == ESC) && !pause) { //press ESC while playing
-      key = 0;
-      pauseGame();
-    } else if ((key == ESC) && pause) { //press ESC while paused
-      key = 0;
-      resumeGame();
+    if (!pause) player.keyPressed();
+    if ((key == ESC) && free_esc) {
+      free_esc = false;
+      if (!pause) { //press ESC while playing
+        key = 0;
+        pauseGame();
+      } else if ((key == ESC) && pause) { //press ESC while paused
+        key = 0;
+        resumeGame();
+      }
     }
+    else key = 0;
   }
   
   void keyReleased() {
     player.keyReleased();
+    if (key == ESC) free_esc = true;
   }
   
   void mousePressed() {
@@ -72,6 +81,7 @@ class Game {
       if (mouse_over_resume_game) {
         resumeGame();
       } else if (mouse_over_leave_game) {
+        quit = true;
         leaveGame();
       }
     }
@@ -88,6 +98,7 @@ class Game {
   }
   
   void leaveGame() {
+    if (!game.quit) for (boolean iter : level.passed) if (iter) game.courses_collected++;
     pause = false;
     transition_counter = 0;
   }

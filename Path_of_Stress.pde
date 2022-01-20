@@ -1,4 +1,4 @@
-import processing.sound.*; //<>//
+import processing.sound.*; //<>// //<>//
 
 //variable used for the intro and main of the 1st and 4th year songs
 boolean intro;
@@ -13,13 +13,21 @@ Player player;
 Level level;
 
 int transition_counter;
+int flag_counter;
 
 boolean on_menu;
 PFont myFont;
-PImage transition_screen;
+PImage transition_screen; //just plain dark
+PImage flag[]; //12 flag animations
+
+
 
 void setup() {
   
+  PImage icon = loadImage(sketchPath() + "/images/objects/course.png");
+  surface.setIcon(icon);
+  surface.setCursor(loadImage(sketchPath() + "/images/miscellaneous/cursor/cursor.png"), 9, 3);
+  surface.setTitle("Path of Stress");
   size(1440, 900);
   noSmooth();
   
@@ -52,10 +60,14 @@ void setup() {
   levels = new Level[4];
   for (int i = 0; i < 4; i++) levels[i] = new Level(i+1);
   
-  menu = new Menu();
-  game = new Game();
+  flag_counter = 0;
+  flag = new PImage[12];
+  for (int i = 0; i <12; i++) {
+      flag[i] = loadImage(sketchPath() + "/images/miscellaneous/flag/flag" + i + ".png");
+  }
   
-  frameRate(60);
+  menu = new Menu();
+  game = new Game();  
   
   textFont(myFont);
   textAlign(CENTER);
@@ -87,14 +99,16 @@ void transitionAnimation() {
   if (transition_counter == 0) {
     music.stop();
     if (on_menu) {
-    sounds[3].amp(menu.volume * menu.sfx_volume * (menu.master_volume/10.0));
-    sounds[3].play();
+      sounds[3].amp(menu.volume * menu.sfx_volume * (menu.master_volume/10.0));
+      sounds[3].play();
+      level.makeTemp();
     }
     else {
       if (game.courses_collected == 36 && !menu.credits_shown) {
         sounds[10].amp(menu.volume * menu.sfx_volume * (menu.master_volume/10.0));
         sounds[10].play();
-      } else {
+      } 
+      else {
         sounds[7].amp(menu.volume * menu.sfx_volume * (menu.master_volume/10.0));
         sounds[7].play();
       }
@@ -125,8 +139,7 @@ void transitionAnimation() {
   }
   
   if (transition_counter > 1 && transition_counter < 100) image(transition_screen, 0, 0, 1440, 900);
-  tint (255, 255); 
-    
+  noTint();
 }
 
 void playMusic() {

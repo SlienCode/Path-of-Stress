@@ -11,16 +11,6 @@ abstract class Object {
   //image of the object
   PImage image;
   
-  //hitboxes' sizes
-  int leftsize;
-  int upsize;
-  int rightsize;
-  
-  //hitboxes
-  Point[] hitboxleft;
-  Point[] hitboxup;
-  Point[] hitboxright;
-  
   Rectangle hitbox[];
   
   Object(int x) {

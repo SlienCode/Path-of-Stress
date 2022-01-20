@@ -21,8 +21,12 @@ class Level {
   int bg_x; //background x
   int move_x; //objects and courses x coordinate initializer
 
+  Flag flag;
+
   Object[] objects;
   Course[] courses;
+  
+  boolean[] passed; //tests which courses the player took before leaving the game
   
   int courses_collected;
 
@@ -42,8 +46,11 @@ class Level {
       
       x_dim = 2160;
       y = -25;
+      
       bg_motion = 1;
-       
+      
+      flag = new Flag(1145, 422, 36, 36);
+      
       objects = new Object[10];
       objects[0] = new Cone(648);
       objects[1] = new Bin(1112, 1);
@@ -73,8 +80,12 @@ class Level {
     else if (year == 2) {
       backgroundBack = loadImage(sketchPath() + "/images/backgrounds/2nd_year.png");
       
+      objects = new Object[0];
+      courses = new Course[0];
+      
       x_dim = 5040;
       y = 0;
+      
       bg_motion = 6;
       
       objects = new Object[18];
@@ -98,23 +109,19 @@ class Level {
       objects[17] = new Desk(5300);
       
       courses = new Course[8];
-      courses[0] = new Course(990, 370); //difficulty: 1
-      courses[1] = new Course(1580, 260); //difficulty: 2
-      courses[2] = new Course(2150, 400); //difficulty: 1
-      courses[3] = new Course(2700, 750); //difficulty: 0
-      courses[4] = new Course(3110, 122); //difficulty: 3
-      courses[5] = new Course(4000, 200); //difficulty: 2
-      courses[6] = new Course(4810, 250); //difficulty: 4
-      courses[7] = new Course(5600, 400); //difficulty: 1
+      courses[0] = new Course(990, 370); //1
+      courses[1] = new Course(1580, 260); //2
+      courses[2] = new Course(2150, 400); //1
+      courses[3] = new Course(2700, 750); //0
+      courses[4] = new Course(3110, 122); //3
+      courses[5] = new Course(4000, 200); //2
+      courses[6] = new Course(4810, 250); //4
+      courses[7] = new Course(5600, 400); //1
       
       right_border = 6240;
     }
     else if (year == 3) {
       backgroundBack = loadImage(sketchPath() + "/images/backgrounds/3rd_year.png");
-      
-      x_dim = 7200;
-      y = 0;
-      bg_motion = 6;
       
       objects = new Object[30];
       objects[0] = new Chair(880);
@@ -149,25 +156,26 @@ class Level {
       objects[29] = new Desk(7990);
       
       courses = new Course[10];
-      courses[0] = new Course(960, 290); //difficulty: 1
-      courses[1] = new Course(1650, 110); //difficulty: 2
-      courses[2] = new Course(2480, 434); //difficulty: 0
-      courses[3] = new Course(3600, 214); //difficulty: 3
-      courses[4] = new Course(4400, 110); //difficulty: 2
-      courses[9] = new Course(5080, 300); //difficulty: 1
-      courses[5] = new Course(5740, 180); //difficulty: 1
-      courses[6] = new Course(6400, 210); //difficulty: 3
-      courses[7] = new Course(7430, 750); //difficulty: 0
-      courses[8] = new Course(8350, 120); //difficulty: 2
-
+      courses[0] = new Course(960, 290); //1
+      courses[1] = new Course(1650, 110); //2
+      courses[2] = new Course(2480, 434); //0
+      courses[3] = new Course(3600, 214); //3
+      courses[4] = new Course(4400, 110); //2
+      courses[5] = new Course(5080, 300); //1
+      courses[6] = new Course(5740, 180); //1
+      courses[7] = new Course(6400, 210); //3
+      courses[8] = new Course(7430, 750); //0
+      courses[9] = new Course(8350, 120); //2
+      
+      x_dim = 7200;
+      y = 0;
+      
+      bg_motion = 6;
+      
       right_border = 9115;
     }
     else if (year == 4) {
       backgroundBack = loadImage(sketchPath() + "/images/backgrounds/4th_year.png");
-      
-      x_dim = 5400;
-      y = 0;
-      bg_motion = 5;
       
       objects = new Object[10];
       objects[0] = new Car(900, 1);
@@ -182,17 +190,23 @@ class Level {
       objects[9] = new Light(6750);
       
       courses = new Course[8];
-      courses[0] = new Course(800, 280); //difficulty: 1
-      courses[1] = new Course(1900, 170); //difficulty: 2
-      courses[2] = new Course(2520, 130); //difficulty: 2
-      courses[3] = new Course(3200, 750); //difficulty: 0
-      courses[4] = new Course(4560, 95); //difficulty: 3
-      courses[5] = new Course(5550, 290); //difficulty: 2
-      courses[6] = new Course(6200, 260); //difficulty: 1
-      courses[7] = new Course(7350, 410); //difficulty: 4
+      courses[0] = new Course(800, 280); //1
+      courses[1] = new Course(1900, 170); //2
+      courses[2] = new Course(2520, 130); //2
+      courses[3] = new Course(3200, 750); //0
+      courses[4] = new Course(4560, 95); //3
+      courses[5] = new Course(5550, 290); //2
+      courses[6] = new Course(6200, 260); //1
+      courses[7] = new Course(7350, 410); //4
+      
+      x_dim = 5400;
+      y = 0;
+      
+      bg_motion = 5;
       
       right_border = 7740;
     }
+    
   }
 
   void draw() {
@@ -200,8 +214,11 @@ class Level {
     if ((player.x >= width/2 - 64 - 8) && (player.x <= right_border - width/2 - 64 - 16 && !player.still)) {
       if (player.x_motion > 0) {
         
-        fg_x -= 4;
         bg_x -= bg_motion;
+        if (year == 1) {
+          flag.x -= bg_motion;
+          fg_x -= 4;
+        }
         
         for (Object object: objects) object.x -= 8;
         for (Course course: courses) course.x -= 8;
@@ -211,8 +228,11 @@ class Level {
     if ((player.x >= width/2 - 64) && (player.x <= right_border - width/2 - 64 - 8 && !player.still)) {
       if (player.x_motion < 0) {
         
-        fg_x += 4;
-        bg_x += bg_motion;
+         bg_x += bg_motion;
+        if (year == 1) {
+          flag.x += bg_motion;
+          fg_x += 4;
+        }
         
         for (Object object: objects) object.x += 8;
         for (Course course: courses) course.x += 8;
@@ -223,6 +243,8 @@ class Level {
     image(backgroundBack, bg_x, y, x_dim, 900);
     if (year == 1 ) //only the first year has a frontground
     image(backgroundFront, fg_x, 0, 4320, 900);
+    
+    if (year == 1) flag.draw();
     
     if (menu.hitboxes) {
       fill(255, 0, 255); //pink
@@ -239,9 +261,12 @@ class Level {
   void reset() {
     level.bg_x = 0;
     level.fg_x = 0;
+    if (game.quit) restoreCourses();
     for (Object object: objects) object.x += move_x;
     for (Course course: courses) course.x += move_x;
+    flag = new Flag(1145, 422, 36, 36);
     move_x = 0;
+    
   }
 
   //toggles the hitbox visability
@@ -249,6 +274,23 @@ class Level {
     for (Object object: objects) object.toggle();
     for (Course course: courses) course.toggle();
   }
+  
+  void restoreCourses() {
+    
+    for (int i = 0; i < courses.length; i++)
+      if (passed[i]) {
+        courses[i].passed = false;
+        level.courses_collected --;
+      }
+  }
+  
+  void makeTemp() {
+    
+    passed = new boolean[courses.length];
+    for (int i = 0; i < courses.length; i++) passed[i] = false;
+    
+  } 
+  
   
   void displayCoursesCollected() {
     //display courses collected

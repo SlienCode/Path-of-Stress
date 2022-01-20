@@ -31,6 +31,8 @@ class Menu {
   PImage image_character2;
   PImage image_character3;
   
+  Flag flag;
+  
   String menu_state;
   int text_size;
   int x_size;
@@ -133,24 +135,26 @@ class Menu {
     image_thumb2_locked = loadImage(sketchPath() + "/images/thumbnails/2nd_thumb_locked.png");
     image_thumb3_locked = loadImage(sketchPath() + "/images/thumbnails/3rd_thumb_locked.png");
     image_thumb4_locked = loadImage(sketchPath() + "/images/thumbnails/4th_thumb_locked.png");
-    image_return_arrow_red = loadImage(sketchPath() + "/images/arrows/return_arrow_red.png");
-    image_return_arrow_yellow = loadImage(sketchPath() + "/images/arrows/return_arrow_yellow.png");
-    image_right_arrow_red = loadImage(sketchPath() + "/images/arrows/right_arrow_red.png");
-    image_right_arrow_yellow = loadImage(sketchPath() + "/images/arrows/right_arrow_yellow.png");
-    image_left_arrow_red = loadImage(sketchPath() + "/images/arrows/left_arrow_red.png");
-    image_left_arrow_yellow = loadImage(sketchPath() + "/images/arrows/left_arrow_yellow.png");
-    image_up_arrowC = loadImage(sketchPath() + "/images/arrows/up_arrowC.png");
-    image_down_arrowC = loadImage(sketchPath() + "/images/arrows/down_arrowC.png");
-    image_tab_blue1 = loadImage(sketchPath() + "/images/tabs/tab_blue1.png");
-    image_tab_blue2 = loadImage(sketchPath() + "/images/tabs/tab_blue2.png");
-    image_tab_black = loadImage(sketchPath() + "/images/tabs/tab_black.png");
-    image_tab_white = loadImage(sketchPath() + "/images/tabs/tab_white.png");
-    image_tab_red = loadImage(sketchPath() + "/images/tabs/tab_black.png");
-    image_tab_yellow = loadImage(sketchPath() + "/images/tabs/tab_black.png");
-    image_tabS_red = loadImage(sketchPath() + "/images/tabs/tabS_red.png");
-    image_tabS_yellow = loadImage(sketchPath() + "/images/tabs/tabS_yellow.png");
+    image_return_arrow_red = loadImage(sketchPath() + "/images/miscellaneous/arrows/return_arrow_red.png");
+    image_return_arrow_yellow = loadImage(sketchPath() + "/images/miscellaneous/arrows/return_arrow_yellow.png");
+    image_right_arrow_red = loadImage(sketchPath() + "/images/miscellaneous/arrows/right_arrow_red.png");
+    image_right_arrow_yellow = loadImage(sketchPath() + "/images/miscellaneous/arrows/right_arrow_yellow.png");
+    image_left_arrow_red = loadImage(sketchPath() + "/images/miscellaneous/arrows/left_arrow_red.png");
+    image_left_arrow_yellow = loadImage(sketchPath() + "/images/miscellaneous/arrows/left_arrow_yellow.png");
+    image_up_arrowC = loadImage(sketchPath() + "/images/miscellaneous/arrows/up_arrowC.png");
+    image_down_arrowC = loadImage(sketchPath() + "/images/miscellaneous/arrows/down_arrowC.png");
+    image_tab_blue1 = loadImage(sketchPath() + "/images/miscellaneous/tabs/tab_blue1.png");
+    image_tab_blue2 = loadImage(sketchPath() + "/images/miscellaneous/tabs/tab_blue2.png");
+    image_tab_black = loadImage(sketchPath() + "/images/miscellaneous/tabs/tab_black.png");
+    image_tab_white = loadImage(sketchPath() + "/images/miscellaneous/tabs/tab_white.png");
+    image_tab_red = loadImage(sketchPath() + "/images/miscellaneous/tabs/tab_red.png");
+    image_tab_yellow = loadImage(sketchPath() + "/images/miscellaneous/tabs/tab_yellow.png");
+    image_tabS_red = loadImage(sketchPath() + "/images/miscellaneous/tabs/tabS_red.png");
+    image_tabS_yellow = loadImage(sketchPath() + "/images/miscellaneous/tabs/tabS_yellow.png");
     image_course = loadImage(sketchPath() + "/images/objects/course.png");
 
+    flag = new Flag(width/2 - 48, 521, 128, 128);
+    
     text_size = 60;
     x_size = text_size*9;
     y_size = text_size;
@@ -436,6 +440,7 @@ class Menu {
   
   void mainMenu() {
     image(image_main_menu_background, 0, 0, 1440, 900);
+    flag.draw();
     
     if (hitboxes) {
       fill(255, 0, 255); //pink

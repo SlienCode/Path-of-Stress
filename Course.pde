@@ -5,7 +5,7 @@ class Course {
   int x;
   int y;
   
-  boolean visibility;
+  boolean passed;
   
   //floating animation
   int floating_counter; //80 frames
@@ -18,16 +18,11 @@ class Course {
   
   int courses_collected;
   
-  Course() {
-    visibility = false;
-    hitbox = new Rectangle();
-  }
-  
   Course(int x,int y) {
     this.x = x;
     this.y = y;
     
-    visibility = true;
+    passed = false;
     
     floating_counter = 0;
     
@@ -53,12 +48,12 @@ class Course {
   
   void draw() {
     floatingAnimation();
-    if (visibility) image(image, x, y, 64, 64);
+    if (!passed) image(image, x, y, 64, 64);
     hitbox.setLocation(x, y);
   }
   
   void toggle() {
-    if (visibility) rect(x, y, 64, 64);
+    if (!passed) rect(x, y, 64, 64);
   }
   
 };
