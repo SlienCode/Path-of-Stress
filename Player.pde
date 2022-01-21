@@ -220,19 +220,19 @@ class Player {
   
   //make it so that holding a button won't execute keyPressed continuously using free_right and free_left
   void keyPressed() {
-      if ((keyCode == RIGHT || key == 'd') && free_right) {
+      if ((keyCode == RIGHT || key == 'd' || key == 'D') && free_right) {
         x_motion = 8;
         player.walk_counter = 0;
         free_right = false;
         player.reverse = false; //don't flip the image, head to the right
       }
-      else if ((keyCode == LEFT || key == 'a') && free_left) {
+      else if ((keyCode == LEFT || key == 'a' || key == 'A') && free_left) {
         x_motion = -8;
         player.walk_counter = 0;
         free_left = false;
         player.reverse = true; //flip the image, head to the left
       }
-      if (keyCode == UP || key == 'w') {
+      if (keyCode == UP || key == ' ' || key == 'w' || key == 'W') {
         //if we are on the ground, jump
         if (player.onGround() && free_up && jump_counter == -1) {
           player.jump_counter = 0;
@@ -242,7 +242,7 @@ class Player {
   }
   
   void keyReleased() {
-      if (keyCode == RIGHT || key == 'd') {
+      if (keyCode == RIGHT || key == 'd' || key == 'D') {
         if (free_left) { //if the user is not holding the left arrow, you can stop the animations
           x_motion = 0;
           player.walk_counter = -1;
@@ -253,7 +253,7 @@ class Player {
         }
         free_right = true; //user let go of the right arrow
       }
-      else if (keyCode == LEFT || key == 'a') {
+      else if (keyCode == LEFT || key == 'a' || key == 'A') {
         if (free_right) { //if the user is not holding the right arrow, you can stop the animations
           x_motion = 0;
           player.walk_counter = -1;
@@ -264,7 +264,7 @@ class Player {
         }
         free_left = true; //user let go of the left arrow
       }
-      if (keyCode == UP || key == 'w')
+      if (keyCode == UP || key == ' ' || key == 'w' || key == 'W')
          free_up = true;
     }
 };

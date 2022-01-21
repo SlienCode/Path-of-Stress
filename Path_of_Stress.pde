@@ -1,4 +1,5 @@
 import processing.sound.*; //<>// //<>//
+import java.lang.*;
 
 //variable used for the intro and main of the 1st and 4th year songs
 boolean intro;
@@ -28,7 +29,10 @@ void setup() {
   surface.setIcon(icon);
   surface.setCursor(loadImage(sketchPath() + "/images/miscellaneous/cursor/cursor.png"), 9, 3);
   surface.setTitle("Path of Stress");
-  size(1440, 900);
+  fullScreen();
+  //size(1440, 900);
+  //size(1366, 768);
+  //size(800, 600);
   noSmooth();
   
   tracks = new SoundFile[7];

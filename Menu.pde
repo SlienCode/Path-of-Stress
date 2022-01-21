@@ -35,8 +35,6 @@ class Menu {
   
   String menu_state;
   int text_size;
-  int x_size;
-  int y_size;
   
   int return_x;
   int return_y;
@@ -153,11 +151,9 @@ class Menu {
     image_tabS_yellow = loadImage(sketchPath() + "/images/miscellaneous/tabs/tabS_yellow.png");
     image_course = loadImage(sketchPath() + "/images/objects/course.png");
 
-    flag = new Flag(width/2 - 48, 521, 128, 128);
+    flag = new Flag(int(Math.round(width*(672.0/1440))), int(Math.round(height*(521.0/900))), int(Math.round(width*(128.0/1440))), int(Math.round(height*(128.0/900))));
     
-    text_size = 60;
-    x_size = text_size*9;
-    y_size = text_size;
+    text_size = 60; //int(Math.round(width*(60.0/1440)))
     
     menu_state = "MAIN MENU";
     
@@ -177,11 +173,11 @@ class Menu {
     mouse_over_return = false;
     
     start_game_x = width/2;
-    start_game_y = height/2 - (text_size + text_size/4);
+    start_game_y = height/2-int(Math.round(height*(75.0/900)));
     settings_x = width/2;
     settings_y = height/2;
     exit_game_x = width/2;
-    exit_game_y = height/2 + (text_size + text_size/4);
+    exit_game_y = height/2+int(Math.round(height*(75.0/900)));
     mouse_over_start_game = false;
     mouse_over_settings = false;
     mouse_over_exit_game = false;
@@ -219,8 +215,8 @@ class Menu {
     mouse_over_display_coordinates = false;
     
     master_volume = 5;
-    master_x = 100;
-    master_y = height/2-28;
+    master_x = int(Math.round(width*(100.0/1440)));
+    master_y = int(Math.round(height*(422.0/900)));
     master_volume_x = master_x+180;
     master_volume_up_y = master_y+37;
     master_volume_down_y = master_volume_up_y+100;
@@ -228,8 +224,8 @@ class Menu {
     mouse_over_master_volume_down = false;
     
     music_volume = 5;
-    music_x = width/2-150;
-    music_y = height/2-28;
+    music_x = int(Math.round(width*(570.0/1440)));
+    music_y = int(Math.round(height*(422.0/900)));
     music_volume_x = music_x+150;
     music_volume_up_y = music_y+37;
     music_volume_down_y = music_volume_up_y+100;
@@ -237,8 +233,8 @@ class Menu {
     mouse_over_music_volume_down = false;
     
     sfx_volume = 5;
-    sfx_x = width-380;
-    sfx_y = height/2-28;
+    sfx_x = int(Math.round(width*(1060.0/1440)));
+    sfx_y = int(Math.round(height*(422.0/900)));
     sfx_volume_x = sfx_x+100;
     sfx_volume_up_y = sfx_y+37;
     sfx_volume_down_y = sfx_volume_up_y+100;
@@ -248,7 +244,7 @@ class Menu {
     credits_shown = false;
     degree = new Degree();
     
-    volume = 0.03;
+    volume = 0.04;
   }
   
   void draw() {
@@ -440,19 +436,20 @@ class Menu {
   }
   
   void mainMenu() {
-    image(image_main_menu_background, 0, 0, 1440, 900);
+    image(image_main_menu_background, 0, 0, width, height);
     flag.draw();
     
     if (hitboxes) {
       fill(255, 0, 255); //pink
-      rect(start_game_x - x_size/3, start_game_y - y_size + y_size/8, x_size*2/3, y_size*9/8); //hitbox of START GAME button
-      rect(settings_x - x_size/3, settings_y - y_size + y_size/8, x_size*2/3, y_size*9/8); //hitbox of SETTINGS button
-      rect(exit_game_x - x_size/3, exit_game_y - y_size + y_size/8, x_size*2/3, y_size*9/8); //hitbox of EXIT GAME button
+      rect(start_game_x-int(Math.round(width*(180.0/1440))), start_game_y-int(Math.round(height*(53.0/900))), int(Math.round(width*(360.0/1440))), int(Math.round(height*(67.0/900)))); //hitbox of START GAME button
+      rect(settings_x-int(Math.round(width*(180.0/1440))), settings_y-int(Math.round(height*(53.0/900))), int(Math.round(width*(360.0/1440))), int(Math.round(height*(67.0/900)))); //hitbox of SETTINGS button
+      rect(exit_game_x-int(Math.round(width*(180.0/1440))), exit_game_y-int(Math.round(height*(53.0/900))), int(Math.round(width*(360.0/1440))), int(Math.round(height*(67.0/900)))); //hitbox of EXIT GAME button
     }
     
-    textSize(text_size);
+    textSize(int(Math.round(width*(60.0/1440))));
+    
     //check if the mouse is over the START GAME option
-    if (mouseX > (start_game_x - x_size/3) && mouseX < (start_game_x + x_size/3) && mouseY > (start_game_y - y_size + (y_size/8)) && mouseY < (start_game_y + y_size/4)) {
+    if (mouseX > start_game_x-int(Math.round(width*(180.0/1440))) && mouseX < start_game_x+int(Math.round(width*(180.0/1440))) && mouseY > start_game_y-int(Math.round(height*(53.0/900))) && mouseY < start_game_y+int(Math.round(height*(15.0/900)))) {
       mouse_over_start_game = true;
       fill(255, 200, 45); //yellow
     } else {
@@ -462,7 +459,7 @@ class Menu {
     text("START GAME", start_game_x, start_game_y);
     
     //check if the mouse is over the SETTINGS option
-    if (mouseX > (settings_x - x_size/3) && mouseX < (settings_x + x_size/3) && mouseY > (settings_y - y_size + y_size/8) && mouseY < (settings_y + y_size/4)) {
+    if (mouseX > settings_x-int(Math.round(width*(180.0/1440))) && mouseX < settings_x+int(Math.round(width*(180.0/1440))) && mouseY > settings_y-int(Math.round(height*(53.0/900))) && mouseY < settings_y+int(Math.round(height*(15.0/900)))) {
       mouse_over_settings = true;
       fill(255, 200, 45); //yellow
     } else {
@@ -472,7 +469,7 @@ class Menu {
     text("SETTINGS", settings_x, settings_y);
     
     //check if the mouse is over the EXIT GAME option
-    if (mouseX > (exit_game_x - x_size/3) && mouseX < (exit_game_x + x_size/3) && mouseY > (exit_game_y - y_size + y_size/8) && mouseY < (exit_game_y + y_size/4)) {
+    if (mouseX > exit_game_x-int(Math.round(width*(180.0/1440))) && mouseX < exit_game_x+int(Math.round(width*(180.0/1440))) && mouseY > exit_game_y-int(Math.round(height*(53.0/900))) && mouseY < exit_game_y+int(Math.round(height*(15.0/900)))) {
       mouse_over_exit_game = true;
       fill(255, 200, 45); //yellow
     } else {
@@ -482,8 +479,13 @@ class Menu {
     text("EXIT GAME", exit_game_x, exit_game_y);
   }
   
+  
+    //********************************************************************************************************
+    //int(Math.round(width*(.0/1440)))   int(Math.round(height*(.0/900)))   int(Math.round(width*(60.0/1440)))
+    //********************************************************************************************************
+  
   void characterMenu() {
-    image(image_secondary_menu_background, 0, 0, 1440, 900);
+    image(image_secondary_menu_background, 0, 0, width, height);
  
     if (hitboxes) {
       fill(255, 0, 255); //pink
@@ -549,141 +551,141 @@ class Menu {
   }
   
   void levelMenu() {
-    image(image_secondary_menu_background, 0, 0, 1440, 900);
+    image(image_secondary_menu_background, 0, 0, width, height);
     
     year_locked = false;
     
     if (hitboxes) {
       fill(255, 0, 255); //pink
-      rect(return_x - 131, return_y - 130, 130, 130); //hitbox of RETURN to menu button
-      rect(play_x-205, play_y-245, 409, 170); //hitbox of PLAY button
+      rect(return_x-int(Math.round(width*(130.0/1440))), return_y-int(Math.round(height*(130.0/900))), int(Math.round(width*(130.0/1440))), int(Math.round(height*(130.0/900)))); //hitbox of RETURN to menu button
+      rect(play_x-int(Math.round(width*(200.0/1440))), play_y-int(Math.round(height*(240.0/900))), int(Math.round(width*(400.0/1440))), int(Math.round(height*(160.0/900)))); //hitbox of PLAY button
     }
     
     //check if the mouse is over the RETURN option
-    if (mouseX > (return_x-131) && mouseX < return_x && mouseY > (return_y-130) && mouseY < return_y) {
+    if (mouseX > return_x-int(Math.round(width*(131.0/1440))) && mouseX < return_x && mouseY > return_y-int(Math.round(height*(130.0/900))) && mouseY < return_y) {
       mouse_over_return = true;
-      image(image_return_arrow_yellow, return_x-130, return_y-130, 130, 130);
+      image(image_return_arrow_yellow, return_x-int(Math.round(width*(130.0/1440))), return_y-int(Math.round(height*(130.0/900))), int(Math.round(width*(130.0/1440))), int(Math.round(height*(130.0/900))));
     } else {
       mouse_over_return = false;
-      image(image_return_arrow_red, return_x-130, return_y-130, 130, 130);
+      image(image_return_arrow_red, return_x-int(Math.round(width*(130.0/1440))), return_y-int(Math.round(height*(130.0/900))), int(Math.round(width*(130.0/1440))), int(Math.round(height*(130.0/900))));
     }
     
     //check if the mouse if over the PLAY option
-    if (mouseX > play_x-205 && mouseX < play_x+204 && mouseY > play_y-245 && mouseY < play_y-75) {
+    if (mouseX > play_x-int(Math.round(width*(205.0/1440))) && mouseX < play_x+int(Math.round(width*(204.0/1440))) && mouseY > play_y-int(Math.round(height*(245.0/900))) && mouseY < play_y-int(Math.round(height*(75.0/900)))) {
       mouse_over_play = true;
-      image(image_tabS_yellow, play_x-200, play_y-240, 400, 160);
+      image(image_tabS_yellow, play_x-int(Math.round(width*(200.0/1440))), play_y-int(Math.round(height*(240.0/900))), int(Math.round(width*(400.0/1440))), int(Math.round(height*(160.0/900))));
       fill(235, 15, 15); //red
     } else {
       mouse_over_play = false;
-      image(image_tabS_red, play_x-200, play_y-240, 400, 160);
+      image(image_tabS_red, play_x-int(Math.round(width*(200.0/1440))), play_y-int(Math.round(height*(240.0/900))), int(Math.round(width*(400.0/1440))), int(Math.round(height*(160.0/900))));
       fill(255, 200, 45); //yellow
     }
-    textSize(text_size*2);
-    text("PLAY", play_x, play_y-125);
+    textSize(int(Math.round(width*(60.0/1440))*2));
+    text("PLAY", play_x, play_y-int(Math.round(height*(125.0/900))));
     
     if (!level_4) { //if you are not being displayed the last level you have the option to view the NEXT one
       if (hitboxes) {
         fill(255, 0, 255); //pink
-        rect(next_level_x-156, next_level_y-130, 130, 130); //hitbox of NEXT LEVEL button
+        rect(next_level_x-int(Math.round(width*(156.0/1440))), next_level_y-int(Math.round(height*(130.0/900))), int(Math.round(width*(130.0/1440))), int(Math.round(height*(130.0/900)))); //hitbox of NEXT LEVEL button
       }
       //check if the mouse if over the NEXT LEVEL option
-      if (mouseX > next_level_x-156 && mouseX < next_level_x-26 && mouseY > next_level_y-130 && mouseY < next_level_y) {
+      if (mouseX > next_level_x-int(Math.round(width*(156.0/1440))) && mouseX < next_level_x-int(Math.round(width*(26.0/1440))) && mouseY > next_level_y-int(Math.round(height*(130.0/900))) && mouseY < next_level_y) {
         mouse_over_next_level = true;
-        image(image_right_arrow_yellow, next_level_x-155, next_level_y-130, 130, 130);
+        image(image_right_arrow_yellow, next_level_x-int(Math.round(width*(155.0/1440))), next_level_y-int(Math.round(height*(130.0/900))), int(Math.round(width*(130.0/1440))), int(Math.round(height*(130.0/900))));
       } else {
         mouse_over_next_level = false;
-        image(image_right_arrow_red, next_level_x-155, next_level_y-130, 130, 130);
+        image(image_right_arrow_red, next_level_x-int(Math.round(width*(155.0/1440))), next_level_y-int(Math.round(height*(130.0/900))), int(Math.round(width*(130.0/1440))), int(Math.round(height*(130.0/900))));
       }
     }
     
     if (!level_1) { //if you are not being displayed the first level you have the option to view the PREVIOUS one
       if (hitboxes) {
         fill(255, 0, 255); //pink
-        rect(previous_level_x+25, previous_level_y-130, 130, 130); //hitbox of PREVIOUS LEVEL button
+        rect(previous_level_x+int(Math.round(width*(25.0/1440))), previous_level_y-int(Math.round(height*(130.0/900))), int(Math.round(width*(130.0/1440))), int(Math.round(height*(130.0/900)))); //hitbox of PREVIOUS LEVEL button
       }
       //check if the mouse if over the PREVIOUS LEVEL option
-      if (mouseX > previous_level_x+25 && mouseX < previous_level_x+155 && mouseY > previous_level_y-130 && mouseY < previous_level_y) {
+      if (mouseX > previous_level_x+int(Math.round(width*(25.0/1440))) && mouseX < previous_level_x+int(Math.round(width*(155.0/1440))) && mouseY > previous_level_y-int(Math.round(height*(130.0/900))) && mouseY < previous_level_y) {
         mouse_over_previous_level = true;
-        image(image_left_arrow_yellow, previous_level_x+25, previous_level_y-130, 130, 130);
+        image(image_left_arrow_yellow, previous_level_x+int(Math.round(width*(25.0/1440))), previous_level_y-int(Math.round(height*(130.0/900))), int(Math.round(width*(130.0/1440))), int(Math.round(height*(130.0/900))));
       } else {
         mouse_over_previous_level = false;
-        image(image_left_arrow_red, previous_level_x+25, previous_level_y-130, 130, 130);
+        image(image_left_arrow_red, previous_level_x+int(Math.round(width*(25.0/1440))), previous_level_y-int(Math.round(height*(130.0/900))), int(Math.round(width*(130.0/1440))), int(Math.round(height*(130.0/900))));
       }
     }
     
     fill(255, 255, 255); //white
-    textSize(text_size);
+    textSize(int(Math.round(width*(60.0/1440)))); 
     if (level_1) {
       level = levels[0];
       mouse_over_previous_level = false;
-      image(image_thumb1, width/2-300, height/2-350, 600, 350);
-      text("1st year", width/2, height/2+65);
+      image(image_thumb1, int(Math.round(width*(420.0/1440))), int(Math.round(height*(100.0/900))), int(Math.round(width*(600./1440))), int(Math.round(height*(350.0/900))));
+      text("1st year", width/2, height/2+int(Math.round(height*(70.0/900))));
     } else if (level_2) {
       level = levels[1];
-      text("2nd year", width/2, height/2+65); 
+      text("2nd year", width/2, height/2+int(Math.round(height*(70.0/900)))); 
       if (game.courses_collected < 6) {
-        image(image_thumb2_locked, width/2-300, height/2-350, 600, 350);
-        textSize(text_size*3/5);
+        image(image_thumb2_locked, int(Math.round(width*(420.0/1440))), int(Math.round(height*(100.0/900))), int(Math.round(width*(600./1440))), int(Math.round(height*(350.0/900))));
+        textSize(int(Math.round(width*(60.0/1440))*3/5));
         if (6 - game.courses_collected > 1) {
-          text("You  need  to  pass  " + (6 - game.courses_collected) + "  more  courses  to  unlock  this  year !", width/2, height/2+150);
+          text("You  need  to  pass  " + (6 - game.courses_collected) + "  more  courses  to  unlock  this  year !", int(Math.round(width*(720.0/1440))), int(Math.round(height*(600.0/900))));
         } else {
-          text("You  need  to  pass  1  more  course  to  unlock  this  year !", width/2, height/2+150);
+          text("You  need  to  pass  1  more  course  to  unlock  this  year !", int(Math.round(width*(720.0/1440))), int(Math.round(height*(600.0/900))));
         }
         year_locked = true;
       } else {
-        image(image_thumb2, width/2-300, height/2-350, 600, 350);
+        image(image_thumb2, int(Math.round(width*(420.0/1440))), int(Math.round(height*(100.0/900))), int(Math.round(width*(600./1440))), int(Math.round(height*(350.0/900))));
       }
     } else if (level_3) {
       level = levels[2];
-      text("3rd year", width/2, height/2+65);
+      text("3rd year", width/2, height/2+int(Math.round(height*(70.0/900))));
       if (game.courses_collected < 12) {
-        image(image_thumb3_locked, width/2-300, height/2-350, 600, 350);
-        textSize(text_size*3/5);
+        image(image_thumb3_locked, int(Math.round(width*(420.0/1440))), int(Math.round(height*(100.0/900))), int(Math.round(width*(600./1440))), int(Math.round(height*(350.0/900))));
+        textSize(int(Math.round(width*(60.0/1440))*3/5));
         if (12 - game.courses_collected > 1) {
-          text("You  need  to  pass  " + (12 - game.courses_collected) + "  more  courses  to  unlock  this  year !", width/2, height/2+150);
+          text("You  need  to  pass  " + (12 - game.courses_collected) + "  more  courses  to  unlock  this  year !", int(Math.round(width*(720.0/1440))), int(Math.round(height*(600.0/900))));
         } else {
-          text("You  need  to  pass  1  more  course  to  unlock  this  year !", width/2, height/2+150);
+          text("You  need  to  pass  1  more  course  to  unlock  this  year !", int(Math.round(width*(720.0/1440))), int(Math.round(height*(600.0/900))));
         }
         year_locked = true;
       } else {
-        image(image_thumb3, width/2-300, height/2-350, 600, 350);
+        image(image_thumb3, int(Math.round(width*(420.0/1440))), int(Math.round(height*(100.0/900))), int(Math.round(width*(600./1440))), int(Math.round(height*(350.0/900))));
       }
     } else if (level_4) {
       level = levels[3];
       mouse_over_next_level = false;
-      text("4th year", width/2, height/2+65);;
+      text("4th year", width/2, height/2+int(Math.round(height*(70.0/900))));
       if (game.courses_collected < 18) {
-        image(image_thumb4_locked, width/2-300, height/2-350, 600, 350);
-        textSize(text_size*3/5);
+        image(image_thumb4_locked, int(Math.round(width*(420.0/1440))), int(Math.round(height*(100.0/900))), int(Math.round(width*(600./1440))), int(Math.round(height*(350.0/900))));
+        textSize(int(Math.round(width*(60.0/1440))*3/5));
         if (18 - game.courses_collected > 1) {
-          text("You  need  to  pass  " + (18 - game.courses_collected) + "  more  courses  to  unlock  this  year !", width/2, height/2+150);
+          text("You  need  to  pass  " + (18 - game.courses_collected) + "  more  courses  to  unlock  this  year !", int(Math.round(width*(720.0/1440))), int(Math.round(height*(600.0/900))));
         } else {
-          text("You  need  to  pass  1  more  course  to  unlock  this  year !", width/2, height/2+150);
+          text("You  need  to  pass  1  more  course  to  unlock  this  year !", int(Math.round(width*(720.0/1440))), int(Math.round(height*(600.0/900))));
         }
-        text("You  need  to  pass  " + (18 - game.courses_collected) + "  more  courses  to  unlock  this  year !", width/2, height/2+150);
+        text("You  need  to  pass  " + (18 - game.courses_collected) + "  more  courses  to  unlock  this  year !", int(Math.round(width*(720.0/1440))), int(Math.round(height*(600.0/900))));
         year_locked = true;
       } else {
-        image(image_thumb4, width/2-300, height/2-350, 600, 350);
+        image(image_thumb4, int(Math.round(width*(420.0/1440))), int(Math.round(height*(100.0/900))), int(Math.round(width*(600./1440))), int(Math.round(height*(350.0/900))));
       }
     }
     if (!year_locked) {
       if (level.courses_collected < level.courses.length) {
-        textSize(text_size*3/4);
-        text(level.courses.length - level.courses_collected + "  courses  left  to  pass !", width/2, height/2+150);  
+        textSize(int(Math.round(width*(60.0/1440))*3/4));
+        text(level.courses.length - level.courses_collected + "  courses  left  to  pass !", int(Math.round(width*(720./1440))), int(Math.round(height*(600.0/900))));  
       } else {
-        textSize(text_size*3/5);
-        text("You  have  passed  all  the  courses  from  this  year !", width/2, height/2+145);
+        textSize(int(Math.round(width*(60.0/1440))*3/5));
+        text("You  have  passed  all  the  courses  from  this  year !", int(Math.round(width*(720./1440))), int(Math.round(height*(595.0/900))));
       }
     }
     
-    image(image_course, 58, 188, 32, 32);
+    image(image_course, int(Math.round(width*(58.0/1440))), int(Math.round(height*(188.0/900))), int(Math.round(width*(32.0/1440))), int(Math.round(height*(32.0/900))));
     fill(220, 220, 220); //light grey
-    textSize(text_size*0.4);
-    text("X", 106, 213);
+    textSize(int(Math.round(width*(60.0/1440))*0.4));
+    text("X", int(Math.round(width*(106.0/1440))), int(Math.round(height*(213.0/900))));
     fill(255, 215, 0); //gold
-    textSize(text_size*3/4);
+    textSize(int(Math.round(width*(60.0/1440))*3/4));
     textAlign(LEFT);
-    text(game.courses_collected, 122, 218);
+    text(game.courses_collected, int(Math.round(width*(122.0/1440))), int(Math.round(height*(218.0/900))));
     
     displayCharacter();
     
@@ -691,7 +693,7 @@ class Menu {
   }
   
   void settingsMenu() {
-    image(image_secondary_menu_background, 0, 0, 1440, 900);
+    image(image_secondary_menu_background, 0, 0, width, height);
     
     textAlign(LEFT);
     
@@ -833,26 +835,26 @@ class Menu {
     if (character_selected) {
       if (hitboxes) {
         fill(255, 0, 255); //pink
-        rect(35, 35, 144, 144);
+        rect(int(Math.round(width*(35.0/1440))), int(Math.round(height*(35.0/900))), int(Math.round(width*(144.0/1440))), int(Math.round(height*(144.0/900))));
       }
       
-      if (mouseX > 35 && mouseX < 35+144 && mouseY > 35 && mouseY < 35+144) {
-        image(image_tab_blue2, 40, 40, 134, 134);
+      if (mouseX > int(Math.round(width*(35.0/1440))) && mouseX < int(Math.round(width*(179.0/1440))) && mouseY > int(Math.round(height*(35.0/900))) && mouseY < int(Math.round(height*(179.0/900)))) {
+        image(image_tab_blue2, int(Math.round(width*(40.0/1440))), int(Math.round(height*(40.0/900))), int(Math.round(width*(134.0/1440))), int(Math.round(height*(134.0/900))));
         mouse_over_displayed_character = true;
       } else {
-        image(image_tab_blue1, 40, 40, 134, 134);
+        image(image_tab_blue1, int(Math.round(width*(40.0/1440))), int(Math.round(height*(40.0/900))), int(Math.round(width*(134.0/1440))), int(Math.round(height*(134.0/900))));
         mouse_over_displayed_character = false;
       }
       
       //display character on tab
       if (character == 0) {
-        image(image_character0, 40+33, 40-8, 64, 128);
+        image(image_character0, int(Math.round(width*(76.0/1440))), int(Math.round(height*(32.0/900))), int(Math.round(width*(64.0/1440))), int(Math.round(height*(128.0/900))));
       } else if (character == 1) {
-        image(image_character1, 40+33, 40-8, 64, 128);
+        image(image_character1, int(Math.round(width*(76.0/1440))), int(Math.round(height*(32.0/900))), int(Math.round(width*(64.0/1440))), int(Math.round(height*(128.0/900))));
       } else if (character == 2) {
-        image(image_character2, 40+33, 40-8, 64, 128);
+        image(image_character2, int(Math.round(width*(76.0/1440))), int(Math.round(height*(32.0/900))), int(Math.round(width*(64.0/1440))), int(Math.round(height*(128.0/900))));
       } else if (character == 3) {
-        image(image_character3, 40+33, 40-8, 64, 128);
+        image(image_character3, int(Math.round(width*(76.0/1440))), int(Math.round(height*(32.0/900))), int(Math.round(width*(64.0/1440))), int(Math.round(height*(128.0/900))));
       }
     }
   }
@@ -870,7 +872,7 @@ class Menu {
   }
   
   void creditsMenu() {
-    image(image_secondary_menu_background, 0, 0, 1440, 900);
+    image(image_secondary_menu_background, 0, 0, width, height);
     degree.draw();
     
     //check if the mouse is over the RETURN option
