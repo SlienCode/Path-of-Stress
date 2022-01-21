@@ -29,7 +29,7 @@ void setup() {
   surface.setIcon(icon);
   surface.setCursor(loadImage(sketchPath() + "/images/miscellaneous/cursor/cursor.png"), 9, 3);
   surface.setTitle("Path of Stress");
-  fullScreen();
+  fullScreen(FX2D);
   //size(1440, 900);
   //size(1366, 768);
   //size(800, 600);
