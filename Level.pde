@@ -15,11 +15,11 @@ class Level {
   
   int right_border; //right side border;
   
-  int bg_motion;
+  float bg_motion;
   
-  int fg_x; //frontground x
-  int bg_x; //background x
-  int move_x; //objects and courses x coordinate initializer
+  float fg_x; //frontground x
+  float bg_x; //background x
+  float move_x; //objects and courses x coordinate initializer
 
   Flag flag;
 
@@ -44,38 +44,38 @@ class Level {
       backgroundFront = loadImage(sketchPath() + "/images/backgrounds/1st_year_front.png");
       backgroundBack = loadImage(sketchPath() + "/images/backgrounds/1st_year_back.png");
       
-      x_dim = 2160;
-      y = -25;
+      x_dim = round(width*1.5);
+      y = -round(height/36);
       
-      bg_motion = 1;
+      bg_motion = step/8;
       
-      flag = new Flag(1145, 422, 36, 36);
+      flag = new Flag(width/1.26, height/2.13, width/40.0, height/25.0);
       
       objects = new Object[10];
-      objects[0] = new Cone(648);
-      objects[1] = new Bin(1112, 1);
-      objects[2] = new Sign(1536, 1);
-      objects[3] = new Bench(2136);
-      objects[4] = new Bus_Stop(2500);
-      objects[5] = new Light(3400);
-      objects[6] = new Car(3710, 2);
-      objects[7] = new Bin(4744, 2);
-      objects[8] = new Hydrant(5436);
-      objects[9] = new Tree(5800);
+      objects[0] = new Cone(width*0.45);
+      objects[1] = new Bin(width*0.77, 1);
+      objects[2] = new Sign(width*1.07, 1);
+      objects[3] = new Bench(width*1.48);
+      objects[4] = new Bus_Stop(width*1.74);
+      objects[5] = new Light(width*2.36);
+      objects[6] = new Car(width*2.58, 2);
+      objects[7] = new Bin(width*3.29, 2);
+      objects[8] = new Hydrant(width*3.77);
+      objects[9] = new Tree(width*4.03);
       
       courses = new Course[10];
-      courses[0] = new Course(900, 420); //difficulty: 1
-      courses[1] = new Course(1526, 114); //difficulty: 2
-      courses[2] = new Course(2050, 130); //difficulty: 3
-      courses[3] = new Course(2400, 750); //difficulty: 0
-      courses[4] = new Course(3000, 250); //difficulty: 2
-      courses[5] = new Course(3830, 160); //difficulty: 3
-      courses[6] = new Course(4430, 750); //difficulty: 0
-      courses[7] = new Course(5100, 310); //difficulty: 1
-      courses[8] = new Course(5720, 300); //difficulty: 2
-      courses[9] = new Course(6550, 340); //difficulty: 2
+      courses[0] = new Course(width*0.63, height*0.47); //difficulty: 1
+      courses[1] = new Course(width*1.06, height*0.13); //difficulty: 2
+      courses[2] = new Course(width*1.42, height*0.14); //difficulty: 3
+      courses[3] = new Course(width*1.67, height*0.83); //difficulty: 0
+      courses[4] = new Course(width*2.08, height*0.28); //difficulty: 2
+      courses[5] = new Course(width*2.66, height*0.18); //difficulty: 3
+      courses[6] = new Course(width*3.08, height*0.83); //difficulty: 0
+      courses[7] = new Course(width*3.54, height*0.34); //difficulty: 1
+      courses[8] = new Course(width*3.97, height*0.33); //difficulty: 2
+      courses[9] = new Course(width*4.55, height*0.38); //difficulty: 2
       
-      right_border = 7200;
+      right_border = 5*width;
     }
     else if (year == 2) {
       backgroundBack = loadImage(sketchPath() + "/images/backgrounds/2nd_year.png");
@@ -211,38 +211,38 @@ class Level {
 
   void draw() {
     //move the background (and frontground if it exists) based on player movement
-    if ((player.x >= width/2 - 64 - 8) && (player.x <= right_border - width/2 - 64 - 16 && !player.still)) {
+    if ((player.x >= width/2 - (width/22.5) - (width/180.0)) && (player.x <= right_border - width/2 - (width/22.5) - (width/90.0) && !player.still)) {
       if (player.x_motion > 0) {
         
         bg_x -= bg_motion;
         if (year == 1) {
           flag.x -= bg_motion;
-          fg_x -= 4;
+          fg_x -= width/360.0;
         }
         
-        for (Object object: objects) object.x -= 8;
-        for (Course course: courses) course.x -= 8;
-        move_x += 8; //to reset the objects when leaving/finishing the level
+        for (Object object: objects) object.x -= step;
+        for (Course course: courses) course.x -= step;
+        move_x += step; //to reset the objects when leaving/finishing the level
       }
     }
-    if ((player.x >= width/2 - 64) && (player.x <= right_border - width/2 - 64 - 8 && !player.still)) {
+    if ((player.x >= width/2 - (width/22.5)) && (player.x <= right_border - width/2 - (width/22.5) - (width/180.0) && !player.still)) {
       if (player.x_motion < 0) {
         
          bg_x += bg_motion;
         if (year == 1) {
           flag.x += bg_motion;
-          fg_x += 4;
+          fg_x += width/360.0;
         }
         
-        for (Object object: objects) object.x += 8;
-        for (Course course: courses) course.x += 8;
-        move_x -= 8; //to reset the objects when quiting the level
+        for (Object object: objects) object.x += step;
+        for (Course course: courses) course.x += step;
+        move_x -= step; //to reset the objects when quiting the level
       }
     }
     
-    image(backgroundBack, bg_x, y, x_dim, 900);
+    image(backgroundBack, bg_x, y, x_dim, height);
     if (year == 1 ) //only the first year has a frontground
-    image(backgroundFront, fg_x, 0, 4320, 900);
+    image(backgroundFront, fg_x, 0, 3*width, height);
     
     if (year == 1) flag.draw();
     
@@ -266,7 +266,7 @@ class Level {
     if (game.quit) restoreCourses();
     for (Object object: objects) object.x += move_x;
     for (Course course: courses) course.x += move_x;
-    flag = new Flag(1145, 422, 36, 36);
+    flag = new Flag(width/1.26, height/2.13, width/40.0, height/25.0);
     move_x = 0;
     
   }

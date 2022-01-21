@@ -2,23 +2,23 @@ import java.awt.*;
 
 class Cone extends Object {
   
-  Cone(int x) {
+  Cone(float x) {
     
     super(x);
     image = loadImage(sketchPath() + "/images/objects/cone.png");
     platform = false;
     hitbox = new Rectangle[1];
-    hitbox[0] = new Rectangle(x, y+836, 64, 64);
+    hitbox[0] = new Rectangle((int)x, (int)y+(height-round(height/14.04)), round(width/22.5), round(height/14.04));
         
   }
   
   void draw() {
-    image(image, x, y+836, 64, 64);
-    hitbox[0].setLocation(x, y+836);
+    image(image, x, y+(height-round(height/14.06)), round(width/22.5), round(height/14.06));
+    hitbox[0].setLocation((int)x, (int)y+(height-round(height/14.04)));
   }
   
   void toggle() {
-    rect(x, y+836, 64, 64);
+    rect(x, y+(height-round(height/14.04)), round(width/22.5), round(height/14.04));
   }
   
 };

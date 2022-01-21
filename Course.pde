@@ -2,8 +2,8 @@ import java.awt.*;
 
 class Course {
   //coordinates
-  int x;
-  int y;
+  float x;
+  float y;
   
   boolean passed;
   
@@ -18,7 +18,7 @@ class Course {
   
   int courses_collected;
   
-  Course(int x,int y) {
+  Course(float x,float y) {
     this.x = x;
     this.y = y;
     
@@ -28,7 +28,7 @@ class Course {
     
     image = loadImage(sketchPath() + "/images/objects/course.png");
 
-    hitbox = new Rectangle(x, y, 64, 64);
+    hitbox = new Rectangle((int)x, (int)y, round(width/22.5), round(height/14.04));
   }
   
   void floatingAnimation() {
@@ -48,12 +48,12 @@ class Course {
   
   void draw() {
     floatingAnimation();
-    if (!passed) image(image, x, y, 64, 64);
-    hitbox.setLocation(x, y);
+    if (!passed) image(image, x, y, round(width/22.5), round(height/14.04));
+    hitbox.setLocation((int)x, (int)y);
   }
   
   void toggle() {
-    if (!passed) rect(x, y, 64, 64);
+    if (!passed) rect(x, y, round(width/22.5), round(height/14.04));
   }
   
 };

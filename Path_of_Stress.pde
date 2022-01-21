@@ -1,4 +1,4 @@
-import processing.sound.*; //<>// //<>//
+import processing.sound.*; //<>//
 import java.lang.*;
 
 //variable used for the intro and main of the 1st and 4th year songs
@@ -20,7 +20,7 @@ boolean on_menu;
 PFont myFont;
 PImage transition_screen; //just plain dark
 PImage flag[]; //12 flag animations
-
+float step;
 
 
 void setup() {
@@ -30,10 +30,12 @@ void setup() {
   surface.setCursor(loadImage(sketchPath() + "/images/miscellaneous/cursor/cursor.png"), 9, 3);
   surface.setTitle("Path of Stress");
   fullScreen(FX2D);
-  //size(1440, 900);
-  //size(1366, 768);
-  //size(800, 600);
-  noSmooth();
+  //size(1440, 900, FX2D);
+  //size(1366, 768, FX2D);
+  //size(800, 600, FX2D);
+  //noSmooth();
+  
+  step = width/180.0; //the step size in pixels the player will make
   
   tracks = new SoundFile[7];
   tracks[0] = new SoundFile(this, sketchPath() + "/music/menu.wav");
@@ -85,7 +87,6 @@ void setup() {
 }
 
 void draw() {
-  
   if (on_menu) menu.draw();
   else game.draw();
  
@@ -142,7 +143,7 @@ void transitionAnimation() {
     }
   }
   
-  if (transition_counter > 1 && transition_counter < 100) image(transition_screen, 0, 0, 1440, 900);
+  if (transition_counter > 1 && transition_counter < 100) image(transition_screen, 0, 0, width, height);
   noTint();
 }
 

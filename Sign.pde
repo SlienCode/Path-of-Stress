@@ -2,23 +2,23 @@ import java.awt.*;
 
 class Sign extends Object {
   
-  Sign(int x, int g) {
+  Sign(float x, int g) {
     
     super(x);
     image = loadImage(sketchPath() + "/images/objects/sign" + g + ".png");
     platform = true;
     hitbox = new Rectangle[1];
-    hitbox[0] = new Rectangle(x+20, y+584, 27, 20);
+    hitbox[0] = new Rectangle((int)x+(round(width/72.0)), (int)y+(round(height/1.54)), round(width/53.33), round(height/45.0));
         
   }
   
   void draw() {
-    image(image, x, y+580, 64, 320);
-    hitbox[0].setLocation(x+20, y+584);
+    image(image, x, y+(height - round(height/2.81)), round(width/22.5), round(height/2.81));
+    hitbox[0].setLocation((int)x+(round(width/72.0)), (int)y+(round(height/1.54)));
   }
   
   void toggle() {
-    rect(x+20, y+584, 27, 20);
+    rect(x+(round(width/72.0)), y+(round(height/1.54)), round(width/53.33), round(height/45.0));
   }
   
 };

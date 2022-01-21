@@ -2,26 +2,26 @@ import java.awt.*;
 
 class Tree extends Object {
   
-  Tree(int x) {
+  Tree(float x) {
     
     super(x);
     image = loadImage(sketchPath() + "/images/objects/tree_platform.png");
     platform = true;
     hitbox = new Rectangle[2];
-    hitbox[0] = new Rectangle(x+108, y+814, 95, 20);
-    hitbox[1] = new Rectangle(x+288, y+764, 103, 20);
+    hitbox[0] = new Rectangle((int)x+round(width/13.33), (int)y+round(height/1.11), round(width/15.16), round(height/45));
+    hitbox[1] = new Rectangle((int)x+round(width/5.0), (int)y+round(height/1.18), round(width/13.98), round(height/45));
         
   }
   
   void draw() {
-    image(image, x, y+420, 480, 480);
-    hitbox[0].setLocation(x+108, y+814);
-    hitbox[1].setLocation(x+288, y+764);
+    image(image, x, y + (height - round(height/1.88)), round(width/3.0), round(height/1.88));
+    hitbox[0].setLocation((int)x+round(width/13.33), (int)y+round(height/1.11));
+    hitbox[1].setLocation((int)x+round(width/5.0), (int)y+round(height/1.18));
   }
   
   void toggle() {
-    rect(x+108, y+814, 95, 20);
-    rect(x+288, y+764, 103, 20);
+    rect(x+round(width/13.33), y+round(height/1.11), round(width/15.16), round(height/45));
+    rect(x+round(width/5.0), y+round(height/1.18), round(width/13.98), round(height/45));
   }
   
 };

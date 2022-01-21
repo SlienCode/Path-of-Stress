@@ -5,12 +5,12 @@ class Flag {
   PImage degree[]; //12 degree animations
   PImage image;
   int counter;
-  int x;
-  int y;
-  int flag_width;
-  int flag_height;
+  float x;
+  float y;
+  float flag_width;
+  float flag_height;
   
-  Flag(int x, int y, int flag_width, int flag_height) {
+  Flag(float x, float y, float flag_width, float flag_height) {
     
     this.x = x;
     this.y = y;
@@ -19,7 +19,7 @@ class Flag {
     
     counter = 0;
     degree = new PImage[12];
-    for (int i = 0; i <12; i++) {
+    for (int i = 0; i < 12; i++) {
       degree[i] = loadImage(sketchPath() + "/images/miscellaneous/flag/flag" + i + ".png");
     }
         

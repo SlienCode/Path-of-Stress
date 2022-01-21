@@ -2,34 +2,34 @@ import java.awt.*;
 
 class Car extends Object {
 
-  Car(int x, int g) {
+  Car(float x, int g) {
 
     super(x);
     image = loadImage(sketchPath() + "/images/objects/car" + g + ".png");
     platform = false;
     hitbox = new Rectangle[5];
-    hitbox[0] = new Rectangle(x+50, y+772, 64, 211);
-    hitbox[1] = new Rectangle(x+114, y+748, 39, 211);
-    hitbox[2] = new Rectangle(x+153, y+724, 38, 211);
-    hitbox[3] = new Rectangle(x+191, y+700, 142, 211);
-    hitbox[4] = new Rectangle(x+333, y+764, 134, 211);
+    hitbox[0] = new Rectangle((int)x+round(width/28.8), (int)y+round(height/1.16), round(width/64), round(height/4.26));
+    hitbox[1] = new Rectangle((int)x+round(width/12.63), (int)y+round(height/1.20), round(width/36.92), round(height/4.26));
+    hitbox[2] = new Rectangle((int)x+round(width/9.41), (int)y+round(height/1.24), round(width/37.89), round(height/4.26));
+    hitbox[3] = new Rectangle((int)x+round(width/7.54), (int)y+round(height/1.28), round(width/10.14), round(height/4.26));
+    hitbox[4] = new Rectangle((int)x+round(width/4.32), (int)y+round(height/1.17), round(width/10.75), round(height/4.26));
   }
 
   void draw() {
-    image(image, x, y+644, 512, 256);
-    hitbox[0].setLocation(x+50, y+772);
-    hitbox[1].setLocation(x+114, y+748);
-    hitbox[2].setLocation(x+153, y+724);
-    hitbox[3].setLocation(x+191, y+700);
-    hitbox[4].setLocation(x+333, y+764);
+    image(image, x, y+(height-round(height/3.55)), round(width/2.81), round(height/3.55));
+    hitbox[0].setLocation((int)x+round(width/28.8), (int)y+round(height/1.16));
+    hitbox[1].setLocation((int)x+round(width/12.63), (int)y+round(height/1.20));
+    hitbox[2].setLocation((int)x+round(width/9.41), (int)y+round(height/1.24));
+    hitbox[3].setLocation((int)x+round(width/7.54), (int)y+round(height/1.28));
+    hitbox[4].setLocation((int)x+round(width/4.32), (int)y+round(height/1.17));
   }
 
   void toggle() {
-    rect(x+50, y+772, 64, 211);
-    rect(x+114, y+748, 39, 211);
-    rect(x+153, y+724, 38, 211);
-    rect(x+191, y+700, 142, 211);
-    rect(x+333, y+764, 134, 211);
+    rect(x+round(width/28.8), y+round(height/1.16), round(width/64), round(height/4.26));
+    rect(x+round(width/12.63), y+round(height/1.20), round(width/36.92), round(height/4.26));
+    rect(x+round(width/9.41), y+round(height/1.24), round(width/37.89), round(height/4.26));
+    rect(x+round(width/7.54), y+round(height/1.28), round(width/10.14), round(height/4.26));
+    rect(x+round(width/4.32), y+round(height/1.17), round(width/10.75), round(height/4.26));
   }
 
 };

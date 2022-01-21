@@ -1,8 +1,8 @@
 abstract class Object {
   
   //coordinates
-  int x;
-  int y;
+  float x;
+  float y;
   int genre;
   
   //is platform or not
@@ -13,11 +13,11 @@ abstract class Object {
   
   Rectangle hitbox[];
   
-  Object(int x) {
+  Object(float x) {
     this.x = x;
   }
   
-  Object(int x, int genre) {
+  Object(float x, int genre) {
     this.x = x;
     this.genre = genre;
   }

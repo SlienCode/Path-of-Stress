@@ -3,12 +3,10 @@ class Player {
   String character;
   
   //coordinates
-  int x;
-  int y;
+  float x;
+  float y;
   
-  int troll;
-  
-  int x_motion;
+  float x_motion;
   
   boolean free_right; //is the user holding the right arrow? if they aren't then it's free so -> true
   boolean free_left; //is the user holding the left arrow? if they aren't then it's free so -> true
@@ -32,13 +30,11 @@ class Player {
   
   Player(String c) {
     
-    troll = 0;
-    
     character = c;
     
     //default coordinates untill player moves
-    x = 128;
-    y = 644;
+    x = round(width/11.25);
+    y = height - round(height/3.51);
     
     free_right = true;
     free_left = true;
@@ -59,8 +55,8 @@ class Player {
       walk[i] = loadImage(sketchPath() + "/images/characters/" + character + "/walk" + i + ".png");
     }
     
-    hitbox_player = new Rectangle(x + 32, y + 48, 63, 208);
-    hitbox_feet = new Rectangle(x + 24, y + 248, 79, 8);
+    hitbox_player = new Rectangle((int)x + round(width/45), (int)y + round(height/18.75), round(width/22.86), round(height/4.33));
+    hitbox_feet = new Rectangle((int)x + round(width/60), (int)y + round(height/3.63), round(width/18.23), round(height/112.5));
       
   }
   
@@ -83,7 +79,7 @@ class Player {
     animation(); //check which animation shall be applied
     
     if (jump_counter == -1 && !onGround()) { //if the player is not jumping, apply gravity
-      y += 15;
+      y += height/60.0;
       image = jump[2];
     }
     else y += jump(); //otherwise, start jump
@@ -91,25 +87,25 @@ class Player {
     collectedCourses(); //count collected courses
     
     //off screen borders
-    if (y > 644) y = 644;
+    if (y > height - round(height/3.51)) y = height - round(height/3.51);
     
-    if (x < width/2 - 64) printPlayer(x); //if the player is at the start of the level, print them based on variable x behind the middle of the screen
+    if (x < width/2 - round(width/22.5)) printPlayer((int)x); //if the player is at the start of the level, print them based on variable x behind the middle of the screen
     
-    else if (x > level.right_border - width/2 - 64) printPlayer(x - (level.right_border - 1440)); //if the player is at the end of the level, print them based on variable x after the middle of the screen
+    else if (x > level.right_border - width/2 - round(width/22.5)) printPlayer((int)x - (level.right_border - width)); //if the player is at the end of the level, print them based on variable x after the middle of the screen
     
-    else printPlayer(width/2 - 64); //if the player is at the middle of the level, print them exactly in the middle of the screen
+    else printPlayer(width/2 - round(width/22.5)); //if the player is at the middle of the level, print them exactly in the middle of the screen
   }
   
   //checks if the player is standing on solid ground
   boolean onGround() {
-    if (y == 644) return true; //literally the ground (y border)
+    if (y == height - round(height/3.51)) return true; //literally the ground (y border)
     else {
-      Rectangle temp = new Rectangle((int)hitbox_feet.getX(), (int)hitbox_feet.getY() + 15, 63, 8);
+      Rectangle temp = new Rectangle((int)hitbox_feet.getX(), (int)hitbox_feet.getY() + round(height/60), round(width/22.86), round(height/112.5));
       for (Object object: level.objects) { //for every object in the level;
         for (Rectangle hitboxiter: object.hitbox) {
           if (temp.intersects(hitboxiter)) {
             if (jump_counter == -1 || jump_counter >= 40) {
-              y = (int)hitboxiter.getY() - 256;
+              y = (int)hitboxiter.getY() - round(height/3.51);
               jump_counter = -1;
             }
             return true;
@@ -122,14 +118,14 @@ class Player {
   
   //checks if the player is kissing a wall
   boolean onKiss() {
-    if (x <= 8) { //literally the left wall (-x border)
-      x = 8;
+    if (x <= round(width/180)) { //literally the left wall (-x border)
+      x = round(width/180);
       if (x_motion > 0) //if you want to go right, you are allowed
         x += x_motion;
       return true;
     }
     else {
-      Rectangle temp = new Rectangle((int)hitbox_feet.getX() + x_motion, (int)hitbox_feet.getY(), 63, 8);
+      Rectangle temp = new Rectangle((int)hitbox_feet.getX() + round(x_motion), (int)hitbox_feet.getY(), round(width/22.86), round(height/112.5));
       for (Object object: level.objects) { //for every object in the level
         if (!object.platform) {
           for (Rectangle hitboxiter: object.hitbox) {
@@ -147,20 +143,20 @@ class Player {
   //prints the player in the right position
   private void printPlayer(int x) {
    
-     hitbox_player.setLocation(x + 24, y + 48);
-     hitbox_feet.setLocation(x + 32, y + 248);
+     hitbox_player.setLocation((int)x + round(width/60), (int)y + round(height/18.75));
+     hitbox_feet.setLocation((int)x + round(width/45), (int)y + round(height/3.63));
      if (menu.hitboxes) {
        fill(255, 215, 0); //gold
-       rect(x + 24, y + 48, 79, 208);
+       rect(x + round(width/60), y + round(height/18.75), round(width/18.23), round(height/4.33));
        fill(235, 15, 15); //red
-       rect(x + 32, y + 248, 63, 8);
+       rect(x + round(width/45), y + round(height/3.63), round(width/22.86), round(height/112.5));
      }
      if (reverse) { //if the player is walking towards the left, flip the image if needed 
        scale(-1,1); 
-       image(image, - x - 128, y, 128, 256);
+       image(image, - x - round(width/11.25), y, round(width/11.25), round(height/3.51));
        scale(-1,1);
      }
-     else image(image, x, y, 128, 256); //else don't flip it
+     else image(image, x, y, round(width/11.25), round(height/3.51)); //else don't flip it
   }
   
   private void animation() {
@@ -178,28 +174,28 @@ class Player {
     }
   }
   
-  private int jump() {
+  private float jump() {
     if (jump_counter == 9) {
       sounds[4].amp(menu.volume * menu.sfx_volume * (menu.master_volume/10.0));
       sounds[4].play();
     }
-    if (jump_counter >= 10 && jump_counter <= 20) return -10; //go up 10 pixels
-    else if (jump_counter > 20 && jump_counter <= 30) return -7; //go up 7 pixels (slow down mode)
-    else if (jump_counter >= 30 && jump_counter <= 35) return -4; //go up just 4 pixel (almost done going up)
+    if (jump_counter >= 10 && jump_counter <= 20) return -(height/90.0); //go up 10 pixels
+    else if (jump_counter > 20 && jump_counter <= 30) return -(height/128.57); //go up 7 pixels (slow down mode)
+    else if (jump_counter >= 30 && jump_counter <= 35) return -(height/225.0); //go up just 4 pixel (almost done going up)
     else if (jump_counter >= 35 && jump_counter <= 40) return 0; //stay still
     else if (jump_counter >= 40 && jump_counter <= 45) { //check if the player is about to hit a hitbox before they go down 5 pixels
       if (onGround()) {
         jump_counter = -1;
         return 0;
       }
-      else return 5;
+      else return (height/180.0);
     }
     else if (jump_counter >= 45 && jump_counter <= 50) { //check if the player is about to hit a hitbox before they go down 10 pixels
       if (onGround()) {
         jump_counter = -1;
         return 0;
       }
-    else return 10;
+    else return (height/90.0);
     }
     return 0; //otherwise, don't touch the y axis
   }
@@ -221,18 +217,18 @@ class Player {
   //make it so that holding a button won't execute keyPressed continuously using free_right and free_left
   void keyPressed() {
       if ((keyCode == RIGHT || key == 'd' || key == 'D') && free_right) {
-        x_motion = 8;
+        x_motion = step;
         player.walk_counter = 0;
         free_right = false;
         player.reverse = false; //don't flip the image, head to the right
       }
       else if ((keyCode == LEFT || key == 'a' || key == 'A') && free_left) {
-        x_motion = -8;
+        x_motion = -step;
         player.walk_counter = 0;
         free_left = false;
         player.reverse = true; //flip the image, head to the left
       }
-      if (keyCode == UP || key == ' ' || key == 'w' || key == 'W') {
+      if (keyCode == UP || key == 'w' || key == 'W'|| key == ' ') {
         //if we are on the ground, jump
         if (player.onGround() && free_up && jump_counter == -1) {
           player.jump_counter = 0;
@@ -248,7 +244,7 @@ class Player {
           player.walk_counter = -1;
         }
         else {
-          player.x_motion = -8;
+          player.x_motion = -step;
           player.reverse = true; //flip the image, head to the left
         }
         free_right = true; //user let go of the right arrow
@@ -259,12 +255,12 @@ class Player {
           player.walk_counter = -1;
         }
         else {
-          player.x_motion = 8;
+          player.x_motion = step;
           player.reverse = false; //don't flip the image, head to the right
         }
         free_left = true; //user let go of the left arrow
       }
-      if (keyCode == UP || key == ' ' || key == 'w' || key == 'W')
+      if (keyCode == UP || key == 'w' || key == 'W' || key == ' ')
          free_up = true;
     }
 };
