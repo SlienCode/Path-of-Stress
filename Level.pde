@@ -300,13 +300,13 @@ class Level {
   
   void displayCoursesCollected() {
     //display courses collected
-    image(courseImage, width/2-116, 30, 64, 64);
+    image(courseImage, width/2-int(Math.round(width*(116.0/1440))), int(Math.round(height*(28.0/900))), int(Math.round(width*(64.0/1440))), int(Math.round(height*(64.0/900))));
     textAlign(LEFT);
     fill(220, 220, 220); //light grey
-    textSize(menu.text_size*0.8);
-    text("x  ", width/2-16, 80);
+    textSize(int(Math.round(width*(60.0/1440))*0.8));
+    text("x  ", width/2-int(Math.round(width*(16.0/1440))), int(Math.round(height*(80.0/900))));
     fill(255, 215, 0); //gold
-    textSize(menu.text_size*3/2);
-    text(courses_collected, width/2+42, 92);
+    textSize(int(Math.round(width*(60.0/1440))*3/2));
+    text(courses_collected, width/2+int(Math.round(width*(42.0/1440))), int(Math.round(height*(92.0/900))));
   }
 };
