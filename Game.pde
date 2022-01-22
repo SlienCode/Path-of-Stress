@@ -22,12 +22,12 @@ class Game {
     image = loadImage(sketchPath() + "/images/miscellaneous/tabs/tab.png");
     
     resume_game_x = width/2;
-    resume_game_y = height/2-50;
+    resume_game_y = height/2-int(Math.round(height*(50.0/900)));
     mouse_over_resume_game = false;
     leave_game_x = width/2;
-    leave_game_y = height/2+50;
+    leave_game_y = height/2+int(Math.round(height*(50.0/900)));
     mouse_over_leave_game = false;
-    
+
     pause = false;
   }
   
@@ -104,15 +104,15 @@ class Game {
   }
   
   void gameMenu() {
-    image(image, width/2-250, height/2-170, 500, 300);
+    image(image, width/2-int(Math.round(width*(250.0/1440))), height/2-int(Math.round(height*(170.0/900))), int(Math.round(width*(500.0/1440))), int(Math.round(height*(300.0/900))));
     textAlign(CENTER);
-    textSize(menu.text_size);
+    textSize(int(Math.round(width*(60.0/1440))));
     if (menu.hitboxes) {
       fill(255, 0, 255); //pink
-      rect(resume_game_x-200, resume_game_y-60, 400, 80); //hitbox of RESUME GAME button
-      rect(leave_game_x-200, leave_game_y-60, 400, 80); //hitbox of LEAVE GAME button
+      rect(resume_game_x-int(Math.round(width*(200.0/1440))), resume_game_y-int(Math.round(height*(60.0/900))), int(Math.round(width*(400.0/1440))), int(Math.round(height*(80.0/900)))); //hitbox of RESUME GAME button
+      rect(leave_game_x-int(Math.round(width*(200.0/1440))), leave_game_y-int(Math.round(height*(60.0/900))), int(Math.round(width*(400.0/1440))), int(Math.round(height*(80.0/900)))); //hitbox of LEAVE GAME button
     }
-    if (mouseX > resume_game_x-200 && mouseX < resume_game_x+200 && mouseY > resume_game_y-60 && mouseY < resume_game_y+20) {
+    if (mouseX > resume_game_x-int(Math.round(width*(200.0/1440))) && mouseX < resume_game_x+int(Math.round(width*(200.0/1440))) && mouseY > resume_game_y-int(Math.round(height*(60.0/900))) && mouseY < resume_game_y+int(Math.round(height*(20.0/900)))) {
       mouse_over_resume_game = true;
       fill(255, 200, 45); //yellow
     } else {
@@ -120,7 +120,7 @@ class Game {
       fill(235, 15, 15); //red
     }
     text("RESUME GAME", resume_game_x, resume_game_y);
-    if (mouseX > leave_game_x-200 && mouseX < leave_game_x+200 && mouseY > leave_game_y-60 && mouseY < leave_game_y+20) {
+    if (mouseX > leave_game_x-int(Math.round(width*(200.0/1440))) && mouseX < leave_game_x+int(Math.round(width*(200.0/1440))) && mouseY > leave_game_y-int(Math.round(height*(60.0/900))) && mouseY < leave_game_y+int(Math.round(height*(20.0/900)))) {
       mouse_over_leave_game = true;
       fill(255, 200, 45); //yellow
     } else {
