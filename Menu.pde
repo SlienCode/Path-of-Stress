@@ -810,8 +810,8 @@ class Menu {
     fill(0);
     text(master_volume, master_volume_x+int(Math.round(width*(17.0/1440))), master_y+int(Math.round(height*(120.0/900))));
     
-    image(image_up_arrowC, music_volume_x, music_volume_up_y, 65, int(Math.round(height*(33.0/900))));
-    image(image_down_arrowC, music_volume_x, music_volume_down_y, 65, int(Math.round(height*(33.0/900))));
+    image(image_up_arrowC, music_volume_x, music_volume_up_y, int(Math.round(width*(65.0/1440))), int(Math.round(height*(33.0/900))));
+    image(image_down_arrowC, music_volume_x, music_volume_down_y, int(Math.round(width*(65.0/1440))), int(Math.round(height*(33.0/900))));
     fill(255);
     text("music", music_x, music_y+int(Math.round(height*(120.0/900))));
     fill(0);
