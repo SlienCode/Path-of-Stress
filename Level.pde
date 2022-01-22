@@ -47,7 +47,7 @@ class Level {
       x_dim = round(width*1.5);
       y = -round(height/36);
       
-      bg_motion = step/8;
+      bg_motion = step/8.0;
       
       flag = new Flag(width/1.26, height/2.13, width/40.0, height/25.0);
       
@@ -80,131 +80,128 @@ class Level {
     else if (year == 2) {
       backgroundBack = loadImage(sketchPath() + "/images/backgrounds/2nd_year.png");
       
-      objects = new Object[0];
-      courses = new Course[0];
-      
-      x_dim = 5040;
+      x_dim = round(width*3.5);
       y = 0;
       
-      bg_motion = 6;
+      bg_motion = width/240.0;
       
       objects = new Object[18];
-      objects[0] = new Chair(800);
-      objects[1] = new Desk(900);
-      objects[2] = new Chair(1150);
-      objects[3] = new Chair(1480);
-      objects[4] = new Desk(1400);
-      objects[5] = new Bookshelf_Short(1880);
-      objects[6] = new Chair(2130);
-      objects[7] = new Pillar(2350);
-      objects[8] = new Pillar(2910);
-      objects[9] = new Bookshelf_Tall(3490);
-      objects[10] = new Chair(3830);
-      objects[11] = new Desk(3750);
-      objects[12] = new Bookshelf_Short(4110);
-      objects[13] = new Chair(4430);
-      objects[14] = new Pillar(4745);
-      objects[15] = new Chair(5100);
-      objects[16] = new Chair(5200);
-      objects[17] = new Desk(5300);
+      objects[0] = new Chair(width*0.56);
+      objects[1] = new Desk(width*0.63);
+      objects[2] = new Chair(width*0.80);
+      objects[3] = new Chair(width*1.03);
+      objects[4] = new Desk(width*0.97);
+      objects[5] = new Bookshelf_Short(width*1.31);
+      objects[6] = new Chair(width*1.48);
+      objects[7] = new Pillar(width*1.63);
+      objects[8] = new Pillar(width*2.02);
+      objects[9] = new Bookshelf_Tall(width*2.42);
+      objects[10] = new Chair(width*2.66);
+      objects[11] = new Desk(width*2.60);
+      objects[12] = new Bookshelf_Short(width*2.85);
+      objects[13] = new Chair(width*3.08);
+      objects[14] = new Pillar(width*3.30);
+      objects[15] = new Chair(width*3.54);
+      objects[16] = new Chair(width*3.61);
+      objects[17] = new Desk(width*3.70);
       
       courses = new Course[8];
-      courses[0] = new Course(990, 370); //1
-      courses[1] = new Course(1580, 260); //2
-      courses[2] = new Course(2150, 400); //1
-      courses[3] = new Course(2700, 750); //0
-      courses[4] = new Course(3110, 122); //3
-      courses[5] = new Course(4000, 200); //2
-      courses[6] = new Course(4810, 250); //4
-      courses[7] = new Course(5600, 400); //1
+      courses[0] = new Course(width*0.69, height*0.41); //1
+      courses[1] = new Course(width*1.1, height*0.29); //2
+      courses[2] = new Course(width*1.49, height*0.44); //1
+      courses[3] = new Course(width*1.88, height*0.83); //0
+      courses[4] = new Course(width*2.16, height*0.14); //3
+      courses[5] = new Course(width*2.78, height*0.22); //2
+      courses[6] = new Course(width*3.34, height*0.28); //4
+      courses[7] = new Course(width*3.90, height*0.44); //1
       
-      right_border = 6240;
+      right_border = round(width*4.32);
     }
     else if (year == 3) {
       backgroundBack = loadImage(sketchPath() + "/images/backgrounds/3rd_year.png");
       
-      objects = new Object[30];
-      objects[0] = new Chair(880);
-      objects[1] = new Desk(800);
-      objects[2] = new Chair(1050);
-      objects[3] = new Bookshelf_Tall(1400);
-      objects[4] = new Chair(1700);
-      objects[5] = new Ladder(2050);
-      objects[6] = new Closet(2150);
-      objects[7] = new Closet(2380);
-      objects[8] = new Closet(2610);
-      objects[9] = new Chair(3050);
-      objects[10] = new Bookshelf_Short(3200);
-      objects[11] = new Chair(3650);
-      objects[12] = new Chair(3880);
-      objects[13] = new Chair(4020);
-      objects[14] = new Desk(3750);
-      objects[15] = new Desk(4000);
-      objects[16] = new Ladder(4600);
-      objects[17] = new Bookshelf_Tall(4700);
-      objects[18] = new Desk(5060);
-      objects[19] = new Closet(5350);
-      objects[20] = new Closet(5580);
-      objects[21] = new Ladder(5820);
-      objects[22] = new Chair(6420);
-      objects[23] = new Chair(6600);
-      objects[24] = new Desk(6520);
-      objects[25] = new Bookshelf_Tall(7000);
-      objects[26] = new Bookshelf_Short(7174);
-      objects[27] = new Chair(7550);
-      objects[28] = new Ladder(7880);
-      objects[29] = new Desk(7990);
-      
-      courses = new Course[10];
-      courses[0] = new Course(960, 290); //1
-      courses[1] = new Course(1650, 110); //2
-      courses[2] = new Course(2480, 434); //0
-      courses[3] = new Course(3600, 214); //3
-      courses[4] = new Course(4400, 110); //2
-      courses[5] = new Course(5080, 300); //1
-      courses[6] = new Course(5740, 180); //1
-      courses[7] = new Course(6400, 210); //3
-      courses[8] = new Course(7430, 750); //0
-      courses[9] = new Course(8350, 120); //2
-      
-      x_dim = 7200;
+      x_dim = width*5;
       y = 0;
       
-      bg_motion = 6;
+      bg_motion = width/240.0;
       
-      right_border = 9115;
+      objects = new Object[30];
+      objects[0] = new Chair(width*0.61);
+      objects[1] = new Desk(width*0.56);
+      objects[2] = new Chair(width*0.73);
+      objects[3] = new Bookshelf_Tall(width*0.97);
+      objects[4] = new Chair(width*1.18);
+      objects[5] = new Ladder(width*1.42);
+      objects[6] = new Closet(width*1.49);
+      objects[7] = new Closet(width*1.65);
+      objects[8] = new Closet(width*1.81);
+      objects[9] = new Chair(width*2.12);
+      objects[10] = new Bookshelf_Short(width*2.22);
+      objects[11] = new Chair(width*2.53);
+      objects[12] = new Chair(width*2.69);
+      objects[13] = new Chair(width*2.79);
+      objects[14] = new Desk(width*2.60);
+      objects[15] = new Desk(width*2.78);
+      objects[16] = new Ladder(width*3.19);
+      objects[17] = new Bookshelf_Tall(width*3.26);
+      objects[18] = new Desk(width*3.52);
+      objects[19] = new Closet(width*3.72);
+      objects[20] = new Closet(width*3.88);
+      objects[21] = new Ladder(width*4.04);
+      objects[22] = new Chair(width*4.46);
+      objects[23] = new Chair(width*4.58);
+      objects[24] = new Desk(width*4.53);
+      objects[25] = new Bookshelf_Tall(width*4.86);
+      objects[26] = new Bookshelf_Short(width*4.98);
+      objects[27] = new Chair(width*5.24);
+      objects[28] = new Ladder(width*5.47);
+      objects[29] = new Desk(width*5.55);
+      
+      courses = new Course[10];
+      courses[0] = new Course(width*0.67, height*0.32); //1
+      courses[1] = new Course(width*1.15, height*0.12); //2
+      courses[2] = new Course(width*1.72, height*0.48); //0
+      courses[3] = new Course(width*2.5, height*0.24); //3
+      courses[4] = new Course(width*3.06, height*0.12); //2
+      courses[5] = new Course(width*3.53, height*0.33); //1
+      courses[6] = new Course(width*3.99, height*0.2); //1
+      courses[7] = new Course(width*4.44, height*0.23); //3
+      courses[8] = new Course(width*5.16, height*0.83); //0
+      courses[9] = new Course(width*5.80, height*0.13); //2
+      
+      right_border = round(width*6.33);
     }
     else if (year == 4) {
       backgroundBack = loadImage(sketchPath() + "/images/backgrounds/4th_year.png");
       
-      objects = new Object[10];
-      objects[0] = new Car(900, 1);
-      objects[1] = new Sign(1500, 3);
-      objects[2] = new Hydrant(2000);
-      objects[3] = new Bin(2400, 2);
-      objects[4] = new Sign(2920, 2);
-      objects[5] = new Truck(3370);
-      objects[6] = new Bin(4360, 1);
-      objects[7] = new Tree(5000);
-      objects[8] = new Car(5960, 3);
-      objects[9] = new Light(6750);
-      
-      courses = new Course[8];
-      courses[0] = new Course(800, 280); //1
-      courses[1] = new Course(1900, 170); //2
-      courses[2] = new Course(2520, 130); //2
-      courses[3] = new Course(3200, 750); //0
-      courses[4] = new Course(4560, 95); //3
-      courses[5] = new Course(5550, 290); //2
-      courses[6] = new Course(6200, 260); //1
-      courses[7] = new Course(7350, 410); //4
-      
-      x_dim = 5400;
+      x_dim = round(width*3.75);
       y = 0;
       
-      bg_motion = 5;
+      bg_motion = width/288.0;
       
-      right_border = 7740;
+      objects = new Object[10];
+      objects[0] = new Car(width*0.63, 1);
+      objects[1] = new Sign(width*1.04, 3);
+      objects[2] = new Hydrant(width*1.39);
+      objects[3] = new Bin(width*1.67, 2);
+      objects[4] = new Sign(width*2.03, 2);
+      objects[5] = new Truck(width*2.34);
+      objects[6] = new Bin(width*3.03, 1);
+      objects[7] = new Tree(width*3.47);
+      objects[8] = new Car(width*4.14, 3);
+      objects[9] = new Light(width*4.69);
+      
+      courses = new Course[8];
+      courses[0] = new Course(width*0.56, height*0.31); //1
+      courses[1] = new Course(width*1.32, height*0.19); //2
+      courses[2] = new Course(width*1.75, height*0.14); //2
+      courses[3] = new Course(width*2.22, height*0.83); //0
+      courses[4] = new Course(width*3.17, height*0.11); //3
+      courses[5] = new Course(width*3.85, height*0.32); //2
+      courses[6] = new Course(width*4.31, height*0.29); //1
+      courses[7] = new Course(width*5.10, height*0.46); //4
+      
+      right_border = round(width*5.37);
     }
     
   }

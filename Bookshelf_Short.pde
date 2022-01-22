@@ -8,17 +8,17 @@ class Bookshelf_Short extends Object {
     image = loadImage(sketchPath() + "/images/objects/bookshelf_short.png");
     platform = false;
     hitbox = new Rectangle[1];
-    hitbox[0] = new Rectangle((int)x+11, (int)y+696, 175, 206);
+    hitbox[0] = new Rectangle((int)x+round(width/130.91), (int)y+round(height/1.30), round(width/8.23), round(height/4.37));
         
   }
   
   void draw() {
-    image(image, x, y+516, 192, 384);
-    hitbox[0].setLocation((int)x+11, (int)y+696);
+    image(image, x, y+(height - round(height/2.29)), round(width/7.5), round(height/2.29));
+    hitbox[0].setLocation((int)x+round(width/130.91), (int)y+round(height/1.30));
   }
   
   void toggle() {
-    rect(x+11, y+696, 175, 206);
+    rect(x+round(width/130.91), y+round(height/1.30), round(width/8.23), round(height/4.37));
   }
   
 };

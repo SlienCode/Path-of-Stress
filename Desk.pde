@@ -8,17 +8,17 @@ class Desk extends Object {
     image = loadImage(sketchPath() + "/images/objects/desk.png");
     platform = false;
     hitbox = new Rectangle[1];
-    hitbox[0] = new Rectangle((int)x+29, (int)y+798, 229, 104);
+    hitbox[0] = new Rectangle((int)x+round(width/49.66), (int)y+round(height/1.13), round(width/6.29), round(height/8.65));
         
   }
   
   void draw() {
-    image(image, x, y+708, 288, 192);
-    hitbox[0].setLocation((int)x+29, (int)y+798);
+    image(image, x, y+(height - round(height/4.60)), round(width/5.0), round(height/4.60));
+    hitbox[0].setLocation((int)x+round(width/49.66), (int)y+round(height/1.13));
   }
   
   void toggle() {
-    rect(x+29, y+798, 229, 104);
+    rect(x+round(width/49.66), y+round(height/1.13), round(width/6.29), round(height/8.65));
   }
   
 };

@@ -8,17 +8,17 @@ class Chair extends Object {
     image = loadImage(sketchPath() + "/images/objects/chair.png");
     platform = false;
     hitbox = new Rectangle[1];
-    hitbox[0] = new Rectangle((int)x+25, (int)y+846, 83, 54);
+    hitbox[0] = new Rectangle((int)x+round(width/57.6), (int)y+round(height/1.06), round(width/17.35), round(height/16.67));
         
   }
   
   void draw() {
-    image(image, x, y+772, 128, 128);
-    hitbox[0].setLocation((int)x+25, (int)y+846);
+    image(image, x, y+(height - round(height/7.03)), round(width/11.25), round(height/7.03));
+    hitbox[0].setLocation((int)x+round(width/57.6), (int)y+round(height/1.06));
   }
   
   void toggle() {
-    rect(x+25, y+846, 83, 54);
+    rect(x+round(width/57.6), y+round(height/1.06), round(width/17.35), round(height/16.67));
   }
   
 };

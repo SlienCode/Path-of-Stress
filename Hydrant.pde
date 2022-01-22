@@ -12,7 +12,7 @@ class Hydrant extends Object {
   }
   
   void draw() {
-    image(image, x, y + (height - round(height/7.03)), round(width/22.5), round(height/7.03));
+    image(image, x, y + (height - round(height/7.2)), round(width/22.5), round(height/7.2));
     hitbox[0].setLocation((int)x, (int)y+(round(height/1.11)));
   }
   

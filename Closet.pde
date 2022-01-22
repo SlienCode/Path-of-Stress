@@ -8,17 +8,17 @@ class Closet extends Object {
     image = loadImage(sketchPath() + "/images/objects/closet.png");
     platform = false;
     hitbox = new Rectangle[1];
-    hitbox[0] = new Rectangle((int)x+11, (int)y+584, 232, 318);
+    hitbox[0] = new Rectangle((int)x+round(width/130.91), (int)y+round(height/1.54), round(width/6.20), round(height/2.83));
         
   }
   
   void draw() {
-    image(image, x, y+580, 256, 320);
-    hitbox[0].setLocation((int)x+11, (int)y+584);
+    image(image, x, y+(height - round(height/2.81)), round(width/5.63), round(height/2.81));
+    hitbox[0].setLocation((int)x+round(width/130.91), (int)y+round(height/1.54));
   }
   
   void toggle() {
-    rect(x+11, y+584, 232, 318);
+    rect(x+round(width/130.91), y+round(height/1.54), round(width/6.20), round(height/2.83));
   }
   
 };
