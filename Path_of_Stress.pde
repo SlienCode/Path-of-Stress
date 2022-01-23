@@ -72,7 +72,7 @@ void setup() {
   }
   
   menu = new Menu();
-  game = new Game();  
+  game = new Game();
   
   textFont(myFont);
   textAlign(CENTER);

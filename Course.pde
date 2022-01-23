@@ -5,6 +5,10 @@ class Course {
   float x;
   float y;
   
+  //depending on window size, adjust floating animation
+  float floating_div;
+  
+  //determins whether the player has passed this course or not
   boolean passed;
   
   //floating animation
@@ -24,6 +28,11 @@ class Course {
     
     passed = false;
     
+    if (height >= 1080) floating_div = 3;
+    else if (height >= 900) floating_div = 4;
+    else if (height >= 768) floating_div = 5;
+    else floating_div = 6;
+    
     floating_counter = 0;
     
     image = loadImage(sketchPath() + "/images/objects/course.png");
@@ -32,18 +41,18 @@ class Course {
   }
   
   void floatingAnimation() {
-    if ((floating_counter < 5) && (floating_counter % 2 == 0))  y += 2;
-    else if ((floating_counter < 15) && (floating_counter % 2 == 0)) y += 1;
-    else if ((floating_counter < 25) && (floating_counter % 2 == 0))  y += 0;
-    else if ((floating_counter < 35) && (floating_counter % 2 == 0))  y += -1;
-    else if ((floating_counter < 45) && (floating_counter % 2 == 0))  y += -2;
-    else if ((floating_counter < 55) && (floating_counter % 2 == 0)) y += -1;
-    else if ((floating_counter < 65) && (floating_counter % 2 == 0)) y += 0;
-    else if ((floating_counter < 75) && (floating_counter % 2 == 0)) y += 1;
-    else if ((floating_counter < 80) && (floating_counter % 2 == 0)) y += 2;
+    if ((floating_counter < 7.5) && (floating_counter % floating_div) == 0) y += 2;
+    else if ((floating_counter < 22.5) && (floating_counter % floating_div == 0)) y += 1;
+    else if ((floating_counter < 37.5) && (floating_counter % floating_div == 0)) y += 0;
+    else if ((floating_counter < 52.5) && (floating_counter % floating_div == 0)) y += -1;
+    else if ((floating_counter < 67.5) && (floating_counter % floating_div == 0)) y += -2;
+    else if ((floating_counter < 82.5) && (floating_counter % floating_div == 0)) y += -1;
+    else if ((floating_counter < 97.5) && (floating_counter % floating_div == 0)) y += 0;
+    else if ((floating_counter < 112.5) && (floating_counter % floating_div == 0)) y += 1;
+    else if ((floating_counter < 120) && (floating_counter % floating_div == 0)) y += 2;
     
     floating_counter++;
-    if (floating_counter == 80) floating_counter = 0; //start the animation from scratch
+    if (floating_counter == 120) floating_counter = 0; //start the animation from scratch
   }
   
   void draw() {

@@ -199,7 +199,7 @@ class Level {
       courses[4] = new Course(width*3.17, height*0.11); //3
       courses[5] = new Course(width*3.85, height*0.32); //2
       courses[6] = new Course(width*4.31, height*0.29); //1
-      courses[7] = new Course(width*5.10, height*0.46); //4
+      courses[7] = new Course(width*5.10, height*0.45); //4
       
       right_border = round(width*5.37);
     }
