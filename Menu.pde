@@ -741,7 +741,7 @@ class Menu {
     }
     
     //check if mouse is over DISPLAY COORDINATES option
-    if (mouseX > int(round(width*(20.0/1440))) && mouseX < int(round(width*(70.0/1440))) && mouseY > 140 && mouseY < int(round(height*(190.0/900)))) {
+    if (mouseX > int(round(width*(20.0/1440))) && mouseX < int(round(width*(70.0/1440))) && mouseY > int(round(height*(140.0/900))) && mouseY < int(round(height*(190.0/900)))) {
       mouse_over_display_coordinates = true;
     } else {
       mouse_over_display_coordinates = false;
@@ -928,9 +928,9 @@ class Menu {
       fill(0); //black
       textSize(int(round(width*(60.0/1440))*0.8));
       text("x ", int(round(width*(30.0/1440))), int(round(height*(40.0/900))));
-      text(player.x-int(round(width*(128.0/1440))), int(round(width*(90.0/1440))), int(round(height*(40.0/900))));
+      text(int(player.x-round(width*(128.0/1440))), int(round(width*(90.0/1440))), int(round(height*(40.0/900))));
       text("y ", int(round(width*(30.0/1440))), int(round(height*(80.0/900))));
-      text(-player.y+int(round(height*(644.0/900))), int(round(width*(90.0/1440))), int(round(height*(80.0/900))));
+      text(int(-player.y+round(height*(644.0/900))), int(round(width*(90.0/1440))), int(round(height*(80.0/900))));
       textAlign(CENTER);
     }
   }
