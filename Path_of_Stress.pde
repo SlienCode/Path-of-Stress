@@ -1,4 +1,4 @@
-import processing.sound.*; //<>// //<>//
+import processing.sound.*;
 import java.lang.*;
 
 //variable used for the intro and main of the 1st and 4th year songs
@@ -21,7 +21,6 @@ PFont myFont;
 PImage transition_screen; //just plain dark
 PImage flag[]; //12 flag animations
 float step;
-
 
 void setup() {
   
