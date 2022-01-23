@@ -152,7 +152,7 @@ class Menu {
     image_tabS_yellow = loadImage(sketchPath() + "/images/miscellaneous/tabs/tabS_yellow.png");
     image_course = loadImage(sketchPath() + "/images/objects/course.png");
 
-    flag = new Flag(int(round(width*(672.0/1440))), int(round(height*(521.0/900))), int(round(width*(128.0/1440))), int(round(height*(128.0/900))));
+    flag = new Flag(round(width*(672.0/1440)), round(height*(521.0/900)), round(width*(128.0/1440)), round(height*(128.0/900)));
     
     menu_state = "MAIN MENU";
     
@@ -176,11 +176,11 @@ class Menu {
     mouse_over_return = false;
     
     start_game_x = width/2;
-    start_game_y = height/2-int(round(height*(75.0/900)));
+    start_game_y = height/2-round(height*(75.0/900));
     settings_x = width/2;
     settings_y = height/2;
     exit_game_x = width/2;
-    exit_game_y = height/2+int(round(height*(75.0/900)));
+    exit_game_y = height/2+round(height*(75.0/900));
     mouse_over_start_game = false;
     mouse_over_settings = false;
     mouse_over_exit_game = false;
@@ -218,29 +218,29 @@ class Menu {
     mouse_over_display_coordinates = false;
     
     master_volume = 5;
-    master_x = int(round(width*(100.0/1440)));
-    master_y = int(round(height*(422.0/900)));
-    master_volume_x = master_x+int(round(width*(180.0/1440)));
-    master_volume_up_y = master_y+int(round(height*(37.0/900)));
-    master_volume_down_y = master_volume_up_y+int(round(height*(100.0/900)));
+    master_x = round(width*(100.0/1440));
+    master_y = round(height*(422.0/900));
+    master_volume_x = master_x+round(width*(180.0/1440));
+    master_volume_up_y = master_y+round(height*(37.0/900));
+    master_volume_down_y = master_volume_up_y+round(height*(100.0/900));
     mouse_over_master_volume_up = false;
     mouse_over_master_volume_down = false;
     
     music_volume = 5;
-    music_x = int(round(width*(570.0/1440)));
-    music_y = int(round(height*(422.0/900)));
-    music_volume_x = music_x+int(round(width*(150.0/1440)));
-    music_volume_up_y = music_y+int(round(height*(37.0/900)));
-    music_volume_down_y = music_volume_up_y+int(round(height*(100.0/900)));
+    music_x = round(width*(570.0/1440));
+    music_y = round(height*(422.0/900));
+    music_volume_x = music_x+round(width*(150.0/1440));
+    music_volume_up_y = music_y+round(height*(37.0/900));
+    music_volume_down_y = music_volume_up_y+round(height*(100.0/900));
     mouse_over_music_volume_up = false;
     mouse_over_music_volume_down = false;
     
     sfx_volume = 5;
-    sfx_x = int(round(width*(1060.0/1440)));
-    sfx_y = int(round(height*(422.0/900)));
-    sfx_volume_x = sfx_x+int(round(width*(100.0/1440)));
-    sfx_volume_up_y = sfx_y+int(round(height*(37.0/900)));
-    sfx_volume_down_y = sfx_volume_up_y+int(round(height*(100.0/900)));
+    sfx_x = round(width*(1060.0/1440));
+    sfx_y = round(height*(422.0/900));
+    sfx_volume_x = sfx_x+round(width*(100.0/1440));
+    sfx_volume_up_y = sfx_y+round(height*(37.0/900));
+    sfx_volume_down_y = sfx_volume_up_y+round(height*(100.0/900));
     mouse_over_sfx_volume_up = false;
     mouse_over_sfx_volume_down = false;
     
@@ -250,7 +250,7 @@ class Menu {
     volume = 0.04;
     
     //********************************************************************************************************
-    //int(round(width*(.0/1440)))   int(round(height*(.0/900)))   int(round(width*(60.0/1440)))
+    //round(width*(.0/1440)))   round(height*(.0/900)))   round(width*(60.0/1440)))
     //********************************************************************************************************
   }
   
@@ -448,15 +448,15 @@ class Menu {
     
     if (hitboxes) {
       fill(255, 0, 255); //pink
-      rect(start_game_x-int(round(width*(180.0/1440))), start_game_y-int(round(height*(53.0/900))), int(round(width*(360.0/1440))), int(round(height*(67.0/900)))); //hitbox of START GAME button
-      rect(settings_x-int(round(width*(180.0/1440))), settings_y-int(round(height*(53.0/900))), int(round(width*(360.0/1440))), int(round(height*(67.0/900)))); //hitbox of SETTINGS button
-      rect(exit_game_x-int(round(width*(180.0/1440))), exit_game_y-int(round(height*(53.0/900))), int(round(width*(360.0/1440))), int(round(height*(67.0/900)))); //hitbox of EXIT GAME button
+      rect(start_game_x-round(width*(180.0/1440)), start_game_y-round(height*(53.0/900)), round(width*(360.0/1440)), round(height*(67.0/900))); //hitbox of START GAME button
+      rect(settings_x-round(width*(180.0/1440)), settings_y-round(height*(53.0/900)), round(width*(360.0/1440)), round(height*(67.0/900))); //hitbox of SETTINGS button
+      rect(exit_game_x-round(width*(180.0/1440)), exit_game_y-round(height*(53.0/900)), round(width*(360.0/1440)), round(height*(67.0/900))); //hitbox of EXIT GAME button
     }
     
-    textSize(int(round(width*(60.0/1440))));
+    textSize(round(width*(60.0/1440)));
     
     //check if the mouse is over the START GAME option
-    if (mouseX > start_game_x-int(round(width*(180.0/1440))) && mouseX < start_game_x+int(round(width*(180.0/1440))) && mouseY > start_game_y-int(round(height*(53.0/900))) && mouseY < start_game_y+int(round(height*(15.0/900)))) {
+    if (mouseX > start_game_x-round(width*(180.0/1440)) && mouseX < start_game_x+round(width*(180.0/1440)) && mouseY > start_game_y-round(height*(53.0/900)) && mouseY < start_game_y+round(height*(15.0/900))) {
       mouse_over_start_game = true;
       fill(255, 200, 45); //yellow
     } else {
@@ -466,7 +466,7 @@ class Menu {
     text("START GAME", start_game_x, start_game_y);
     
     //check if the mouse is over the SETTINGS option
-    if (mouseX > settings_x-int(round(width*(180.0/1440))) && mouseX < settings_x+int(round(width*(180.0/1440))) && mouseY > settings_y-int(round(height*(53.0/900))) && mouseY < settings_y+int(round(height*(15.0/900)))) {
+    if (mouseX > settings_x-round(width*(180.0/1440)) && mouseX < settings_x+round(width*(180.0/1440)) && mouseY > settings_y-round(height*(53.0/900)) && mouseY < settings_y+round(height*(15.0/900))) {
       mouse_over_settings = true;
       fill(255, 200, 45); //yellow
     } else {
@@ -476,7 +476,7 @@ class Menu {
     text("SETTINGS", settings_x, settings_y);
     
     //check if the mouse is over the EXIT GAME option
-    if (mouseX > exit_game_x-int(round(width*(180.0/1440))) && mouseX < exit_game_x+int(round(width*(180.0/1440))) && mouseY > exit_game_y-int(round(height*(53.0/900))) && mouseY < exit_game_y+int(round(height*(15.0/900)))) {
+    if (mouseX > exit_game_x-round(width*(180.0/1440)) && mouseX < exit_game_x+round(width*(180.0/1440)) && mouseY > exit_game_y-round(height*(53.0/900)) && mouseY < exit_game_y+round(height*(15.0/900))) {
       mouse_over_exit_game = true;
       fill(255, 200, 45); //yellow
     } else {
@@ -491,68 +491,68 @@ class Menu {
  
     if (hitboxes) {
       fill(255, 0, 255); //pink
-      rect(return_x-int(round(width*(131.0/1440))), return_y-int(round(height*(130.0/900))), int(round(width*(130.0/1440))), int(round(height*(130.0/900)))); //hitbox of RETURN to menu button
-      rect(character_x+int(round(width*(249.0/1440))), character_y-int(round(height*(65.0/900))), int(round(width*(130.0/1440))), int(round(height*(130.0/900)))); //hitbox of NEXT CHARACTER button
-      rect(character_x-int(round(width*(380.0/1440))), character_y-int(round(height*(65.0/900))), int(round(width*(130.0/1440))), int(round(height*(130.0/900)))); //hitbox of PREVIOUS CHARACTER button
-      rect(select_x-int(round(width*(185.0/1440))), select_y-int(round(height*(205.0/900))), int(round(width*(369.0/1440))), int(round(height*(130.0/900)))); //hitbox of SELECT button
+      rect(return_x-round(width*(131.0/1440)), return_y-round(height*(130.0/900)), round(width*(130.0/1440)), round(height*(130.0/900))); //hitbox of RETURN to menu button
+      rect(character_x+round(width*(249.0/1440)), character_y-round(height*(65.0/900)), round(width*(130.0/1440)), round(height*(130.0/900))); //hitbox of NEXT CHARACTER button
+      rect(character_x-round(width*(380.0/1440)), character_y-round(height*(65.0/900)), round(width*(130.0/1440)), round(height*(130.0/900))); //hitbox of PREVIOUS CHARACTER button
+      rect(select_x-round(width*(185.0/1440)), select_y-round(height*(205.0/900)), round(width*(369.0/1440)), round(height*(130.0/900))); //hitbox of SELECT button
     }
     
     //check if the mouse is over the RETURN option
-    if (mouseX > return_x-int(round(width*(131.0/1440))) && mouseX < return_x && mouseY > return_y-int(round(height*(130.0/900))) && mouseY < return_y) {
+    if (mouseX > return_x-round(width*(131.0/1440)) && mouseX < return_x && mouseY > return_y-round(height*(130.0/900)) && mouseY < return_y) {
       mouse_over_return = true;
-      image(image_return_arrow_yellow, return_x-int(round(width*(130.0/1440))), return_y-int(round(height*(130.0/900))), int(round(width*(130.0/1440))), int(round(height*(130.0/900))));
+      image(image_return_arrow_yellow, return_x-round(width*(130.0/1440)), return_y-round(height*(130.0/900)), round(width*(130.0/1440)), round(height*(130.0/900)));
     } else {
       mouse_over_return = false;
-      image(image_return_arrow_red, return_x-int(round(width*(130.0/1440))), return_y-int(round(height*(130.0/900))), int(round(width*(130.0/1440))), int(round(height*(130.0/900))));
+      image(image_return_arrow_red, return_x-round(width*(130.0/1440)), return_y-round(height*(130.0/900)), round(width*(130.0/1440)), round(height*(130.0/900)));
     }
     
     //check if the mouse if over the NEXT CHARACTER option
-    if (mouseX > character_x+int(round(width*(249.0/1440))) && mouseX < character_x+int(round(width*(380.0/1440))) && mouseY > character_y-int(round(height*(65.0/900))) && mouseY < character_y+int(round(height*(65.0/900)))) {
+    if (mouseX > character_x+round(width*(249.0/1440)) && mouseX < character_x+round(width*(380.0/1440)) && mouseY > character_y-round(height*(65.0/900)) && mouseY < character_y+round(height*(65.0/900))) {
       mouse_over_next_character = true;
-      image(image_right_arrow_yellow, character_x+int(round(width*(250.0/1440))), character_y-int(round(height*(65.0/900))), int(round(width*(130.0/1440))), int(round(height*(130.0/900))));
+      image(image_right_arrow_yellow, character_x+round(width*(250.0/1440)), character_y-round(height*(65.0/900)), round(width*(130.0/1440)), round(height*(130.0/900)));
     } else {
       mouse_over_next_character = false;
-      image(image_right_arrow_red, character_x+int(round(width*(250.0/1440))), character_y-int(round(height*(65.0/900))), int(round(width*(130.0/1440))), int(round(height*(130.0/900))));
+      image(image_right_arrow_red, character_x+round(width*(250.0/1440)), character_y-round(height*(65.0/900)), round(width*(130.0/1440)), round(height*(130.0/900)));
     }
     
     //check if the mouse if over the PREVIOUS CHARACTER option
-    if (mouseX > character_x-int(round(width*(380.0/1440))) && mouseX < character_x-int(round(width*(250.0/1440))) && mouseY > character_y-int(round(height*(65.0/900))) && mouseY < character_y+int(round(height*(65.0/900)))) {
+    if (mouseX > character_x-round(width*(380.0/1440)) && mouseX < character_x-round(width*(250.0/1440)) && mouseY > character_y-round(height*(65.0/900)) && mouseY < character_y+round(height*(65.0/900))) {
       mouse_over_previous_character = true;
-      image(image_left_arrow_yellow, character_x-int(round(width*(380.0/1440))), character_y-int(round(height*(65.0/900))), int(round(width*(130.0/1440))), int(round(height*(130.0/900))));
+      image(image_left_arrow_yellow, character_x-round(width*(380.0/1440)), character_y-round(height*(65.0/900)), round(width*(130.0/1440)), round(height*(130.0/900)));
     } else {
       mouse_over_previous_character = false;
-      image(image_left_arrow_red, character_x-int(round(width*(380.0/1440))), character_y-int(round(height*(65.0/900))), int(round(width*(130.0/1440))), int(round(height*(130.0/900))));
+      image(image_left_arrow_red, character_x-round(width*(380.0/1440)), character_y-round(height*(65.0/900)), round(width*(130.0/1440)), round(height*(130.0/900)));
     }
     
     //check if the mouse if over the SELECT option
-    if (mouseX > select_x-int(round(width*(185.0/1440))) && mouseX < select_x+int(round(width*(249.0/1440))) && mouseY > select_y-int(round(height*(205.0/900))) && mouseY < select_y-int(round(height*(75.0/900)))) {
+    if (mouseX > select_x-round(width*(185.0/1440)) && mouseX < select_x+round(width*(249.0/1440)) && mouseY > select_y-round(height*(205.0/900)) && mouseY < select_y-round(height*(75.0/900))) {
       mouse_over_select = true;
-      image(image_tabS_yellow, select_x-int(round(width*(180.0/1440))), select_y-int(round(height*(200.0/900))), int(round(width*(360.0/1440))), int(round(height*(120.0/900))));
+      image(image_tabS_yellow, select_x-round(width*(180.0/1440)), select_y-round(height*(200.0/900)), round(width*(360.0/1440)), round(height*(120.0/900)));
       fill(235, 15, 15); //red
     } else {
       mouse_over_select = false;
-      image(image_tabS_red, select_x-int(round(width*(180.0/1440))), select_y-int(round(height*(200.0/900))), int(round(width*(360.0/1440))), int(round(height*(120.0/900))));
+      image(image_tabS_red, select_x-round(width*(180.0/1440)), select_y-round(height*(200.0/900)), round(width*(360.0/1440)), round(height*(120.0/900)));
       fill(255, 200, 45); //yellow
     }
-    textSize(int(round(width*(60.0/1440))*1.4));
-    text("SELECT", select_x, select_y-int(round(height*(115.0/900))));
+    textSize(round(width*(60.0/1440)*1.4));
+    text("SELECT", select_x, select_y-round(height*(115.0/900)));
     
     //display tab
-    image(image_tab_blue1, character_x-int(round(width*(200.0/1440))), character_y-int(round(height*(200.0/900))), int(round(width*(400.0/1440))), int(round(height*(400.0/900))));
+    image(image_tab_blue1, character_x-round(width*(200.0/1440)), character_y-round(height*(200.0/900)), round(width*(400.0/1440)), round(height*(400.0/900)));
     
     //display character
     if (character_temp == 0) {
-      image(image_character0, character_x-int(round(width*(100.0/1440))), character_y-int(round(height*(220.0/900))), int(round(width*(192.0/1440))), int(round(height*(384.0/900))));
+      image(image_character0, character_x-round(width*(100.0/1440)), character_y-round(height*(220.0/900)), round(width*(192.0/1440)), round(height*(384.0/900)));
     } else if (character_temp == 1) {
-       image(image_character1, character_x-int(round(width*(100.0/1440))), character_y-int(round(height*(220.0/900))), int(round(width*(192.0/1440))), int(round(height*(384.0/900))));
+       image(image_character1, character_x-round(width*(100.0/1440)), character_y-round(height*(220.0/900)), round(width*(192.0/1440)), round(height*(384.0/900)));
     } else if (character_temp == 2) {
-       image(image_character2, character_x-int(round(width*(100.0/1440))), character_y-int(round(height*(220.0/900))), int(round(width*(192.0/1440))), int(round(height*(384.0/900))));
+       image(image_character2, character_x-round(width*(100.0/1440)), character_y-round(height*(220.0/900)), round(width*(192.0/1440)), round(height*(384.0/900)));
     } else if (character_temp == 3) {
-       image(image_character3, character_x-int(round(width*(100.0/1440))), character_y-int(round(height*(220.0/900))), int(round(width*(192.0/1440))), int(round(height*(384.0/900))));
+       image(image_character3, character_x-round(width*(100.0/1440)), character_y-round(height*(220.0/900)), round(width*(192.0/1440)), round(height*(384.0/900)));
     } else if (character_temp == 4) {
-       image(image_character4, character_x-int(round(width*(100.0/1440))), character_y-int(round(height*(220.0/900))), int(round(width*(192.0/1440))), int(round(height*(384.0/900))));
+       image(image_character4, character_x-round(width*(100.0/1440)), character_y-round(height*(220.0/900)), round(width*(192.0/1440)), round(height*(384.0/900)));
     } else if (character_temp == 5) {
-       image(image_character5, character_x-int(round(width*(100.0/1440))), character_y-int(round(height*(220.0/900))), int(round(width*(192.0/1440))), int(round(height*(384.0/900))));
+       image(image_character5, character_x-round(width*(100.0/1440)), character_y-round(height*(220.0/900)), round(width*(192.0/1440)), round(height*(384.0/900)));
     }
   }
   
@@ -563,135 +563,135 @@ class Menu {
     
     if (hitboxes) {
       fill(255, 0, 255); //pink
-      rect(return_x-int(round(width*(130.0/1440))), return_y-int(round(height*(130.0/900))), int(round(width*(130.0/1440))), int(round(height*(130.0/900)))); //hitbox of RETURN to menu button
-      rect(play_x-int(round(width*(200.0/1440))), play_y-int(round(height*(240.0/900))), int(round(width*(400.0/1440))), int(round(height*(160.0/900)))); //hitbox of PLAY button
+      rect(return_x-round(width*(130.0/1440)), return_y-round(height*(130.0/900)), round(width*(130.0/1440)), round(height*(130.0/900))); //hitbox of RETURN to menu button
+      rect(play_x-round(width*(200.0/1440)), play_y-round(height*(240.0/900)), round(width*(400.0/1440)), round(height*(160.0/900))); //hitbox of PLAY button
     }
     
     //check if the mouse is over the RETURN option
-    if (mouseX > return_x-int(round(width*(131.0/1440))) && mouseX < return_x && mouseY > return_y-int(round(height*(130.0/900))) && mouseY < return_y) {
+    if (mouseX > return_x-round(width*(131.0/1440)) && mouseX < return_x && mouseY > return_y-round(height*(130.0/900)) && mouseY < return_y) {
       mouse_over_return = true;
-      image(image_return_arrow_yellow, return_x-int(round(width*(130.0/1440))), return_y-int(round(height*(130.0/900))), int(round(width*(130.0/1440))), int(round(height*(130.0/900))));
+      image(image_return_arrow_yellow, return_x-round(width*(130.0/1440)), return_y-round(height*(130.0/900)), round(width*(130.0/1440)), round(height*(130.0/900)));
     } else {
       mouse_over_return = false;
-      image(image_return_arrow_red, return_x-int(round(width*(130.0/1440))), return_y-int(round(height*(130.0/900))), int(round(width*(130.0/1440))), int(round(height*(130.0/900))));
+      image(image_return_arrow_red, return_x-round(width*(130.0/1440)), return_y-round(height*(130.0/900)), round(width*(130.0/1440)), round(height*(130.0/900)));
     }
     
     //check if the mouse if over the PLAY option
-    if (mouseX > play_x-int(round(width*(205.0/1440))) && mouseX < play_x+int(round(width*(204.0/1440))) && mouseY > play_y-int(round(height*(245.0/900))) && mouseY < play_y-int(round(height*(75.0/900)))) {
+    if (mouseX > play_x-round(width*(205.0/1440)) && mouseX < play_x+round(width*(204.0/1440)) && mouseY > play_y-round(height*(245.0/900)) && mouseY < play_y-round(height*(75.0/900))) {
       mouse_over_play = true;
-      image(image_tabS_yellow, play_x-int(round(width*(200.0/1440))), play_y-int(round(height*(240.0/900))), int(round(width*(400.0/1440))), int(round(height*(160.0/900))));
+      image(image_tabS_yellow, play_x-round(width*(200.0/1440)), play_y-round(height*(240.0/900)), round(width*(400.0/1440)), round(height*(160.0/900)));
       fill(235, 15, 15); //red
     } else {
       mouse_over_play = false;
-      image(image_tabS_red, play_x-int(round(width*(200.0/1440))), play_y-int(round(height*(240.0/900))), int(round(width*(400.0/1440))), int(round(height*(160.0/900))));
+      image(image_tabS_red, play_x-round(width*(200.0/1440)), play_y-round(height*(240.0/900)), round(width*(400.0/1440)), round(height*(160.0/900)));
       fill(255, 200, 45); //yellow
     }
-    textSize(int(round(width*(60.0/1440))*2));
-    text("PLAY", play_x, play_y-int(round(height*(125.0/900))));
+    textSize(round(width*(60.0/1440)*2));
+    text("PLAY", play_x, play_y-round(height*(125.0/900)));
     
     if (!level_4) { //if you are not being displayed the last level you have the option to view the NEXT one
       if (hitboxes) {
         fill(255, 0, 255); //pink
-        rect(next_level_x-int(round(width*(156.0/1440))), next_level_y-int(round(height*(130.0/900))), int(round(width*(130.0/1440))), int(round(height*(130.0/900)))); //hitbox of NEXT LEVEL button
+        rect(next_level_x-round(width*(156.0/1440)), next_level_y-round(height*(130.0/900)), round(width*(130.0/1440)), round(height*(130.0/900))); //hitbox of NEXT LEVEL button
       }
       //check if the mouse if over the NEXT LEVEL option
-      if (mouseX > next_level_x-int(round(width*(156.0/1440))) && mouseX < next_level_x-int(round(width*(26.0/1440))) && mouseY > next_level_y-int(round(height*(130.0/900))) && mouseY < next_level_y) {
+      if (mouseX > next_level_x-round(width*(156.0/1440)) && mouseX < next_level_x-round(width*(26.0/1440)) && mouseY > next_level_y-round(height*(130.0/900)) && mouseY < next_level_y) {
         mouse_over_next_level = true;
-        image(image_right_arrow_yellow, next_level_x-int(round(width*(155.0/1440))), next_level_y-int(round(height*(130.0/900))), int(round(width*(130.0/1440))), int(round(height*(130.0/900))));
+        image(image_right_arrow_yellow, next_level_x-round(width*(155.0/1440)), next_level_y-round(height*(130.0/900)), round(width*(130.0/1440)), round(height*(130.0/900)));
       } else {
         mouse_over_next_level = false;
-        image(image_right_arrow_red, next_level_x-int(round(width*(155.0/1440))), next_level_y-int(round(height*(130.0/900))), int(round(width*(130.0/1440))), int(round(height*(130.0/900))));
+        image(image_right_arrow_red, next_level_x-round(width*(155.0/1440)), next_level_y-round(height*(130.0/900)), round(width*(130.0/1440)), round(height*(130.0/900)));
       }
     }
     
     if (!level_1) { //if you are not being displayed the first level you have the option to view the PREVIOUS one
       if (hitboxes) {
         fill(255, 0, 255); //pink
-        rect(previous_level_x+int(round(width*(25.0/1440))), previous_level_y-int(round(height*(130.0/900))), int(round(width*(130.0/1440))), int(round(height*(130.0/900)))); //hitbox of PREVIOUS LEVEL button
+        rect(previous_level_x+round(width*(25.0/1440)), previous_level_y-round(height*(130.0/900)), round(width*(130.0/1440)), round(height*(130.0/900))); //hitbox of PREVIOUS LEVEL button
       }
       //check if the mouse if over the PREVIOUS LEVEL option
-      if (mouseX > previous_level_x+int(round(width*(25.0/1440))) && mouseX < previous_level_x+int(round(width*(155.0/1440))) && mouseY > previous_level_y-int(round(height*(130.0/900))) && mouseY < previous_level_y) {
+      if (mouseX > previous_level_x+round(width*(25.0/1440)) && mouseX < previous_level_x+round(width*(155.0/1440)) && mouseY > previous_level_y-round(height*(130.0/900)) && mouseY < previous_level_y) {
         mouse_over_previous_level = true;
-        image(image_left_arrow_yellow, previous_level_x+int(round(width*(25.0/1440))), previous_level_y-int(round(height*(130.0/900))), int(round(width*(130.0/1440))), int(round(height*(130.0/900))));
+        image(image_left_arrow_yellow, previous_level_x+round(width*(25.0/1440)), previous_level_y-round(height*(130.0/900)), round(width*(130.0/1440)), round(height*(130.0/900)));
       } else {
         mouse_over_previous_level = false;
-        image(image_left_arrow_red, previous_level_x+int(round(width*(25.0/1440))), previous_level_y-int(round(height*(130.0/900))), int(round(width*(130.0/1440))), int(round(height*(130.0/900))));
+        image(image_left_arrow_red, previous_level_x+round(width*(25.0/1440)), previous_level_y-round(height*(130.0/900)), round(width*(130.0/1440)), round(height*(130.0/900)));
       }
     }
     
     fill(255, 255, 255); //white
-    textSize(int(round(width*(60.0/1440)))); 
+    textSize(round(width*(60.0/1440))); 
     if (level_1) {
       level = levels[0];
       mouse_over_previous_level = false;
-      image(image_thumb1, int(round(width*(420.0/1440))), int(round(height*(100.0/900))), int(round(width*(600./1440))), int(round(height*(350.0/900))));
-      text("1st year", width/2, height/2+int(round(height*(70.0/900))));
+      image(image_thumb1, round(width*(420.0/1440)), round(height*(100.0/900)), round(width*(600./1440)), round(height*(350.0/900)));
+      text("1st year", width/2, height/2+round(height*(70.0/900)));
     } else if (level_2) {
       level = levels[1];
-      text("2nd year", width/2, height/2+int(round(height*(70.0/900)))); 
+      text("2nd year", width/2, height/2+round(height*(70.0/900))); 
       if (game.courses_collected < 6) {
-        image(image_thumb2_locked, int(round(width*(420.0/1440))), int(round(height*(100.0/900))), int(round(width*(600./1440))), int(round(height*(350.0/900))));
-        textSize(int(round(width*(60.0/1440))*3/5));
+        image(image_thumb2_locked, round(width*(420.0/1440)), round(height*(100.0/900)), round(width*(600./1440)), round(height*(350.0/900)));
+        textSize(round(width*(60.0/1440)*3/5));
         if (6 - game.courses_collected > 1) {
-          text("You  need  to  pass  " + (6 - game.courses_collected) + "  more  courses  to  unlock  this  year !", int(round(width*(720.0/1440))), int(round(height*(600.0/900))));
+          text("You  need  to  pass  " + (6 - game.courses_collected) + "  more  courses  to  unlock  this  year !", round(width*(720.0/1440)), round(height*(600.0/900)));
         } else {
-          text("You  need  to  pass  1  more  course  to  unlock  this  year !", int(round(width*(720.0/1440))), int(round(height*(600.0/900))));
+          text("You  need  to  pass  1  more  course  to  unlock  this  year !", round(width*(720.0/1440)), round(height*(600.0/900)));
         }
         year_locked = true;
       } else {
-        image(image_thumb2, int(round(width*(420.0/1440))), int(round(height*(100.0/900))), int(round(width*(600./1440))), int(round(height*(350.0/900))));
+        image(image_thumb2, round(width*(420.0/1440)), round(height*(100.0/900)), round(width*(600./1440)), round(height*(350.0/900)));
       }
     } else if (level_3) {
       level = levels[2];
-      text("3rd year", width/2, height/2+int(round(height*(70.0/900))));
+      text("3rd year", width/2, height/2+round(height*(70.0/900)));
       if (game.courses_collected < 12) {
-        image(image_thumb3_locked, int(round(width*(420.0/1440))), int(round(height*(100.0/900))), int(round(width*(600./1440))), int(round(height*(350.0/900))));
-        textSize(int(round(width*(60.0/1440))*3/5));
+        image(image_thumb3_locked, round(width*(420.0/1440)), round(height*(100.0/900)), round(width*(600./1440)), round(height*(350.0/900)));
+        textSize(round(width*(60.0/1440)*3/5));
         if (12 - game.courses_collected > 1) {
-          text("You  need  to  pass  " + (12 - game.courses_collected) + "  more  courses  to  unlock  this  year !", int(round(width*(720.0/1440))), int(round(height*(600.0/900))));
+          text("You  need  to  pass  " + (12 - game.courses_collected) + "  more  courses  to  unlock  this  year !", round(width*(720.0/1440)), round(height*(600.0/900)));
         } else {
-          text("You  need  to  pass  1  more  course  to  unlock  this  year !", int(round(width*(720.0/1440))), int(round(height*(600.0/900))));
+          text("You  need  to  pass  1  more  course  to  unlock  this  year !", round(width*(720.0/1440)), round(height*(600.0/900)));
         }
         year_locked = true;
       } else {
-        image(image_thumb3, int(round(width*(420.0/1440))), int(round(height*(100.0/900))), int(round(width*(600./1440))), int(round(height*(350.0/900))));
+        image(image_thumb3, round(width*(420.0/1440)), round(height*(100.0/900)), round(width*(600./1440)), round(height*(350.0/900)));
       }
     } else if (level_4) {
       level = levels[3];
       mouse_over_next_level = false;
-      text("4th year", width/2, height/2+int(round(height*(70.0/900))));
+      text("4th year", width/2, height/2+round(height*(70.0/900)));
       if (game.courses_collected < 18) {
-        image(image_thumb4_locked, int(round(width*(420.0/1440))), int(round(height*(100.0/900))), int(round(width*(600./1440))), int(round(height*(350.0/900))));
-        textSize(int(round(width*(60.0/1440))*3/5));
+        image(image_thumb4_locked, round(width*(420.0/1440)), round(height*(100.0/900)), round(width*(600./1440)), round(height*(350.0/900)));
+        textSize(round(width*(60.0/1440)*3/5));
         if (18 - game.courses_collected > 1) {
-          text("You  need  to  pass  " + (18 - game.courses_collected) + "  more  courses  to  unlock  this  year !", int(round(width*(720.0/1440))), int(round(height*(600.0/900))));
+          text("You  need  to  pass  " + (18 - game.courses_collected) + "  more  courses  to  unlock  this  year !", round(width*(720.0/1440)), round(height*(600.0/900)));
         } else {
-          text("You  need  to  pass  1  more  course  to  unlock  this  year !", int(round(width*(720.0/1440))), int(round(height*(600.0/900))));
+          text("You  need  to  pass  1  more  course  to  unlock  this  year !", round(width*(720.0/1440)), round(height*(600.0/900)));
         }
-        text("You  need  to  pass  " + (18 - game.courses_collected) + "  more  courses  to  unlock  this  year !", int(round(width*(720.0/1440))), int(round(height*(600.0/900))));
+        text("You  need  to  pass  " + (18 - game.courses_collected) + "  more  courses  to  unlock  this  year !", round(width*(720.0/1440)), round(height*(600.0/900)));
         year_locked = true;
       } else {
-        image(image_thumb4, int(round(width*(420.0/1440))), int(round(height*(100.0/900))), int(round(width*(600./1440))), int(round(height*(350.0/900))));
+        image(image_thumb4, round(width*(420.0/1440)), round(height*(100.0/900)), round(width*(600./1440)), round(height*(350.0/900)));
       }
     }
     if (!year_locked) {
       if (level.courses_collected < level.courses.length) {
-        textSize(int(round(width*(60.0/1440))*3/4));
-        text(level.courses.length - level.courses_collected + "  courses  left  to  pass !", int(round(width*(720./1440))), int(round(height*(600.0/900))));  
+        textSize(round(width*(60.0/1440)*3/4));
+        text(level.courses.length - level.courses_collected + "  courses  left  to  pass !", round(width*(720./1440)), round(height*(600.0/900)));  
       } else {
-        textSize(int(round(width*(60.0/1440))*3/5));
-        text("You  have  passed  all  the  courses  from  this  year !", int(round(width*(720./1440))), int(round(height*(595.0/900))));
+        textSize(round(width*(60.0/1440)*3/5));
+        text("You  have  passed  all  the  courses  from  this  year !", round(width*(720./1440)), round(height*(595.0/900)));
       }
     }
     
-    image(image_course, int(round(width*(58.0/1440))), int(round(height*(188.0/900))), int(round(width*(32.0/1440))), int(round(height*(32.0/900))));
+    image(image_course, round(width*(58.0/1440)), round(height*(188.0/900)), round(width*(32.0/1440)), round(height*(32.0/900)));
     fill(220, 220, 220); //light grey
-    textSize(int(round(width*(60.0/1440))*0.4));
-    text("X", int(round(width*(106.0/1440))), int(round(height*(213.0/900))));
+    textSize(round(width*(60.0/1440)*0.4));
+    text("X", round(width*(106.0/1440)), round(height*(213.0/900)));
     fill(255, 215, 0); //gold
-    textSize(int(round(width*(60.0/1440))*3/4));
+    textSize(round(width*(60.0/1440)*3/4));
     textAlign(LEFT);
-    text(game.courses_collected, int(round(width*(122.0/1440))), int(round(height*(218.0/900))));
+    text(game.courses_collected, round(width*(122.0/1440)), round(height*(218.0/900)));
     
     displayCharacter();
     
@@ -705,134 +705,134 @@ class Menu {
     
     if (hitboxes) {
       fill(255, 0, 255); //pink
-      rect(return_x-int(round(width*(131.0/1440))), return_y-int(round(height*(130.0/900))), int(round(width*(130.0/1440))), int(round(height*(130.0/900)))); //hitbox of RETURN to menu button
-      rect(int(round(width*(20.0/1440))), int(round(height*(20.0/900))), int(round(width*(50.0/1440))), int(round(height*(50.0/900)))); //hitbox of DISPLAY FPS button
-      rect(int(round(width*(20.0/1440))), int(round(height*(80.0/900))), int(round(width*(50.0/1440))), int(round(height*(50.0/900)))); //hitbox of DISPLAY HITBOXES button
-      rect(int(round(width*(20.0/1440))), int(round(height*(140.0/900))), int(round(width*(50.0/1440))), int(round(height*(50.0/900)))); //hitbox of DISPLAY COORDINATES button
-      rect(master_volume_x, master_volume_up_y, int(round(width*(65.0/1440))), int(round(height*(33.0/900)))); //hitbox of MASTER VOLUME UP button
-      rect(master_volume_x, master_volume_down_y, int(round(width*(65.0/1440))), int(round(height*(33.0/900)))); //hitbox of MASTER VOLUME DOWN button
-      rect(music_volume_x, music_volume_up_y, int(round(width*(65.0/1440))), int(round(height*(33.0/900)))); //hitbox of MUSIC VOLUME UP button
-      rect(music_volume_x, music_volume_down_y, int(round(width*(65.0/1440))), int(round(height*(33.0/900)))); //hitbox of MUSIC VOLUME DOWN button
-      rect(sfx_volume_x, sfx_volume_up_y, int(round(width*(65.0/1440))), int(round(height*(33.0/900)))); //hitbox of SFX VOLUME UP button
-      rect(sfx_volume_x, sfx_volume_down_y, int(round(width*(65.0/1440))), int(round(height*(33.0/900)))); //hitbox of SFX VOLUME DOWN button
+      rect(return_x-round(width*(131.0/1440)), return_y-round(height*(130.0/900)), round(width*(130.0/1440)), round(height*(130.0/900))); //hitbox of RETURN to menu button
+      rect(round(width*(20.0/1440)), round(height*(20.0/900)), round(width*(50.0/1440)), round(height*(50.0/900))); //hitbox of DISPLAY FPS button
+      rect(round(width*(20.0/1440)), round(height*(80.0/900)), round(width*(50.0/1440)), round(height*(50.0/900))); //hitbox of DISPLAY HITBOXES button
+      rect(round(width*(20.0/1440)), round(height*(140.0/900)), round(width*(50.0/1440)), round(height*(50.0/900))); //hitbox of DISPLAY COORDINATES button
+      rect(master_volume_x, master_volume_up_y, round(width*(65.0/1440)), round(height*(33.0/900))); //hitbox of MASTER VOLUME UP button
+      rect(master_volume_x, master_volume_down_y, round(width*(65.0/1440)), round(height*(33.0/900))); //hitbox of MASTER VOLUME DOWN button
+      rect(music_volume_x, music_volume_up_y, round(width*(65.0/1440)), round(height*(33.0/900))); //hitbox of MUSIC VOLUME UP button
+      rect(music_volume_x, music_volume_down_y, round(width*(65.0/1440)), round(height*(33.0/900))); //hitbox of MUSIC VOLUME DOWN button
+      rect(sfx_volume_x, sfx_volume_up_y, round(width*(65.0/1440)), round(height*(33.0/900))); //hitbox of SFX VOLUME UP button
+      rect(sfx_volume_x, sfx_volume_down_y, round(width*(65.0/1440)), round(height*(33.0/900))); //hitbox of SFX VOLUME DOWN button
     }
     
     //check if the mouse is over the RETURN option
-    if (mouseX > return_x-int(round(width*(131.0/1440))) && mouseX < return_x && mouseY > return_y-int(round(height*(130.0/900))) && mouseY < return_y) {
+    if (mouseX > return_x-round(width*(131.0/1440)) && mouseX < return_x && mouseY > return_y-round(height*(130.0/900)) && mouseY < return_y) {
       mouse_over_return = true;
-      image(image_return_arrow_yellow, return_x-int(round(width*(130.0/1440))), return_y-int(round(height*(130.0/900))), int(round(width*(130.0/1440))), int(round(height*(130.0/900))));
+      image(image_return_arrow_yellow, return_x-round(width*(130.0/1440)), return_y-round(height*(130.0/900)), round(width*(130.0/1440)), round(height*(130.0/900)));
     } else {
       mouse_over_return = false;
-      image(image_return_arrow_red, return_x-int(round(width*(130.0/1440))), return_y-int(round(height*(130.0/900))), int(round(width*(130.0/1440))), int(round(height*(130.0/900))));
+      image(image_return_arrow_red, return_x-round(width*(130.0/1440)), return_y-round(height*(130.0/900)), round(width*(130.0/1440)), round(height*(130.0/900)));
     }
     
     //check if mouse is over DISPLAY FPS option
-    if (mouseX > int(round(width*(20.0/1440))) && mouseX < int(round(width*(70.0/1440))) && mouseY > int(round(height*(20.0/900))) && mouseY < int(round(height*(70.0/900)))) {
+    if (mouseX > round(width*(20.0/1440)) && mouseX < round(width*(70.0/1440)) && mouseY > round(height*(20.0/900)) && mouseY < round(height*(70.0/900))) {
       mouse_over_display_fps = true;
     } else {
       mouse_over_display_fps = false;
     }
     
     //check if mouse is over DISPLAY HITBOXES option
-    if (mouseX > int(round(width*(20.0/1440))) && mouseX < int(round(width*(70.0/1440))) && mouseY > int(round(height*(80.0/900))) && mouseY < int(round(height*(130.0/900)))) {
+    if (mouseX > round(width*(20.0/1440)) && mouseX < round(width*(70.0/1440)) && mouseY > round(height*(80.0/900)) && mouseY < round(height*(130.0/900))) {
       mouse_over_display_hitboxes = true;
     } else {
       mouse_over_display_hitboxes = false;
     }
     
     //check if mouse is over DISPLAY COORDINATES option
-    if (mouseX > int(round(width*(20.0/1440))) && mouseX < int(round(width*(70.0/1440))) && mouseY > int(round(height*(140.0/900))) && mouseY < int(round(height*(190.0/900)))) {
+    if (mouseX > round(width*(20.0/1440)) && mouseX < round(width*(70.0/1440)) && mouseY > round(height*(140.0/900)) && mouseY < round(height*(190.0/900))) {
       mouse_over_display_coordinates = true;
     } else {
       mouse_over_display_coordinates = false;
     }
     
     //check if mouse is over MASTER VOLUME UP option
-    if (mouseX > master_volume_x && mouseX < master_volume_x+int(round(width*(65.0/1440))) && mouseY > master_volume_up_y && mouseY < master_volume_up_y+int(round(height*(33.0/900)))) {
+    if (mouseX > master_volume_x && mouseX < master_volume_x+round(width*(65.0/1440)) && mouseY > master_volume_up_y && mouseY < master_volume_up_y+round(height*(33.0/900))) {
       mouse_over_master_volume_up = true;
     } else {
       mouse_over_master_volume_up = false;
     }
     
     //check if mouse is over MASTER VOLUME DOWN option
-    if (mouseX > master_volume_x && mouseX < master_volume_x+int(round(width*(65.0/1440))) && mouseY > master_volume_down_y && mouseY < master_volume_down_y+int(round(height*(33.0/900)))) {
+    if (mouseX > master_volume_x && mouseX < master_volume_x+round(width*(65.0/1440)) && mouseY > master_volume_down_y && mouseY < master_volume_down_y+round(height*(33.0/900))) {
       mouse_over_master_volume_down = true;
     } else {
       mouse_over_master_volume_down = false;
     }
     
     //check if mouse is over MUSIC VOLUME UP option
-    if (mouseX > music_volume_x && mouseX < music_volume_x+int(round(width*(65.0/1440))) && mouseY > music_volume_up_y && mouseY < music_volume_up_y+int(round(height*(33.0/900)))) {
+    if (mouseX > music_volume_x && mouseX < music_volume_x+round(width*(65.0/1440)) && mouseY > music_volume_up_y && mouseY < music_volume_up_y+round(height*(33.0/900))) {
       mouse_over_music_volume_up = true;
     } else {
       mouse_over_music_volume_up = false;
     }
     
     //check if mouse is over MUSIC VOLUME DOWN option
-    if (mouseX > music_volume_x && mouseX < music_volume_x+int(round(width*(65.0/1440))) && mouseY > music_volume_down_y && mouseY < music_volume_down_y+int(round(height*(33.0/900)))) {
+    if (mouseX > music_volume_x && mouseX < music_volume_x+round(width*(65.0/1440)) && mouseY > music_volume_down_y && mouseY < music_volume_down_y+round(height*(33.0/900))) {
       mouse_over_music_volume_down = true;
     } else {
       mouse_over_music_volume_down = false;
     }
     
     //check if mouse is over SFX VOLUME UP option
-    if (mouseX > sfx_volume_x && mouseX < sfx_volume_x+int(round(width*(65.0/1440))) && mouseY > sfx_volume_up_y && mouseY < sfx_volume_up_y+int(round(height*(33.0/900)))) {
+    if (mouseX > sfx_volume_x && mouseX < sfx_volume_x+round(width*(65.0/1440)) && mouseY > sfx_volume_up_y && mouseY < sfx_volume_up_y+round(height*(33.0/900))) {
       mouse_over_sfx_volume_up = true;
     } else {
       mouse_over_sfx_volume_up = false;
     }
     
     //check if mouse is over SFX VOLUME DOWN option
-    if (mouseX > sfx_volume_x && mouseX < sfx_volume_x+int(round(width*(65.0/1440))) && mouseY > sfx_volume_down_y && mouseY < sfx_volume_down_y+int(round(height*(33.0/900)))) {
+    if (mouseX > sfx_volume_x && mouseX < sfx_volume_x+round(width*(65.0/1440)) && mouseY > sfx_volume_down_y && mouseY < sfx_volume_down_y+round(height*(33.0/900))) {
       mouse_over_sfx_volume_down = true;
     } else {
       mouse_over_sfx_volume_down = false;
     }
     
     fill(255, 255, 255); //white
-    textSize(int(round(width*(60.0/1440))*0.8));
+    textSize(round(width*(60.0/1440)*0.8));
     
     if (!fps) {
-      image(image_tab_black, int(round(width*(25.0/1440))), int(round(height*(25.0/900))), int(round(width*(40.0/1440))), int(round(height*(40.0/900))));
+      image(image_tab_black, round(width*(25.0/1440)), round(height*(25.0/900)), round(width*(40.0/1440)), round(height*(40.0/900)));
     } else {
-      image(image_tab_white, int(round(width*(25.0/1440))), int(round(height*(25.0/900))), int(round(width*(40.0/1440))), int(round(height*(40.0/900))));
+      image(image_tab_white, round(width*(25.0/1440)), round(height*(25.0/900)), round(width*(40.0/1440)), round(height*(40.0/900)));
     }
-    text("display  fps", int(round(width*(80.0/1440))), int(round(height*(60.0/900))));
+    text("display  fps", round(width*(80.0/1440)), round(height*(60.0/900)));
     
     if (!hitboxes) {
-      image(image_tab_black, int(round(width*(25.0/1440))), int(round(height*(85.0/900))), int(round(width*(40.0/1440))), int(round(height*(40.0/900))));
+      image(image_tab_black, round(width*(25.0/1440)), round(height*(85.0/900)), round(width*(40.0/1440)), round(height*(40.0/900)));
     } else {
-      image(image_tab_white, int(round(width*(25.0/1440))), int(round(height*(85.0/900))), int(round(width*(40.0/1440))), int(round(height*(40.0/900))));
+      image(image_tab_white, round(width*(25.0/1440)), round(height*(85.0/900)), round(width*(40.0/1440)), round(height*(40.0/900)));
     }
-    text("display  hitboxes", int(round(width*(80.0/1440))), int(round(height*(120.0/900))));
+    text("display  hitboxes", round(width*(80.0/1440)), round(height*(120.0/900)));
     
     if (!coordinates) {
-      image(image_tab_black, int(round(width*(25.0/1440))), int(round(height*(145.0/900))), int(round(width*(40.0/1440))), int(round(height*(40.0/900))));
+      image(image_tab_black, round(width*(25.0/1440)), round(height*(145.0/900)), round(width*(40.0/1440)), round(height*(40.0/900)));
     } else {
-      image(image_tab_white, int(round(width*(25.0/1440))), int(round(height*(145.0/900))), int(round(width*(40.0/1440))), int(round(height*(40.0/900))));
+      image(image_tab_white, round(width*(25.0/1440)), round(height*(145.0/900)), round(width*(40.0/1440)), round(height*(40.0/900)));
     }
-    text("display  coordinates", int(round(width*(80.0/1440))), int(round(height*(180.0/900))));
+    text("display  coordinates", round(width*(80.0/1440)), round(height*(180.0/900)));
     
-    image(image_up_arrowC, master_volume_x, master_volume_up_y, int(round(width*(65.0/1440))), int(round(height*(33.0/900))));
-    image(image_down_arrowC, master_volume_x, master_volume_down_y, int(round(width*(65.0/1440))), int(round(height*(33.0/900))));
+    image(image_up_arrowC, master_volume_x, master_volume_up_y, round(width*(65.0/1440)), round(height*(33.0/900)));
+    image(image_down_arrowC, master_volume_x, master_volume_down_y, round(width*(65.0/1440)), round(height*(33.0/900)));
     fill(255);
-    text("master", master_x, master_y+int(round(height*(120.0/900))));
+    text("master", master_x, master_y+round(height*(120.0/900)));
     fill(0);
-    text(master_volume, master_volume_x+int(round(width*(17.0/1440))), master_y+int(round(height*(120.0/900))));
+    text(master_volume, master_volume_x+round(width*(17.0/1440)), master_y+round(height*(120.0/900)));
     
-    image(image_up_arrowC, music_volume_x, music_volume_up_y, int(round(width*(65.0/1440))), int(round(height*(33.0/900))));
-    image(image_down_arrowC, music_volume_x, music_volume_down_y, int(round(width*(65.0/1440))), int(round(height*(33.0/900))));
+    image(image_up_arrowC, music_volume_x, music_volume_up_y, round(width*(65.0/1440)), round(height*(33.0/900)));
+    image(image_down_arrowC, music_volume_x, music_volume_down_y, round(width*(65.0/1440)), round(height*(33.0/900)));
     fill(255);
-    text("music", music_x, music_y+int(round(height*(120.0/900))));
+    text("music", music_x, music_y+round(height*(120.0/900)));
     fill(0);
-    text(music_volume, music_volume_x+int(round(width*(17.0/1440))), music_y+int(round(height*(120.0/900))));
+    text(music_volume, music_volume_x+round(width*(17.0/1440)), music_y+round(height*(120.0/900)));
     
-    image(image_up_arrowC, sfx_volume_x, sfx_volume_up_y, int(round(width*(65.0/1440))), int(round(height*(33.0/900))));
-    image(image_down_arrowC, sfx_volume_x, sfx_volume_down_y, int(round(width*(65.0/1440))), int(round(height*(33.0/900))));
+    image(image_up_arrowC, sfx_volume_x, sfx_volume_up_y, round(width*(65.0/1440)), round(height*(33.0/900)));
+    image(image_down_arrowC, sfx_volume_x, sfx_volume_down_y, round(width*(65.0/1440)), round(height*(33.0/900)));
     fill(255);
-    text("sfx", sfx_x, sfx_y+int(round(height*(120.0/900))));
+    text("sfx", sfx_x, sfx_y+round(height*(120.0/900)));
     fill(0);
-    text(sfx_volume, sfx_volume_x+int(round(width*(17.0/1440))), sfx_y+int(round(height*(120.0/900))));
+    text(sfx_volume, sfx_volume_x+round(width*(17.0/1440)), sfx_y+round(height*(120.0/900)));
     
     textAlign(CENTER);
   }
@@ -841,30 +841,30 @@ class Menu {
     if (character_selected) {
       if (hitboxes) {
         fill(255, 0, 255); //pink
-        rect(int(round(width*(35.0/1440))), int(round(height*(35.0/900))), int(round(width*(144.0/1440))), int(round(height*(144.0/900))));
+        rect(round(width*(35.0/1440)), round(height*(35.0/900)), round(width*(144.0/1440)), round(height*(144.0/900)));
       }
       
-      if (mouseX > int(round(width*(35.0/1440))) && mouseX < int(round(width*(179.0/1440))) && mouseY > int(round(height*(35.0/900))) && mouseY < int(round(height*(179.0/900)))) {
-        image(image_tab_blue2, int(round(width*(40.0/1440))), int(round(height*(40.0/900))), int(round(width*(134.0/1440))), int(round(height*(134.0/900))));
+      if (mouseX > round(width*(35.0/1440)) && mouseX < round(width*(179.0/1440)) && mouseY > round(height*(35.0/900)) && mouseY < round(height*(179.0/900))) {
+        image(image_tab_blue2, round(width*(40.0/1440)), round(height*(40.0/900)), round(width*(134.0/1440)), round(height*(134.0/900)));
         mouse_over_displayed_character = true;
       } else {
-        image(image_tab_blue1, int(round(width*(40.0/1440))), int(round(height*(40.0/900))), int(round(width*(134.0/1440))), int(round(height*(134.0/900))));
+        image(image_tab_blue1, round(width*(40.0/1440)), round(height*(40.0/900)), round(width*(134.0/1440)), round(height*(134.0/900)));
         mouse_over_displayed_character = false;
       }
       
       //display character on tab
       if (character == 0) {
-        image(image_character0, int(round(width*(76.0/1440))), int(round(height*(32.0/900))), int(round(width*(64.0/1440))), int(round(height*(128.0/900))));
+        image(image_character0, round(width*(76.0/1440)), round(height*(32.0/900)), round(width*(64.0/1440)), round(height*(128.0/900)));
       } else if (character == 1) {
-        image(image_character1, int(round(width*(76.0/1440))), int(round(height*(32.0/900))), int(round(width*(64.0/1440))), int(round(height*(128.0/900))));
+        image(image_character1, round(width*(76.0/1440)), round(height*(32.0/900)), round(width*(64.0/1440)), round(height*(128.0/900)));
       } else if (character == 2) {
-        image(image_character2, int(round(width*(76.0/1440))), int(round(height*(32.0/900))), int(round(width*(64.0/1440))), int(round(height*(128.0/900))));
+        image(image_character2, round(width*(76.0/1440)), round(height*(32.0/900)), round(width*(64.0/1440)), round(height*(128.0/900)));
       } else if (character == 3) {
-        image(image_character3, int(round(width*(76.0/1440))), int(round(height*(32.0/900))), int(round(width*(64.0/1440))), int(round(height*(128.0/900))));
+        image(image_character3, round(width*(76.0/1440)), round(height*(32.0/900)), round(width*(64.0/1440)), round(height*(128.0/900)));
       } else if (character == 4) {
-        image(image_character4, int(round(width*(76.0/1440))), int(round(height*(32.0/900))), int(round(width*(64.0/1440))), int(round(height*(128.0/900))));
+        image(image_character4, round(width*(76.0/1440)), round(height*(32.0/900)), round(width*(64.0/1440)), round(height*(128.0/900)));
       } else if (character == 5) {
-        image(image_character5, int(round(width*(76.0/1440))), int(round(height*(32.0/900))), int(round(width*(64.0/1440))), int(round(height*(128.0/900))));
+        image(image_character5, round(width*(76.0/1440)), round(height*(32.0/900)), round(width*(64.0/1440)), round(height*(128.0/900)));
       }
     }
   }
@@ -886,29 +886,29 @@ class Menu {
     degree.draw();
     
     //check if the mouse is over the RETURN option
-    if (mouseX > return_x-int(round(width*(131.0/1440))) && mouseX < return_x && mouseY > return_y-int(round(height*(130.0/900))) && mouseY < return_y) {
+    if (mouseX > return_x-round(width*(131.0/1440)) && mouseX < return_x && mouseY > return_y-round(height*(130.0/900)) && mouseY < return_y) {
       mouse_over_return = true;
-      image(image_return_arrow_yellow, return_x-int(round(width*(130.0/1440))), return_y-int(round(height*(130.0/900))), int(round(width*(130.0/1440))), int(round(height*(130.0/900))));
+      image(image_return_arrow_yellow, return_x-round(width*(130.0/1440)), return_y-round(height*(130.0/900)), round(width*(130.0/1440)), round(height*(130.0/900)));
     } else {
       mouse_over_return = false;
-      image(image_return_arrow_red, return_x-int(round(width*(130.0/1440))), return_y-int(round(height*(130.0/900))), int(round(width*(130.0/1440))), int(round(height*(130.0/900))));
+      image(image_return_arrow_red, return_x-round(width*(130.0/1440)), return_y-round(height*(130.0/900)), round(width*(130.0/1440)), round(height*(130.0/900)));
     }
     
     fill(255, 215, 0); //gold
     textAlign(CENTER);
     
-    textSize(int(round(width*(60.0/1440))));
-    text("CONGRATULATIONS    FOR    GRADUATING", width/2, int(round(height*(120.0/900))));
+    textSize(round(width*(60.0/1440)));
+    text("CONGRATULATIONS    FOR    GRADUATING", width/2, round(height*(120.0/900)));
     
-    textSize(int(round(width*(60.0/1440))*2/3));
-    text("GRADUATION    CERTIFICATE", width/2, height/2-int(round(height*(80.0/900))));
+    textSize(round(width*(60.0/1440)*2/3));
+    text("GRADUATION    CERTIFICATE", width/2, height/2-round(height*(80.0/900)));
     
     fill(0);
-    textSize(int(round(width*(60.0/1440))));
-    text("THANKS   FOR   PLAYING   OUR   GAME", width/2, height/2+int(round(height*(120.0/900))));
-    textSize(int(round(width*(60.0/1440))*3/4));
-    text("THANOS    GEORGAKAKIS", width/2, height/2+int(round(height*(200.0/900))));
-    text("NICK    CHRISTODOULOU", width/2, height/2+int(round(height*(250.0/900))));
+    textSize(round(width*(60.0/1440)));
+    text("THANKS   FOR   PLAYING   OUR   GAME", width/2, height/2+round(height*(120.0/900)));
+    textSize(round(width*(60.0/1440)*3/4));
+    text("THANOS    GEORGAKAKIS", width/2, height/2+round(height*(200.0/900)));
+    text("NICK    CHRISTODOULOU", width/2, height/2+round(height*(250.0/900)));
   }
   
   void displayFps() {
@@ -916,8 +916,8 @@ class Menu {
     if (fps) {
       textAlign(CENTER);
       fill(0, 255, 0); //green
-      textSize(int(round(width*(60.0/1440))*0.8));
-      text(frameRate, width+int(round(width*(20.0/1440))), int(round(height*(30.0/900)))); 
+      textSize(round(width*(60.0/1440)*0.8));
+      text(frameRate, width+round(width*(20.0/1440)), round(height*(30.0/900))); 
     }
   }
 
@@ -926,11 +926,11 @@ class Menu {
     if (coordinates && !on_menu) {
       textAlign(LEFT);
       fill(0); //black
-      textSize(int(round(width*(60.0/1440))*0.8));
-      text("x ", int(round(width*(30.0/1440))), int(round(height*(40.0/900))));
-      text(int(player.x-round(width*(128.0/1440))), int(round(width*(90.0/1440))), int(round(height*(40.0/900))));
-      text("y ", int(round(width*(30.0/1440))), int(round(height*(80.0/900))));
-      text(int(-player.y+round(height*(644.0/900))), int(round(width*(90.0/1440))), int(round(height*(80.0/900))));
+      textSize(round(width*(60.0/1440)*0.8));
+      text("x ", round(width*(30.0/1440)), round(height*(40.0/900)));
+      text(int((player.x-width*(8.0/1440))/step), round(width*(90.0/1440)), round(height*(40.0/900)));
+      text("y ", round(width*(30.0/1440)), round(height*(80.0/900)));
+      text(int((-player.y+height*(644.0/900))*(900.0/height)), round(width*(90.0/1440)), round(height*(80.0/900)));
       textAlign(CENTER);
     }
   }
