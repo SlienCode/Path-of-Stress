@@ -25,7 +25,7 @@ class Car extends Object {
   }
 
   void toggle() {
-    rect(x+round(width/28.8), y+round(height/1.16), round(width/64), round(height/4.26));
+    rect(x+round(width/28.8), y+round(height/1.16), round(width/22.5), round(height/4.26));
     rect(x+round(width/12.63), y+round(height/1.20), round(width/36.92), round(height/4.26));
     rect(x+round(width/9.41), y+round(height/1.24), round(width/37.89), round(height/4.26));
     rect(x+round(width/7.54), y+round(height/1.28), round(width/10.14), round(height/4.26));
