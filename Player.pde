@@ -125,7 +125,10 @@ class Player {
       return true;
     }
     else {
-      Rectangle temp = new Rectangle((int)hitbox_feet.getX() + round(x_motion), (int)hitbox_feet.getY(), round(width/22.86), round(height/112.5));
+      //we need to round the the number with the higher absolute value
+      Rectangle temp;
+      if (x_motion < 0) temp = new Rectangle(floor((float)hitbox_feet.getX() + x_motion), (int)hitbox_feet.getY(), round(width/22.86), round(height/112.5));
+      else temp = new Rectangle(ceil((float)hitbox_feet.getX() + x_motion), (int)hitbox_feet.getY(), round(width/22.86), round(height/112.5));
       for (Object object: level.objects) { //for every object in the level
         if (!object.platform) {
           for (Rectangle hitboxiter: object.hitbox) {
