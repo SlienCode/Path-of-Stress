@@ -8,17 +8,17 @@ class Cone extends Object {
     image = loadImage(sketchPath() + "/images/objects/cone.png");
     platform = false;
     hitbox = new Rectangle[1];
-    hitbox[0] = new Rectangle((int)x, (int)y+(height-round(height/14.04)), round(width/22.5), round(height/14.04));
+    hitbox[0] = new Rectangle((int)x, height-round(height/14.04), round(width/22.5), round(height/14.04));
         
   }
   
   void draw() {
-    image(image, x, y+(height-round(height/14.06)), round(width/22.5), round(height/14.06));
-    hitbox[0].setLocation((int)x, (int)y+(height-round(height/14.04)));
+    image(image, x, height-round(height/14.06), round(width/22.5), round(height/14.06));
+    hitbox[0].setLocation((int)x, height-round(height/14.04));
   }
   
   void toggle() {
-    rect(x, y+(height-round(height/14.04)), round(width/22.5), round(height/14.04));
+    rect(x, height-round(height/14.04), round(width/22.5), round(height/14.04));
   }
   
 };

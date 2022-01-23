@@ -8,17 +8,17 @@ class Pillar extends Object {
     image = loadImage(sketchPath() + "/images/objects/pillar.png");
     platform = true;
     hitbox = new Rectangle[1];
-    hitbox[0] = new Rectangle((int)x+round(width/53.33), (int)y+round(height/1.49), round(width/10.51), round(height/45.0));
+    hitbox[0] = new Rectangle((int)x+round(width/53.33), round(height/1.49), round(width/10.51), round(height/45.0));
         
   }
   
   void draw() {
-    image(image, x, y+(height - round(height/2.81)), round(width/7.5), round(height/2.81));
-    hitbox[0].setLocation((int)x+round(width/53.33), (int)y+round(height/1.49));
+    image(image, x, height-round(height/2.81), round(width/7.5), round(height/2.81));
+    hitbox[0].setLocation((int)x+round(width/53.33), round(height/1.49));
   }
   
   void toggle() {
-    rect(x+round(width/53.33), y+round(height/1.49), round(width/10.51), round(height/45.0));
+    rect(x+round(width/53.33), round(height/1.49), round(width/10.51), round(height/45.0));
   }
   
 };
