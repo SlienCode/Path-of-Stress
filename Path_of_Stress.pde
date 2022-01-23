@@ -1,4 +1,4 @@
-import processing.sound.*; //<>//
+import processing.sound.*; //<>// //<>//
 import java.lang.*;
 
 //variable used for the intro and main of the 1st and 4th year songs
@@ -29,9 +29,9 @@ void setup() {
   surface.setIcon(icon);
   surface.setCursor(loadImage(sketchPath() + "/images/miscellaneous/cursor/cursor.png"), 9, 3);
   surface.setTitle("Path of Stress");
-  //fullScreen(FX2D);
+  fullScreen(FX2D);
   //size(1440, 900, FX2D);
-  size(1366, 768, FX2D);
+  //size(1366, 768, FX2D);
   //size(800, 600, FX2D);
   
   step = width/180.0; //the step size in pixels the player will make

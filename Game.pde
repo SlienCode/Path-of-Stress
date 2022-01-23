@@ -4,6 +4,7 @@ class Game {
   
   PImage image;
   boolean pause;
+  boolean npc_pause;
   boolean quit;
   boolean free_esc; //is the user holding the esc button? if they aren't then it's free so -> true
   
@@ -29,17 +30,19 @@ class Game {
     mouse_over_leave_game = false;
 
     pause = false;
+    npc_pause = false;
   }
   
   void draw() {
-    if (!pause) {
+    
+    if (!pause && !npc_pause) {
       
       player.still = player.onKiss();
       
       level.draw();
       player.draw();
     }
-    else gameMenu();
+    else if (pause) gameMenu();
     
     if (transition_counter == -1) {
       if (player.x >= level.right_border) {
@@ -58,7 +61,7 @@ class Game {
   //make it so that holding a button won't execute keyPressed continuously using free_right and free_left
   void keyPressed() {
     if (!pause) player.keyPressed();
-    if ((key == ESC) && free_esc) {
+    if ((key == ESC && !npc_pause) && free_esc) {
       free_esc = false;
       if (!pause) { //press ESC while playing
         key = 0;

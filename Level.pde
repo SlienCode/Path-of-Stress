@@ -25,6 +25,7 @@ class Level {
 
   Object[] objects;
   Course[] courses;
+  NPC[] npcs;
   
   boolean[] passed; //tests which courses the player took before leaving the game
   
@@ -75,6 +76,10 @@ class Level {
       courses[8] = new Course(width*3.97, height*0.33); //difficulty: 2
       courses[9] = new Course(width*4.55, height*0.38); //difficulty: 2
       
+      npcs = new NPC[1];
+      npcs[0] = new NPC(width/(1440/400.0), "1st_1", "H E LLO     TH E R E     A N D     W E LC O M E     TO     O U R     U N I V E R S I TY\nI F     Y O U     W I S H     TO     G R U A D U A TE      Y O U     N E E D     TO     P A S S\nA LL    3 6     C O U R S E S     A N D     G E T     TO     TH E     E N D     O F     E V E R Y\nS T A G E     A S     Q U I TTI N G     W I L L     N O T     S A V E     Y O U R     P R O G R E S S\n\nU S E     A     A N D     D     O R     TH E     A R R O W     P A D     TO     M O V E\nA N D     TH E     S P A C E     B A R     TO     J U M P\nB E S T     O F     LU C K     !", 7);
+      //npcs[1] = new NPC(width*3.60, "1st_2", "Y E S     I     J U S T     LI K E     TO     G O     F O R\nA     C O F F E E     F R O M     TI M E     TO     TI M E\nY E S     I     H A V E     M I S S E D     A     C O U P L E     O F     L E C T U R E S\nI     S T O P P E D     C O U N TI N G     A F T E R     1 2", 4);
+      
       right_border = 5*width;
     }
     else if (year == 2) {
@@ -114,6 +119,14 @@ class Level {
       courses[5] = new Course(width*2.78, height*0.22); //2
       courses[6] = new Course(width*3.34, height*0.28); //4
       courses[7] = new Course(width*3.90, height*0.44); //1
+      
+      npcs = new NPC[0];
+      
+      //npcs = new NPC[4];
+      //npcs[0] = new NPC(3200, "2nd_1", "TO D A Y     I S     S U C H     A     LO V E LY     D A Y\nS O     W H A T     D O     Y O U     S A Y     W E     G R A B     A\nC O F F E E     A N D     TA L K     A B O U T     P O LI TI C S     H U H", 3);
+      //npcs[1] = new NPC(width*3.20, "2nd_2", "B E LI E V E     I T     O R     N O T     B U T\nS O M E     C O U R S E S     A R E     H A R D E R\nTH A N     O TH E R S     TO     P A S S  !", 3);
+      //npcs[2] = new NPC(width*1.16, "2nd_3", "I     M I G H T     A S     W E LL     S I T\nH E R E     S I N C E     I     C A N N O T     J U M P\nO V E R     TH I S     B O O K S H E L F   !", 3, false, false);
+      //npcs[3] = new NPC(1300, "2nd_4", "I     D O     N O T     R E M E M B E R     \nA N Y     W O O D E N     TA B L E S     \nB E I N G     H E R E     B E F O R E", 3, false, true);
       
       right_border = round(width*4.32);
     }
@@ -169,6 +182,8 @@ class Level {
       courses[8] = new Course(width*5.16, height*0.83); //0
       courses[9] = new Course(width*5.80, height*0.13); //2
       
+      npcs = new NPC[0];
+      
       right_border = round(width*6.33);
     }
     else if (year == 4) {
@@ -201,12 +216,15 @@ class Level {
       courses[6] = new Course(width*4.31, height*0.29); //1
       courses[7] = new Course(width*5.10, height*0.45); //4
       
+      npcs = new NPC[0];
+      
       right_border = round(width*5.37);
     }
     
   }
 
   void draw() {
+    
     //move the background (and frontground if it exists) based on player movement
     if ((player.x >= width/2 - (width/22.5) - (width/180.0)) && (player.x <= right_border - width/2 - (width/22.5) - (width/90.0) && !player.still)) {
       if (player.x_motion > 0) {
@@ -219,6 +237,7 @@ class Level {
         
         for (Object object: objects) object.x -= step;
         for (Course course: courses) course.x -= step;
+        for (NPC npc: npcs) npc.x  -= step;
         move_x += step; //to reset the objects when leaving/finishing the level
       }
     }
@@ -233,6 +252,7 @@ class Level {
         
         for (Object object: objects) object.x += step;
         for (Course course: courses) course.x += step;
+        for (NPC npc: npcs) npc.x  += step;
         move_x -= step; //to reset the objects when quiting the level
       }
     }
@@ -248,10 +268,12 @@ class Level {
       toggleObjects();
       fill(255, 215, 0); //gold
       toggleCourses();
+      toggleNPC();
     }
     
     for (Object object: objects) object.draw();
     for (Course course: courses) course.draw();
+    for (NPC npc: npcs) npc.draw();
     
     displayCoursesCollected();
   }
@@ -263,6 +285,7 @@ class Level {
     if (game.quit) restoreCourses();
     for (Object object: objects) object.x += move_x;
     for (Course course: courses) course.x += move_x;
+    for (NPC npc: npcs) npc.x += move_x;
     flag = new Flag(width/1.26, height/2.13, width/40.0, height/25.0);
     move_x = 0;
     
@@ -276,6 +299,11 @@ class Level {
   //toggles courses hitbox visibility
   void toggleCourses() {
     for (Course course: courses) course.toggle();
+  }
+  
+  //toggles npc hitbox visibility
+  void toggleNPC() {
+    for (NPC npc: npcs) npc.toggle();
   }
   
   void restoreCourses() {

@@ -10,7 +10,9 @@ class Player {
   
   boolean free_right; //is the user holding the right arrow? if they aren't then it's free so -> true
   boolean free_left; //is the user holding the left arrow? if they aren't then it's free so -> true
-  boolean free_up; //is the user holding the up arrow? if they aren't then it's free so -> true
+  boolean free_jump; //is the user holding the space button? if they aren't then it's free so -> true
+  boolean free_up; //is the user holding the space button? if they aren't then it's free so -> true
+  
   
   boolean reverse; //when true, flip the image to head to the opposite direction
   
@@ -38,6 +40,7 @@ class Player {
     
     free_right = true;
     free_left = true;
+    free_jump = true;
     free_up = true;
     
     reverse = false;
@@ -85,6 +88,7 @@ class Player {
     else y += jump(); //otherwise, start jump
     
     collectedCourses(); //count collected courses
+    npcEncounter();
     
     //off screen borders
     if (y > height - round(height/3.51)) y = height - round(height/3.51);
@@ -155,7 +159,7 @@ class Player {
        rect(x + round(width/45), y + round(height/3.63), round(width/22.86), round(height/112.5));
      }
      if (reverse) { //if the player is walking towards the left, flip the image if needed 
-       scale(-1,1); 
+       scale(-1,1);
        image(image, - x - round(width/11.25), y, round(width/11.25), round(height/3.51));
        scale(-1,1);
      }
@@ -217,8 +221,21 @@ class Player {
     }
   }
   
+  //npc speech test
+  private void npcEncounter() {
+    
+  }
+  
   //make it so that holding a button won't execute keyPressed continuously using free_right and free_left
   void keyPressed() {
+    if (game.npc_pause && free_up && key != ESC) {
+      game.npc_pause = false;
+      if (keyCode == RIGHT || key == 'd' || key == 'D') free_right = false;
+      else if (keyCode == LEFT || key == 'a' || key == 'A') free_left = false;
+      else if (key == ' ') free_jump = false;
+      else if (keyCode == UP || key == 'w' || key == 'W') free_up = false;
+    }
+    else {
       if ((keyCode == RIGHT || key == 'd' || key == 'D') && free_right) {
         x_motion = step;
         player.walk_counter = 0;
@@ -231,39 +248,45 @@ class Player {
         free_left = false;
         player.reverse = true; //flip the image, head to the left
       }
-      if (keyCode == UP || key == 'w' || key == 'W'|| key == ' ') {
+      if (key == ' ') {
         //if we are on the ground, jump
-        if (player.onGround() && free_up && jump_counter == -1) {
+        if (player.onGround() && free_jump && jump_counter == -1) {
           player.jump_counter = 0;
         }
-        free_up = false;
+        free_jump = false;
       }
+      if ((keyCode == UP || key == 'w' || key == 'W') && free_up) {
+        free_up = false;
+        for (NPC npc: level.npcs)
+          if (hitbox_player.intersects(npc.hitbox)) npc.message();
+      }
+    }
   }
   
   void keyReleased() {
-      if (keyCode == RIGHT || key == 'd' || key == 'D') {
-        if (free_left) { //if the user is not holding the left arrow, you can stop the animations
-          x_motion = 0;
-          player.walk_counter = -1;
-        }
-        else {
-          player.x_motion = -step;
-          player.reverse = true; //flip the image, head to the left
-        }
-        free_right = true; //user let go of the right arrow
+    if (keyCode == RIGHT || key == 'd' || key == 'D') {
+      if (free_left) { //if the user is not holding the left arrow, you can stop the animations
+        x_motion = 0;
+        player.walk_counter = -1;
       }
-      else if (keyCode == LEFT || key == 'a' || key == 'A') {
-        if (free_right) { //if the user is not holding the right arrow, you can stop the animations
-          x_motion = 0;
-          player.walk_counter = -1;
-        }
-        else {
-          player.x_motion = step;
-          player.reverse = false; //don't flip the image, head to the right
-        }
-        free_left = true; //user let go of the left arrow
+      else {
+        player.x_motion = -step;
+        player.reverse = true; //flip the image, head to the left
       }
-      if (keyCode == UP || key == 'w' || key == 'W' || key == ' ')
-         free_up = true;
+      free_right = true; //user let go of the right arrow
     }
+    else if (keyCode == LEFT || key == 'a' || key == 'A') {
+      if (free_right) { //if the user is not holding the right arrow, you can stop the animations
+        x_motion = 0;
+        player.walk_counter = -1;
+      }
+      else {
+        player.x_motion = step;
+        player.reverse = false; //don't flip the image, head to the right
+      }
+      free_left = true; //user let go of the left arrow
+    }
+    if (key == ' ') free_jump = true;
+    if (keyCode == UP || key == 'w' || key == 'W') free_up = true;
+  }
 };
