@@ -907,8 +907,8 @@ class Menu {
     textSize(round(width*(60.0/1440)));
     text("THANKS   FOR   PLAYING   OUR   GAME", width/2, height/2+round(height*(120.0/900)));
     textSize(round(width*(60.0/1440)*3/4));
-    text("THANOS    GEORGAKAKIS", width/2, height/2+round(height*(200.0/900)));
-    text("NICK    CHRISTODOULOU", width/2, height/2+round(height*(250.0/900)));
+    text("NICK    CHRISTODOULOU", width/2, height/2+round(height*(200.0/900)));
+    text("THANOS    GEORGAKAKIS", width/2, height/2+round(height*(250.0/900)));
   }
   
   void displayFps() {

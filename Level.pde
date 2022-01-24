@@ -76,9 +76,9 @@ class Level {
       courses[8] = new Course(width*3.97, height*0.33); //difficulty: 2
       courses[9] = new Course(width*4.55, height*0.38); //difficulty: 2
       
-      npcs = new NPC[1];
-      npcs[0] = new NPC(width/(1440/400.0), "1st_1", "H E LLO     TH E R E     A N D     W E LC O M E     TO     O U R     U N I V E R S I TY\nI F     Y O U     W I S H     TO     G R U A D U A TE      Y O U     N E E D     TO     P A S S\nA LL    3 6     C O U R S E S     A N D     G E T     TO     TH E     E N D     O F     E V E R Y\nS T A G E     A S     Q U I TTI N G     W I L L     N O T     S A V E     Y O U R     P R O G R E S S\n\nU S E     A     A N D     D     O R     TH E     A R R O W     P A D     TO     M O V E\nA N D     TH E     S P A C E     B A R     TO     J U M P\nB E S T     O F     LU C K     !", 7);
-      //npcs[1] = new NPC(width*3.60, "1st_2", "Y E S     I     J U S T     LI K E     TO     G O     F O R\nA     C O F F E E     F R O M     TI M E     TO     TI M E\nY E S     I     H A V E     M I S S E D     A     C O U P L E     O F     L E C T U R E S\nI     S T O P P E D     C O U N TI N G     A F T E R     1 2", 4);
+      npcs = new NPC[2];
+      npcs[0] = new NPC(width*0.28, "1st_1", "H E LLO     TH E R E     A N D     W E LC O M E     TO     O U R     U N I V E R S I TY\nI F     Y O U     W I S H     TO     G R U A D U A TE      Y O U     N E E D     TO     P A S S\nA LL    3 6     C O U R S E S     A N D     G E T     TO     TH E     E N D     O F     E V E R Y\nS T A G E     A S     Q U I TTI N G     W I L L     N O T     S A V E     Y O U R     P R O G R E S S\n\nU S E     A     A N D     D     O R     TH E     A R R O W     P A D     TO     M O V E\nA N D     TH E     S P A C E     B A R     TO     J U M P\nB E S T     O F     LU C K     !", 7);
+      npcs[1] = new NPC(width*3.60, "1st_2", "Y E S     I     J U S T     LI K E     TO     G O     F O R\nA     C O F F E E     F R O M     TI M E     TO     TI M E\nY E S     I     H A V E     M I S S E D     A     C O U P L E     O F     L E C T U R E S\nI     S T O P P E D     C O U N TI N G     A F T E R     1 2", 4);
       
       right_border = 5*width;
     }
@@ -120,13 +120,12 @@ class Level {
       courses[6] = new Course(width*3.34, height*0.28); //4
       courses[7] = new Course(width*3.90, height*0.44); //1
       
-      npcs = new NPC[0];
-      
-      //npcs = new NPC[4];
-      //npcs[0] = new NPC(3200, "2nd_1", "TO D A Y     I S     S U C H     A     LO V E LY     D A Y\nS O     W H A T     D O     Y O U     S A Y     W E     G R A B     A\nC O F F E E     A N D     TA L K     A B O U T     P O LI TI C S     H U H", 3);
-      //npcs[1] = new NPC(width*3.20, "2nd_2", "B E LI E V E     I T     O R     N O T     B U T\nS O M E     C O U R S E S     A R E     H A R D E R\nTH A N     O TH E R S     TO     P A S S  !", 3);
-      //npcs[2] = new NPC(width*1.16, "2nd_3", "I     M I G H T     A S     W E LL     S I T\nH E R E     S I N C E     I     C A N N O T     J U M P\nO V E R     TH I S     B O O K S H E L F   !", 3, false, false);
-      //npcs[3] = new NPC(1300, "2nd_4", "I     D O     N O T     R E M E M B E R     \nA N Y     W O O D E N     TA B L E S     \nB E I N G     H E R E     B E F O R E", 3, false, true);
+      npcs = new NPC[5];
+      npcs[0] = new NPC(width*2.22, "2nd_1", "TO D A Y     I S     S U C H     A     LO V E LY     D A Y\nS O     W H A T     D O     Y O U     S A Y     W E     G O     G R A B     A\nC O F F E E     A N D     TA L K     A B O U T     P O LI TI C S     H U H", 3);
+      npcs[1] = new NPC(width*3.20, "2nd_2", "B E LI E V E     I T     O R     N O T     B U T\nS O M E     C O U R S E S     A R E     H A R D E R\nTH A N     O TH E R S     TO     P A S S  !", 3);
+      npcs[2] = new NPC(width*1.16, "2nd_3", "I     M I G H T     A S     W E LL     S I T\nH E R E     S I N C E     I     C A N N O T     J U M P\nO V E R     TH I S     B O O K S H E L F   !", 3, false, false);
+      npcs[3] = new NPC(width*0.90, "2nd_4", "I     D O     N O T     R E M E M B E R     \nA N Y     W O O D E N     TA B L E S     \nB E I N G     H E R E     B E F O R E", 3, false, true);
+      npcs[4] = new NPC(width*0.48, "2nd_5", "E X C U S E     M E     F R I E N D\nC O U LD     Y O U     P L E A S E     TE LL     M E\nW H E R E     C L A S S     A LP H A     I S", 3);
       
       right_border = round(width*4.32);
     }
@@ -182,7 +181,11 @@ class Level {
       courses[8] = new Course(width*5.16, height*0.83); //0
       courses[9] = new Course(width*5.80, height*0.13); //2
       
-      npcs = new NPC[0];
+      npcs = new NPC[4];
+      npcs[0] = new NPC(width*0.89, "3rd_1", "TH E R E     A R E     N O     P I C TU R E S\nI N     TH E     B O O K S\nW H O     W O U LD     E V E N     R E A D     TH E S E", 3, false, true);
+      npcs[1] = new NPC(width*1.30, "3rd_2" ,"TH E R E     I S     N O     W A Y\nI     A M     G E TTI N G     U P     TH E R E\nN O T     I N     A     S K I R T     A T     LE A S T", 3, false, true);
+      npcs[2] = new NPC(width*2.97, "3rd_3", "C O U L D     Y O U     P L E A S E     N O T\nS TA N D     O N     TH E     TA B LE S     W I TH     \nY O U R     D I R TY     S H O E S\n\nJ U S T     W A LK     A R O U N D     TH E M     N E X T     TI M E", 5);
+      npcs[3] = new NPC(width*5.35, "3rd_4", "Y E A H     I     D O     N O T     W A N N A     B R A G\nB U T     I     K N O W     H O W     TO     P R I N T\nH E LLO     W O R L D\n     I N     F I V E     D I F F E R E N T     LA N G U A G E S", 4);
       
       right_border = round(width*6.33);
     }
@@ -216,7 +219,10 @@ class Level {
       courses[6] = new Course(width*4.31, height*0.29); //1
       courses[7] = new Course(width*5.10, height*0.45); //4
       
-      npcs = new NPC[0];
+      npcs = new NPC[3];
+      npcs[0] = new NPC(width*1.55, "4th_1", "R E M E M B E R     TO     R E C Y C LE\nS A V E     TH E     P LA N E T   !", 3);
+      npcs[1] = new NPC(width*3.35, "4th_2", "Y O     I S     TH I S     TH E\nU N I V E R S I TY     Y O U     G O     TO\n\nI     H E A R D     TH E R E     I S     TH I S\nG I R L     W H O     K N O W S     H O W\nTO     P R I N T     H E LLO     W O R LD\nI N     F I V E     D I F F E R E N T     LA N G U A G E S\nC R A Z Y     S TU F F   !", 7);
+      npcs[2] = new NPC(width*4.90, "4th_3", "S O M E     C O U R S E S     A R E     J U ST     M A D E\nTO     M A K E     Y O U R     LI F E     D I F F I C U  LT\n\nB U T     I F     Y O U     K E E P     T R Y I N G\nY O U     W I LL     E V E N TU A LLY     M A K E     IT", 5);
       
       right_border = round(width*5.37);
     }
