@@ -668,7 +668,6 @@ class Menu {
         } else {
           text("You  need  to  pass  1  more  course  to  unlock  this  year !", round(width*(720.0/1440)), round(height*(600.0/900)));
         }
-        text("You  need  to  pass  " + (18 - game.courses_collected) + "  more  courses  to  unlock  this  year !", round(width*(720.0/1440)), round(height*(600.0/900)));
         year_locked = true;
       } else {
         image(image_thumb4, round(width*(420.0/1440)), round(height*(100.0/900)), round(width*(600./1440)), round(height*(350.0/900)));
