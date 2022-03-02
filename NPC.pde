@@ -5,6 +5,7 @@ class NPC {
   float x;
   int text_lines;
   PImage image;
+  PImage keyImage;
   String message;
   boolean lock_on_player;
   boolean face_right;
@@ -14,6 +15,7 @@ class NPC {
   NPC(float x, String g, String message, int text_lines, boolean lop, boolean fr) {
     this.x = x;
     image = loadImage(sketchPath() + "/images/miscellaneous/NPC/" + g + ".png");
+    keyImage = loadImage(sketchPath() + "/images/miscellaneous/NPC/key.png");
     this.message = message;
     this.text_lines = text_lines;
     face_right = fr;
@@ -25,6 +27,7 @@ class NPC {
   NPC(float x, String g, String message, int text_lines) {
     this.x = x;
     image = loadImage(sketchPath() + "/images/miscellaneous/NPC/" + g + ".png");
+    keyImage = loadImage(sketchPath() + "/images/miscellaneous/NPC/key.png");
     this.message = message;
     this.text_lines = text_lines;
     face_right = true;
@@ -36,6 +39,8 @@ class NPC {
   void draw() {
     
     hitbox.setLocation((int)x-round(width/(1440/64.0)), round(height/(900/692.0)));
+    
+    if (player.hitbox_player.intersects(hitbox)) image(keyImage, x+round(width/(1440/32.0)), height - round(height/(900/300.0)), round(width/(1440/64.0)), round(height/(900/64.0))); 
     if (lock_on_player) {
       
       //look at the player

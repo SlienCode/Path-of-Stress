@@ -88,7 +88,6 @@ class Player {
     else y += jump(); //otherwise, start jump
     
     collectedCourses(); //count collected courses
-    npcEncounter();
     
     //off screen borders
     if (y > height - round(height/3.51)) y = height - round(height/3.51);
@@ -219,11 +218,6 @@ class Player {
         return;
       }
     }
-  }
-  
-  //npc speech test
-  private void npcEncounter() {
-    
   }
   
   //make it so that holding a button won't execute keyPressed continuously using free_right and free_left
