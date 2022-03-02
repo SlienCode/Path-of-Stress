@@ -674,9 +674,12 @@ class Menu {
       }
     }
     if (!year_locked) {
-      if (level.courses_collected < level.courses.length) {
+      if (level.courses.length-level.courses_collected == 1) {
         textSize(round(width*(60.0/1440)*3/4));
-        text(level.courses.length - level.courses_collected + "  courses  left  to  pass !", round(width*(720./1440)), round(height*(600.0/900)));  
+        text("1  course  left  to  pass !", round(width*(720./1440)), round(height*(600.0/900)));
+      } else if (level.courses_collected < level.courses.length) {
+        textSize(round(width*(60.0/1440)*3/4));
+        text(level.courses.length - level.courses_collected + "  courses  left  to  pass !", round(width*(720./1440)), round(height*(600.0/900)));
       } else {
         textSize(round(width*(60.0/1440)*3/5));
         text("You  have  passed  all  the  courses  from  this  year !", round(width*(720./1440)), round(height*(595.0/900)));
