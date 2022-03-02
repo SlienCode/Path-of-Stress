@@ -383,52 +383,76 @@ class Menu {
       } else if (mouse_over_display_fps) { //click on DISPLAY FPS option
         if (!fps) {
           fps = true;
+          sounds[8].amp(volume * sfx_volume * (master_volume/10.0));
+          sounds[8].play();
         } else {
           fps = false;
+          sounds[5].amp(volume * sfx_volume * (master_volume/10.0));
+          sounds[5].play();
         }
       } else if (mouse_over_display_hitboxes) { //click on DISPLAY HITBOXES option
         if (!hitboxes) {
           hitboxes = true;
+          sounds[8].amp(volume * sfx_volume * (master_volume/10.0));
+          sounds[8].play();
         } else {
           hitboxes = false;
+          sounds[5].amp(volume * sfx_volume * (master_volume/10.0));
+          sounds[5].play();
         }
       } else if (mouse_over_display_coordinates) { //click on DISPLAY COORDINATES option
         if (!coordinates) {
           coordinates = true;
+          sounds[8].amp(volume * sfx_volume * (master_volume/10.0));
+          sounds[8].play();
         } else {
           coordinates = false;
+          sounds[5].amp(volume * sfx_volume * (master_volume/10.0));
+          sounds[5].play();
         }
       } else if (mouse_over_master_volume_up) {
         if (master_volume < 9) {
           master_volume++;
           for (SoundFile iter : sounds) iter.amp(volume * sfx_volume * (master_volume/10.0));
           music.amp(volume * music_volume * (master_volume/10.0));
+          sounds[8].amp(volume * sfx_volume * (master_volume/10.0));
+          sounds[8].play();
         }
       } else if (mouse_over_master_volume_down) {
         if (master_volume > 0) {
           master_volume--;
           for (SoundFile iter : sounds) iter.amp(volume * sfx_volume * (master_volume/10.0));
           music.amp(volume * music_volume * (master_volume/10.0));
+          sounds[5].amp(volume * sfx_volume * (master_volume/10.0));
+          sounds[5].play();
         }
       } else if (mouse_over_music_volume_up) {
         if (music_volume < 9) {
           music_volume++;
           music.amp(volume * music_volume * (master_volume/10.0));
+          sounds[8].amp(volume * sfx_volume * (master_volume/10.0));
+          sounds[8].play();
         }
       } else if (mouse_over_music_volume_down) {
         if (music_volume > 0) {
           music_volume--;
           music.amp(volume * music_volume * (master_volume/10.0));
+          sounds[5].amp(volume * sfx_volume * (master_volume/10.0));
+          sounds[5].play();
         }
       } else if (mouse_over_sfx_volume_up) {
         if (sfx_volume < 9) {
           sfx_volume++;
           for (SoundFile iter : sounds) iter.amp(volume * sfx_volume * (master_volume/10.0));
+          sounds[8].amp(volume * sfx_volume * (master_volume/10.0));
+          sounds[8].play();
         }
       } else if (mouse_over_sfx_volume_down) {
         if (sfx_volume > 0) {
           sfx_volume--;
           for (SoundFile iter : sounds) iter.amp(volume * sfx_volume * (master_volume/10.0));
+          sounds[5].amp(volume * sfx_volume * (master_volume/10.0));
+          sounds[5].play();
         }
       }
     } else if (menu_state == "CREDITS MENU") { //CREDITS MENU
