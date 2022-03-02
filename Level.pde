@@ -105,7 +105,7 @@ class Level {
       objects[11] = new Desk(width*2.60);
       objects[12] = new Bookshelf_Short(width*2.85);
       objects[13] = new Chair(width*3.08);
-      objects[14] = new Pillar(width*3.30);
+      objects[14] = new Pillar(width*3.29);
       objects[15] = new Chair(width*3.54);
       objects[16] = new Chair(width*3.61);
       objects[17] = new Desk(width*3.70);
