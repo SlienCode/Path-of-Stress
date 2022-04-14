@@ -51,6 +51,16 @@ class Menu {
   boolean mouse_over_start_game;
   boolean mouse_over_settings;
   boolean mouse_over_exit_game;
+  PImage cloud0;
+  PImage cloud1;
+  
+  //cloud coordinates
+  int left_x;
+  int left_y;
+  int right_x;
+  int right_y;
+  
+  int row; //which cloud shall be printed on the left
 
   //character menu
   String[] characters;
@@ -65,8 +75,7 @@ class Menu {
   boolean mouse_over_previous_character;
   boolean mouse_over_select;
   boolean mouse_over_displayed_character;
-
-
+  
   //level menu
   boolean level_1;
   boolean level_2;
@@ -119,6 +128,7 @@ class Menu {
   boolean mouse_over_sfx_volume_up;
   boolean mouse_over_sfx_volume_down;
   
+  boolean changed; //used to determine if we have to generate new cloud locations or not
   boolean credits_shown;
   Degree degree;
 
@@ -170,6 +180,15 @@ class Menu {
     image_character4 = loadImage(sketchPath() + "/images/characters/" + characters[4] + "/idle0.png");
     characters[5] = "emo_female";
     image_character5 = loadImage(sketchPath() + "/images/characters/" + characters[5] + "/idle0.png");
+    
+    changed = false;
+    cloud0 = loadImage(sketchPath() + "/images/miscellaneous/clouds/cloud0.png");
+    cloud1 = loadImage(sketchPath() + "/images/miscellaneous/clouds/cloud1.png");
+    left_x = getRandomNumber(0, 300);
+    left_y = getRandomNumber(0, 400);
+    right_x = getRandomNumber(1200, 950);
+    right_y = getRandomNumber(0, 400);
+    row = getRandomNumber(0, 2);
      
     return_x = width;
     return_y = height;
@@ -255,220 +274,338 @@ class Menu {
   }
   
   void draw() {
+    
     if (menu_state == "MAIN MENU") {
       mainMenu();
+      changed = false;
     } else if (menu_state == "CHARACTER MENU") {
       characterMenu();
+      changed = true;
     } else if (menu_state == "LEVEL MENU") {
       levelMenu();
+      changed = true;
     } else if (menu_state == "SETTINGS MENU") {
       settingsMenu();
+      changed = true;
     } else if (menu_state == "CREDITS MENU") {
       creditsMenu();
+      changed = true;
     }
     displayFps();
     displayCoordinates();
   }
   
   void mousePressed() {
-    if (menu_state == "MAIN MENU") { //MAIN MENU
-      if (mouse_over_start_game) { //click on START GAME option
-        sounds[2].amp(volume * sfx_volume * (master_volume/10.0));
-        sounds[2].play();
-        if (!character_selected){
+    try {
+      if (menu_state == "MAIN MENU") { //MAIN MENU
+        if (mouse_over_start_game) { //click on START GAME option
+            audioInput = AudioSystem.getAudioInputStream(sounds[2]);
+            sfx = AudioSystem.getClip();
+            sfx.open(audioInput);
+            sfxVolume = (FloatControl) sfx.getControl(FloatControl.Type.MASTER_GAIN);
+            sfxVolume.setValue(1.2*(sfx_volume+master_volume-16));
+            if (!noSFX && !mute) sfx.start();
+          if (!character_selected){
+            menu_state = "CHARACTER MENU";
+          } else {
+            level_1 = true;
+            menu_state = "LEVEL MENU";
+          }
+        } else if (mouse_over_settings) { //click on SETTINGS option
+            audioInput = AudioSystem.getAudioInputStream(sounds[2]);
+            sfx = AudioSystem.getClip();
+            sfx.open(audioInput);
+            sfxVolume = (FloatControl) sfx.getControl(FloatControl.Type.MASTER_GAIN);
+            sfxVolume.setValue(1.2*(sfx_volume+master_volume-16));
+            if (!noSFX && !mute) sfx.start();
+          menu_state = "SETTINGS MENU";
+        } else if (mouse_over_exit_game) { //click on EXIT GAME option
+          music.stop();
+          exit();
+          System.exit(0);
+        }
+        
+      } else if (menu_state == "CHARACTER MENU") { //CHARACTER MENU
+        if (mouse_over_return) { //click on RETURN option
+          audioInput = AudioSystem.getAudioInputStream(sounds[0]);
+          sfx = AudioSystem.getClip();
+          sfx.open(audioInput);
+          sfxVolume = (FloatControl) sfx.getControl(FloatControl.Type.MASTER_GAIN);
+          sfxVolume.setValue(1.2*(sfx_volume+master_volume-16));
+          if (!noSFX && !mute) sfx.start();
+          if (!character_selected){
+            character_temp = 0;
+            menu_state = "MAIN MENU";
+          } else {
+            character_temp = character;
+            level_1 = true;
+            menu_state = "LEVEL MENU";
+          }
+        } else if (mouse_over_next_character) { //click on NEXT CHARACTER option
+            audioInput = AudioSystem.getAudioInputStream(sounds[8]);
+            sfx = AudioSystem.getClip();
+            sfx.open(audioInput);
+            sfxVolume = (FloatControl) sfx.getControl(FloatControl.Type.MASTER_GAIN);
+            sfxVolume.setValue(1.2*(sfx_volume+master_volume-16));
+            if (!noSFX && !mute) sfx.start();
+          if (character_temp+1 == characters.length) {
+            character_temp = 0;
+          } else {
+            character_temp++;
+          }
+        } else if (mouse_over_previous_character) { //click on PREVIOUS CHARACTER option
+            audioInput = AudioSystem.getAudioInputStream(sounds[5]);
+            sfx = AudioSystem.getClip();
+            sfx.open(audioInput);
+            sfxVolume = (FloatControl) sfx.getControl(FloatControl.Type.MASTER_GAIN);
+            sfxVolume.setValue(1.2*(sfx_volume+master_volume-16));
+            if (!noSFX && !mute) sfx.start();
+          if (character_temp-1 == -1) {
+            character_temp = characters.length-1;
+          } else {
+            character_temp--;
+          }
+        } else if (mouse_over_select) { //click on SELECT option
+            audioInput = AudioSystem.getAudioInputStream(sounds[2]);
+            sfx = AudioSystem.getClip();
+            sfx.open(audioInput);
+            sfxVolume = (FloatControl) sfx.getControl(FloatControl.Type.MASTER_GAIN);
+            sfxVolume.setValue(1.2*(sfx_volume+master_volume-16));
+            if (!noSFX && !mute) sfx.start();
+            character = character_temp;
+            character_selected = true;
+            level_1 = true;
+            menu_state = "LEVEL MENU";
+        }
+      } else if (menu_state == "LEVEL MENU") { //LEVEL MENU
+        if (mouse_over_return) { //click on RETURN option
+            levelReset();
+            audioInput = AudioSystem.getAudioInputStream(sounds[2]);
+            sfx = AudioSystem.getClip();
+            sfx.open(audioInput);
+            sfxVolume = (FloatControl) sfx.getControl(FloatControl.Type.MASTER_GAIN);
+            sfxVolume.setValue(1.2*(sfx_volume+master_volume-16));
+            if (!noSFX && !mute) sfx.start();
+            menu_state = "MAIN MENU";
+        } else if (mouse_over_next_level) { //click on NEXT LEVEL option
+            audioInput = AudioSystem.getAudioInputStream(sounds[8]);
+            sfx = AudioSystem.getClip();
+            sfx.open(audioInput);
+            sfxVolume = (FloatControl) sfx.getControl(FloatControl.Type.MASTER_GAIN);
+            sfxVolume.setValue(1.2*(sfx_volume+master_volume-16));
+            if (!noSFX && !mute) sfx.start();
+           if (level_1) {
+             level_1 = false;
+             level_2 = true;
+           } else if (level_2) {
+             level_2 = false;
+             level_3 = true;
+           } else if (level_3) {
+             level_3 = false;
+             level_4 = true;
+           }
+        } else if (mouse_over_previous_level) { //click on PREVIOUS LEVEL option
+            audioInput = AudioSystem.getAudioInputStream(sounds[5]);
+            sfx = AudioSystem.getClip();
+            sfx.open(audioInput);
+            sfxVolume = (FloatControl) sfx.getControl(FloatControl.Type.MASTER_GAIN);
+            sfxVolume.setValue(1.2*(sfx_volume+master_volume-16));
+            if (!noSFX && !mute) sfx.start();
+           if (level_2) {
+             level_2 = false;
+             level_1 = true;
+           } else if (level_3) {
+             level_3 = false;
+             level_2 = true;
+           } else if (level_4) {
+             level_4 = false;
+             level_3 = true;
+           }
+        } else if (mouse_over_displayed_character) { //click on DISPLAYED CHARACTER option
+          levelReset();
           menu_state = "CHARACTER MENU";
-        } else {
-          level_1 = true;
-          menu_state = "LEVEL MENU";
+        } else if (mouse_over_play) { //click on PLAY option
+          if (level_1) {
+            level = levels[0];
+            startGame();
+          } else if (level_2 && game.courses_collected >= 6) {
+            level = levels[1];
+            startGame();
+          } else if (level_3 && game.courses_collected >= 12) {
+            level = levels[2];
+            startGame();
+          } else if (level_4 && game.courses_collected >= 18) {
+            level = levels[3];
+            startGame();
+          }
         }
-      } else if (mouse_over_settings) { //click on SETTINGS option
-        sounds[2].amp(volume * sfx_volume * (master_volume/10.0));
-        sounds[2].play();
-        menu_state = "SETTINGS MENU";
-      } else if (mouse_over_exit_game) { //click on EXIT GAME option
-        exit();
-      }
-      
-    } else if (menu_state == "CHARACTER MENU") { //CHARACTER MENU
-      if (mouse_over_return) { //click on RETURN option
-          sounds[0].amp(volume * sfx_volume * (master_volume/10.0));
-          sounds[0].play();
-        if (!character_selected){
-          character_temp = 0;
-          menu_state = "MAIN MENU";
-        } else {
-          character_temp = character;
-          level_1 = true;
-          menu_state = "LEVEL MENU";
+      } else if (menu_state == "SETTINGS MENU") { //SETTINGS MENU
+        if (mouse_over_return) { //click on RETURN option
+            audioInput = AudioSystem.getAudioInputStream(sounds[0]);
+            sfx = AudioSystem.getClip();
+            sfx.open(audioInput);
+            sfxVolume = (FloatControl) sfx.getControl(FloatControl.Type.MASTER_GAIN);
+            sfxVolume.setValue(1.2*(sfx_volume+master_volume-16));
+            if (!noSFX && !mute) sfx.start();
+            menu_state = "MAIN MENU";
+        } else if (mouse_over_display_fps) { //click on DISPLAY FPS option
+          if (!fps) {
+            fps = true;
+            audioInput = AudioSystem.getAudioInputStream(sounds[8]);
+            sfx = AudioSystem.getClip();
+            sfx.open(audioInput);
+            sfxVolume = (FloatControl) sfx.getControl(FloatControl.Type.MASTER_GAIN);
+            sfxVolume.setValue(1.2*(sfx_volume+master_volume-16));
+            if (!noSFX && !mute) sfx.start();
+          } else {
+            fps = false;
+            audioInput = AudioSystem.getAudioInputStream(sounds[5]);
+            sfx = AudioSystem.getClip();
+            sfx.open(audioInput);
+            sfxVolume = (FloatControl) sfx.getControl(FloatControl.Type.MASTER_GAIN);
+            sfxVolume.setValue(1.2*(sfx_volume+master_volume-16));
+            if (!noSFX && !mute) sfx.start();
+          }
+        } else if (mouse_over_display_hitboxes) { //click on DISPLAY HITBOXES option
+          if (!hitboxes) {
+            hitboxes = true;
+            audioInput = AudioSystem.getAudioInputStream(sounds[8]);
+            sfx = AudioSystem.getClip();
+            sfx.open(audioInput);
+            sfxVolume = (FloatControl) sfx.getControl(FloatControl.Type.MASTER_GAIN);
+            sfxVolume.setValue(1.2*(sfx_volume+master_volume-16));
+            if (!noSFX && !mute) sfx.start();
+          } else {
+            hitboxes = false;
+            audioInput = AudioSystem.getAudioInputStream(sounds[5]);
+            sfx = AudioSystem.getClip();
+            sfx.open(audioInput);
+            sfxVolume = (FloatControl) sfx.getControl(FloatControl.Type.MASTER_GAIN);
+            sfxVolume.setValue(1.2*(sfx_volume+master_volume-16));
+            if (!noSFX && !mute) sfx.start();
+          }
+        } else if (mouse_over_display_coordinates) { //click on DISPLAY COORDINATES option
+          if (!coordinates) {
+            coordinates = true;
+            audioInput = AudioSystem.getAudioInputStream(sounds[8]);
+            sfx = AudioSystem.getClip();
+            sfx.open(audioInput);
+            sfxVolume = (FloatControl) sfx.getControl(FloatControl.Type.MASTER_GAIN);
+            sfxVolume.setValue(1.2*(sfx_volume+master_volume-16));
+            if (!noSFX && !mute) sfx.start();
+          } else {
+            coordinates = false;
+            audioInput = AudioSystem.getAudioInputStream(sounds[5]);
+            sfx = AudioSystem.getClip();
+            sfx.open(audioInput);
+            sfxVolume = (FloatControl) sfx.getControl(FloatControl.Type.MASTER_GAIN);
+            sfxVolume.setValue(1.2*(sfx_volume+master_volume-16));
+            if (!noSFX && !mute) sfx.start();
+          }
+        } else if (mouse_over_master_volume_up) {
+          if (master_volume < 9) {
+            master_volume++;
+            mute  = false;
+            if (!noMusic) musicVolume.setValue(1.2*(music_volume+master_volume-16));
+            audioInput = AudioSystem.getAudioInputStream(sounds[8]);
+            sfx = AudioSystem.getClip();
+            sfx.open(audioInput);
+            sfxVolume = (FloatControl) sfx.getControl(FloatControl.Type.MASTER_GAIN);
+            sfxVolume.setValue(1.2*(sfx_volume+master_volume-16));
+            if (!noSFX) sfx.start();
+          }
+        } else if (mouse_over_master_volume_down) {
+          if (master_volume > 0) {
+            master_volume--;
+            if (master_volume == 0) {
+              mute = true;
+              musicVolume.setValue(-80);
+            } else {
+              if (!noMusic) musicVolume.setValue(1.2*(music_volume+master_volume-16));
+              audioInput = AudioSystem.getAudioInputStream(sounds[5]);
+              sfx = AudioSystem.getClip();
+              sfx.open(audioInput);
+              sfxVolume = (FloatControl) sfx.getControl(FloatControl.Type.MASTER_GAIN);
+              sfxVolume.setValue(1.2*(sfx_volume+master_volume-16));
+              if (!noSFX) sfx.start();
+            }
+          }
+        } else if (mouse_over_music_volume_up) {
+          if (music_volume < 9) {
+            noMusic = false;
+            music_volume++;
+            if (!mute) musicVolume.setValue(1.2*(music_volume+master_volume-16));
+            audioInput = AudioSystem.getAudioInputStream(sounds[8]);
+            sfx = AudioSystem.getClip();
+            sfx.open(audioInput);
+            sfxVolume = (FloatControl) sfx.getControl(FloatControl.Type.MASTER_GAIN);
+            sfxVolume.setValue(1.2*(sfx_volume+master_volume-16));
+            if (!noSFX && !mute) sfx.start();
+          }
+        } else if (mouse_over_music_volume_down) {
+          if (music_volume > 0) {
+            music_volume--;
+            if (music_volume == 0) {
+              noMusic = true;
+              musicVolume.setValue(-80);
+            } else {
+                if (!mute) musicVolume.setValue(1.2*(music_volume+master_volume-16));
+            }
+            audioInput = AudioSystem.getAudioInputStream(sounds[5]);
+            sfx = AudioSystem.getClip();
+            sfx.open(audioInput);
+            sfxVolume = (FloatControl) sfx.getControl(FloatControl.Type.MASTER_GAIN);
+            sfxVolume.setValue(1.2*(sfx_volume+master_volume-16));
+            if (!noSFX && !mute) sfx.start();
+          }
+        } else if (mouse_over_sfx_volume_up) {
+          if (sfx_volume < 9) {
+            noSFX = false;
+            sfx_volume++;
+            audioInput = AudioSystem.getAudioInputStream(sounds[8]);
+            sfx = AudioSystem.getClip();
+            sfx.open(audioInput);
+            sfxVolume = (FloatControl) sfx.getControl(FloatControl.Type.MASTER_GAIN);
+            sfxVolume.setValue(1.2*(sfx_volume+master_volume-16));
+            if (!mute) sfx.start();
+          }
+        } else if (mouse_over_sfx_volume_down) {
+          if (sfx_volume > 0) {
+            sfx_volume--;
+            if (sfx_volume == 0) noSFX = true;
+            else {
+              audioInput = AudioSystem.getAudioInputStream(sounds[5]);
+              sfx = AudioSystem.getClip();
+              sfx.open(audioInput);
+              sfxVolume = (FloatControl) sfx.getControl(FloatControl.Type.MASTER_GAIN);
+              sfxVolume.setValue(1.2*(sfx_volume+master_volume-16));
+              if (!mute) sfx.start();
+            }
+          }
         }
-      } else if (mouse_over_next_character) { //click on NEXT CHARACTER option
-          sounds[8].amp(volume * sfx_volume * (master_volume/10.0));
-          sounds[8].play();
-        if (character_temp+1 == characters.length) {
-          character_temp = 0;
-        } else {
-          character_temp++;
-        }
-      } else if (mouse_over_previous_character) { //click on PREVIOUS CHARACTER option
-          sounds[5].amp(volume * sfx_volume * (master_volume/10.0));
-          sounds[5].play();
-        if (character_temp-1 == -1) {
-          character_temp = characters.length-1;
-        } else {
-          character_temp--;
-        }
-      } else if (mouse_over_select) { //click on SELECT option
-        sounds[2].amp(volume * sfx_volume * (master_volume/10.0));
-        sounds[2].play();
-        character = character_temp;
-        character_selected = true;
-        level_1 = true;
-        menu_state = "LEVEL MENU";
-      }
-    } else if (menu_state == "LEVEL MENU") { //LEVEL MENU
-      if (mouse_over_return) { //click on RETURN option
-          levelReset();
-          sounds[0].amp(volume * sfx_volume * (master_volume/10.0));
-          sounds[0].play();
-          menu_state = "MAIN MENU";
-      } else if (mouse_over_next_level) { //click on NEXT LEVEL option
-          sounds[8].amp(volume * sfx_volume * (master_volume/10.0));
-          sounds[8].play();
-         if (level_1) {
-           level_1 = false;
-           level_2 = true;
-         } else if (level_2) {
-           level_2 = false;
-           level_3 = true;
-         } else if (level_3) {
-           level_3 = false;
-           level_4 = true;
-         }
-      } else if (mouse_over_previous_level) { //click on PREVIOUS LEVEL option
-          sounds[5].amp(volume * sfx_volume * (master_volume/10.0));
-          sounds[5].play();
-         if (level_2) {
-           level_2 = false;
-           level_1 = true;
-         } else if (level_3) {
-           level_3 = false;
-           level_2 = true;
-         } else if (level_4) {
-           level_4 = false;
-           level_3 = true;
-         }
-      } else if (mouse_over_displayed_character) { //click on DISPLAYED CHARACTER option
-        levelReset();
-        menu_state = "CHARACTER MENU";
-      } else if (mouse_over_play) { //click on PLAY option
-        if (level_1) {
-          level = levels[0];
-          startGame();
-        } else if (level_2 && game.courses_collected >= 6) {
-          level = levels[1];
-          startGame();
-        } else if (level_3 && game.courses_collected >= 12) {
-          level = levels[2];
-          startGame();
-        } else if (level_4 && game.courses_collected >= 18) {
-          level = levels[3];
-          startGame();
-        }
-      }
-    } else if (menu_state == "SETTINGS MENU") { //SETTINGS MENU
-      if (mouse_over_return) { //click on RETURN option
-          sounds[0].amp(volume * sfx_volume * (master_volume/10.0));
-          sounds[0].play();
-          menu_state = "MAIN MENU";
-      } else if (mouse_over_display_fps) { //click on DISPLAY FPS option
-        if (!fps) {
-          fps = true;
-          sounds[8].amp(volume * sfx_volume * (master_volume/10.0));
-          sounds[8].play();
-        } else {
-          fps = false;
-          sounds[5].amp(volume * sfx_volume * (master_volume/10.0));
-          sounds[5].play();
-        }
-      } else if (mouse_over_display_hitboxes) { //click on DISPLAY HITBOXES option
-        if (!hitboxes) {
-          hitboxes = true;
-          sounds[8].amp(volume * sfx_volume * (master_volume/10.0));
-          sounds[8].play();
-        } else {
-          hitboxes = false;
-          sounds[5].amp(volume * sfx_volume * (master_volume/10.0));
-          sounds[5].play();
-        }
-      } else if (mouse_over_display_coordinates) { //click on DISPLAY COORDINATES option
-        if (!coordinates) {
-          coordinates = true;
-          sounds[8].amp(volume * sfx_volume * (master_volume/10.0));
-          sounds[8].play();
-        } else {
-          coordinates = false;
-          sounds[5].amp(volume * sfx_volume * (master_volume/10.0));
-          sounds[5].play();
-        }
-      } else if (mouse_over_master_volume_up) {
-        if (master_volume < 9) {
-          master_volume++;
-          for (SoundFile iter : sounds) iter.amp(volume * sfx_volume * (master_volume/10.0));
-          music.amp(volume * music_volume * (master_volume/10.0));
-          sounds[8].amp(volume * sfx_volume * (master_volume/10.0));
-          sounds[8].play();
-        }
-      } else if (mouse_over_master_volume_down) {
-        if (master_volume > 0) {
-          master_volume--;
-          for (SoundFile iter : sounds) iter.amp(volume * sfx_volume * (master_volume/10.0));
-          music.amp(volume * music_volume * (master_volume/10.0));
-          sounds[5].amp(volume * sfx_volume * (master_volume/10.0));
-          sounds[5].play();
-        }
-      } else if (mouse_over_music_volume_up) {
-        if (music_volume < 9) {
-          music_volume++;
-          music.amp(volume * music_volume * (master_volume/10.0));
-          sounds[8].amp(volume * sfx_volume * (master_volume/10.0));
-          sounds[8].play();
-        }
-      } else if (mouse_over_music_volume_down) {
-        if (music_volume > 0) {
-          music_volume--;
-          music.amp(volume * music_volume * (master_volume/10.0));
-          sounds[5].amp(volume * sfx_volume * (master_volume/10.0));
-          sounds[5].play();
-        }
-      } else if (mouse_over_sfx_volume_up) {
-        if (sfx_volume < 9) {
-          sfx_volume++;
-          for (SoundFile iter : sounds) iter.amp(volume * sfx_volume * (master_volume/10.0));
-          sounds[8].amp(volume * sfx_volume * (master_volume/10.0));
-          sounds[8].play();
-        }
-      } else if (mouse_over_sfx_volume_down) {
-        if (sfx_volume > 0) {
-          sfx_volume--;
-          for (SoundFile iter : sounds) iter.amp(volume * sfx_volume * (master_volume/10.0));
-          sounds[5].amp(volume * sfx_volume * (master_volume/10.0));
-          sounds[5].play();
+      } else if (menu_state == "CREDITS MENU") { //CREDITS MENU
+        if (mouse_over_return) { //click on RETURN option
+            audioInput = AudioSystem.getAudioInputStream(sounds[0]);
+            sfx = AudioSystem.getClip();
+            sfx.open(audioInput);
+            sfxVolume = (FloatControl) sfx.getControl(FloatControl.Type.MASTER_GAIN);
+            sfxVolume.setValue(1.2*(sfx_volume+master_volume-16));
+            if (!noSFX && !mute) sfx.start();
+            credits_shown = true;
+            levelReset();
+            menu_state = "MAIN MENU";
         }
       }
-    } else if (menu_state == "CREDITS MENU") { //CREDITS MENU
-      if (mouse_over_return) { //click on RETURN option
-          sounds[0].amp(volume * sfx_volume * (master_volume/10.0));
-          sounds[0].play();
-          credits_shown = true;
-          levelReset();
-          menu_state = "MAIN MENU";
-      }
+    }
+    catch(Exception e) {
+      e.printStackTrace();
     }
   }
   
   void mainMenu() {
     image(image_main_menu_background, 0, 0, width, height);
     flag.draw();
+    printClouds();
     
     if (hitboxes) {
       fill(255, 0, 255); //pink
@@ -959,5 +1096,28 @@ class Menu {
       text(int((-player.y+height*(644.0/900))*(900.0/height)), round(width*(90.0/1440)), round(height*(80.0/900)));
       textAlign(CENTER);
     }
+  }
+  
+  void printClouds() {
+    
+    if (changed == true) {
+      left_x = getRandomNumber(0, 300);
+      left_y = getRandomNumber(0, 400);
+      right_x = getRandomNumber(1200, 950);
+      right_y = getRandomNumber(0, 400);
+      row = getRandomNumber(0, 2);
+    }
+    if (row == 0) {
+      image(cloud0, round(width*((float)left_x/1440)), round(height*((float)left_y/900)), round(width*((float)256/1440)), round(height*((float)256/900)));
+      image(cloud1, round(width*((float)right_x/1440)), round(height*((float)right_y/900)), round(width*((float)256/1440)), round(height*((float)256/900)));
+    }
+    else {
+      image(cloud1, round(width*((float)left_x/1440)), round(height*((float)left_y/900)), round(width*((float)256/1440)), round(height*((float)256/900)));
+      image(cloud0, round(width*((float)right_x/1440)), round(height*((float)right_y/900)), round(width*((float)256/1440)), round(height*((float)256/900)));
+    }
+  }
+  
+  public int getRandomNumber(int min, int max) {
+    return (int) ((Math.random() * (max - min)) + min);
   }
 };

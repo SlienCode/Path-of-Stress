@@ -1,6 +1,6 @@
 class Level {
 
-  SoundFile music;
+  File track;
   
   int year;
   
@@ -35,7 +35,8 @@ class Level {
     move_x = 0;
     this.year = year;
     
-    music = tracks[year];
+    track = tracks[year];
+    track_num = year;
     
     courses_collected = 0;
     

@@ -67,16 +67,29 @@ class Player {
     
     image = idle[0]; //default standing position image
     
-    if (!still) { //if you are not kissing a wall
-      x += x_motion; //if you didn't kiss a wall, move x
-      if (walk_counter == 0 && jump_counter == -1 && onGround()) { //if you are walking and if you are not trying to jump and if you are not in the air
-        sounds[9].amp(menu.volume * menu.sfx_volume * (menu.master_volume/10.0));
-        sounds[9].play();
+    try {
+      if (!still) { //if you are not kissing a wall
+        x += x_motion; //if you didn't kiss a wall, move x
+        if (walk_counter == 0 && jump_counter == -1 && onGround()) { //if you are walking and if you are not trying to jump and if you are not in the air
+          audioInput = AudioSystem.getAudioInputStream(sounds[9]);
+          sfx = AudioSystem.getClip();
+          sfx.open(audioInput);
+          sfxVolume = (FloatControl) sfx.getControl(FloatControl.Type.MASTER_GAIN);
+          sfxVolume.setValue(1.2*(menu.sfx_volume+menu.master_volume-16));
+          if (!noSFX && !mute) sfx.start();
+        }
+        if (walk_counter == 20 && jump_counter == -1 && onGround()) { //if you are walking and if you are not trying to jump and if you are not in the air
+          audioInput = AudioSystem.getAudioInputStream(sounds[9]);
+          sfx = AudioSystem.getClip();
+          sfx.open(audioInput);
+          sfxVolume = (FloatControl) sfx.getControl(FloatControl.Type.MASTER_GAIN);
+          sfxVolume.setValue(1.2*(menu.sfx_volume+menu.master_volume-16));
+          if (!noSFX && !mute) sfx.start();
+        }
       }
-      if (walk_counter == 20 && jump_counter == -1 && onGround()) { //if you are walking and if you are not trying to jump and if you are not in the air
-        sounds[9].amp(menu.volume * menu.sfx_volume * (menu.master_volume/10.0));
-        sounds[9].play();
-      }
+    }
+    catch (Exception e) {
+      e.printStackTrace();
     }
     
     animation(); //check which animation shall be applied
@@ -181,9 +194,18 @@ class Player {
   }
   
   private float jump() {
-    if (jump_counter == 9) {
-      sounds[4].amp(menu.volume * menu.sfx_volume * (menu.master_volume/10.0));
-      sounds[4].play();
+    try {
+      if (jump_counter == 9) {
+        audioInput = AudioSystem.getAudioInputStream(sounds[4]);
+        sfx = AudioSystem.getClip();
+        sfx.open(audioInput);
+        sfxVolume = (FloatControl) sfx.getControl(FloatControl.Type.MASTER_GAIN);
+        sfxVolume.setValue(1.2*(menu.sfx_volume+menu.master_volume-16));
+        if (!noSFX && !mute) sfx.start();
+      }
+    }
+    catch (Exception e) {
+      e.printStackTrace();
     }
     if (jump_counter >= 10 && jump_counter <= 20) return -(height/90.0); //go up 10 pixels
     else if (jump_counter > 20 && jump_counter <= 30) return -(height/128.57); //go up 7 pixels (slow down mode)
@@ -208,15 +230,24 @@ class Player {
   
   //count collected courses
   private void collectedCourses() {
-    for (int i = 0; i < level.courses.length; i++) {
-      if (hitbox_player.intersects(level.courses[i].hitbox) && (!level.courses[i].passed)) {
-        level.courses[i].passed = true;
-        level.courses_collected += 1;
-        level.passed[i] = true;
-        sounds[1].amp(menu.volume * menu.sfx_volume * (menu.master_volume/10.0));
-        sounds[1].play();
-        return;
+    try {
+      for (int i = 0; i < level.courses.length; i++) {
+        if (hitbox_player.intersects(level.courses[i].hitbox) && (!level.courses[i].passed)) {
+          level.courses[i].passed = true;
+          level.courses_collected += 1;
+          level.passed[i] = true;
+          audioInput = AudioSystem.getAudioInputStream(sounds[1]);
+          sfx = AudioSystem.getClip();
+          sfx.open(audioInput);
+          sfxVolume = (FloatControl) sfx.getControl(FloatControl.Type.MASTER_GAIN);
+          sfxVolume.setValue(1.2*(menu.sfx_volume+menu.master_volume-16));
+          if (!noSFX && !mute) sfx.start();
+          return;
+        }
       }
+    }
+    catch (Exception e) {
+      e.printStackTrace();
     }
   }
   

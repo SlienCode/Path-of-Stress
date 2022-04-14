@@ -92,12 +92,11 @@ class Game {
   
   void pauseGame() {
     pause = true;
-    music.pause();
+    music.stop();
   }
   
   void resumeGame() {
     pause = false;
-    music.play();
   }
   
   void leaveGame() {
