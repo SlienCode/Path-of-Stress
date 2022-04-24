@@ -78,7 +78,7 @@ class Level {
       courses[9] = new Course(width*4.55, height*0.38); //difficulty: 2
       
       npcs = new NPC[2];
-      npcs[0] = new NPC(width*0.28, "1st_1", "H E LLO     TH E R E     A N D     W E LC O M E     TO     O U R     U N I V E R S I TY\nI F     Y O U     W I S H     TO     G R U A D U A TE      Y O U     N E E D     TO     P A S S\nA LL    3 6     C O U R S E S     A N D     G E T     TO     TH E     E N D     O F     E V E R Y\nS T A G E     A S     Q U I TTI N G     W I L L     N O T     S A V E     Y O U R     P R O G R E S S\n\nU S E     A     A N D     D     O R     TH E     A R R O W     P A D     TO     M O V E\nA N D     TH E     S P A C E     B A R     TO     J U M P\nB E S T     O F     LU C K     !", 7);
+      npcs[0] = new NPC(width*0.28, "1st_1", "H E LLO     TH E R E     A N D     W E LC O M E     TO     O U R     U N I V E R S I TY\nI F     Y O U     W I S H     TO     G R A D U A TE      Y O U     N E E D     TO     P A S S\nA LL    3 6     C O U R S E S     A N D     G E T     TO     TH E     E N D     O F     E V E R Y\nS T A G E     A S     Q U I TTI N G     W I L L     N O T     S A V E     Y O U R     P R O G R E S S\n\nU S E     A     A N D     D     O R     TH E     A R R O W     P A D     TO     M O V E\nA N D     TH E     S P A C E     B A R     TO     J U M P\nB E S T     O F     LU C K     !", 7);
       npcs[1] = new NPC(width*3.60, "1st_2", "Y E S     I     J U S T     LI K E     TO     G O     F O R\nA     C O F F E E     F R O M     TI M E     TO     TI M E\nY E S     I     H A V E     M I S S E D     A     C O U P L E     O F     L E C T U R E S\nI     S T O P P E D     C O U N TI N G     A F T E R     1 2", 4);
       
       right_border = 5*width;
