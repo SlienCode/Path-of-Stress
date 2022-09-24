@@ -1,3 +1,4 @@
+![Path of Stress](https://user-images.githubusercontent.com/80926890/192099828-2d7a3e32-5251-4524-b6ea-a16bfbee2683.jpg)
 # Path of Stress
 Path of Stress is a platformer game made in Java using the Processing library. All of the assets such as images, animations, music and sound effects are made by us and you are free to use them for non-commercial purposes only. Special thanks to Jakob Fischer for the text font used in the game.
 
